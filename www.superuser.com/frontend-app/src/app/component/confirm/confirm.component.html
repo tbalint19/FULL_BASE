@@ -1,0 +1,50 @@
+<div *ngIf="!minified" class="well">
+  <div class="user-sign">
+    <span class="glyphicon glyphicon-user"></span>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+      <confirm-code-input></confirm-code-input>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button
+      class="btn btn-success"
+      [disabled]="status.isPending() || status.isSuspended()"
+      (click)="attemptConfirm()">
+      Confirm<span class="glyphicon glyphicon-ok-circle"></span>
+    </button>
+  </div>
+
+  <div class="info-container">
+    <p>
+      Please be aware that you have approx. 5-10 minutes to complete this step, afterwards
+      not confirmed accounts are deleted. In case you did not receive it, you can
+      <button
+        class="inline-text-button"
+        (click)="resendRequest()">
+        ask for a resend
+      </button>.
+    </p>
+  </div>
+</div>
+
+<div *ngIf="minified" class="well">
+  <p class="minified-alert">
+    <span class="glyphicon glyphicon-alert"></span>&nbsp;&nbsp;
+    Please confirm your account - check your email.
+  </p>
+  <div class="input-group">
+    <confirm-code-input></confirm-code-input>
+    <span class="input-group-btn">
+      <button
+        class="btn btn-default"
+        [disabled]="status.isPending() || status.isSuspended()"
+        (click)="attemptConfirm()">
+        Confirm<span class="glyphicon glyphicon-ok-circle"></span>
+      </button>
+    </span>
+  </div>
+</div>
