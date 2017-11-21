@@ -13,5 +13,7 @@ public interface UserRepository extends CrudRepository<ApplicationUser, Long> {
 
     ApplicationUser findByEmailIgnoreCase(String email);
 
+    ApplicationUser findById(Long userId);
+
 //    ApplicationUser findByUsernameOrEmail(String credential);
 }

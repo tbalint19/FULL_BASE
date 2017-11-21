@@ -1,6 +1,7 @@
 package com.base.coreapi.model.auth;
 
 
+import com.base.coreapi.model.messages.Channel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -40,5 +41,9 @@ public class ApplicationUser {
     @JsonIgnore
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Reset> resets;
+
+    @JsonIgnore
+    @OneToOne
+    private Channel channel;
 
 }

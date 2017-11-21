@@ -37,4 +37,16 @@ export class RequestFactory {
   createNewOrderDayRequest(dto: NewOrderDayDTO): HttpRequest {
     return new HttpRequest("/api/calendar/orderday/new", "POST", dto);
   }
+
+  createGetUsersRequest(): HttpRequest {
+    return new HttpRequest("/api/message/users", "GET", null);
+  }
+
+  createGetMessagesRequest(userId: number): HttpRequest {
+    return new HttpRequest("/api/message/all", "GET", {userId});
+  }
+
+  createRespondRequest(): HttpRequest {
+    return new HttpRequest("/api/message/respond", "POST", null);
+  }
 }

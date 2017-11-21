@@ -7,6 +7,8 @@ import {ConfirmDtoCreator} from "../model/creator/confirm-dto-creator";
 import {ConfirmationDTO} from "../model/dto/confirm-dto";
 import {ResetDtoCreator} from "../model/creator/reset-dto-creator";
 import {ResetDTO} from "../model/dto/reset-dto";
+import {MessageCreateDtoCreator} from "../model/creator/message-create-dto-creator";
+import {MessageCreateDTO} from "../model/dto/message-create-dto";
 
 @Injectable()
 export class DtoFactory {
@@ -38,6 +40,12 @@ export class DtoFactory {
     dto.username = creator.username;
     dto.password = creator.password;
     dto.code = creator.code;
+    return dto;
+  }
+
+  public createMessageCreateDTO(creator: MessageCreateDtoCreator): MessageCreateDTO {
+    let dto = new MessageCreateDTO();
+    dto.text = creator.message;
     return dto;
   }
 

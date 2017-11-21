@@ -8,6 +8,7 @@ import {ConfirmEmailParams} from "../model/params/confirm-email-params.model";
 import {CheckUsernameParams} from "../model/params/check-username-params.model";
 import {CheckEmailParams} from "../model/params/check-email-params.model";
 import {ResetDTO} from "../model/dto/reset-dto";
+import {MessageCreateDTO} from "../model/dto/message-create-dto";
 
 @Injectable()
 export class RequestFactory {
@@ -42,5 +43,13 @@ export class RequestFactory {
 
   public createResetRequest(dto: ResetDTO): HttpRequest{
     return new HttpRequest("/api/reset/finish", "POST", dto);
+  }
+
+  public createGetMessagesRequest(): HttpRequest {
+    return new HttpRequest("/api/message/all", "GET", null);
+  }
+
+  public createNewMessageRequest(dto: MessageCreateDTO): HttpRequest {
+    return new HttpRequest("/api/message/send", "POST", dto);
   }
 }

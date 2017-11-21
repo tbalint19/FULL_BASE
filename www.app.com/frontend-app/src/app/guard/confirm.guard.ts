@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
+import jwtDecode from "jwt-decode";
+
 
 @Injectable()
 export class ConfirmGuard implements CanActivate {
@@ -7,10 +9,30 @@ export class ConfirmGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (localStorage['auth-token'].includes('Bearer ')) {
+    if (this.isAuthenticated() && this.isConfirmed()) {
       return true;
     }
     this.router.navigate(['confirm']);
     return false;
+  }
+
+  public isAuthenticated(): boolean {
+    return localStorage.getItem('auth-token') != null;
+  }
+
+  public isConfirmed(): boolean {
+    return this.isAuthenticated() ? this.getSub() == "true" : false;
+  }
+
+  public getCredential(): string {
+    return this.isAuthenticated() ? this.getAud() : null;
+  }
+
+  private getAud(): string {
+    return jwtDecode(localStorage.getItem('auth-token'))['aud'];
+  }
+
+  private getSub(): string {
+    return jwtDecode(localStorage.getItem('auth-token'))['sub'];
   }
 }

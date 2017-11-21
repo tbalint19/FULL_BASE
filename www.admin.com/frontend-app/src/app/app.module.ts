@@ -45,6 +45,8 @@ import {CreatorFactory} from "./factory/creator-factory";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CalendarStatus} from "./status/calendar-status";
 import {CalendarService} from "./service/calendar.service";
+import {MessageStatus} from "./status/message-status";
+import {PrivateMessageService} from "./service/private-message.service";
 
 
 @NgModule({
@@ -81,6 +83,7 @@ import {CalendarService} from "./service/calendar.service";
     ResetService,
     MessageService,
     MainMessageService,
+    PrivateMessageService,
     CalendarService,
     UsernameValidator,
     EmailValidator,
@@ -93,6 +96,7 @@ import {CalendarService} from "./service/calendar.service";
     DtoFactory,
     CreatorFactory,
     AuthStatus,
+    MessageStatus,
     LoginStatus,
     ResetStatus,
     ResetStartStatus,

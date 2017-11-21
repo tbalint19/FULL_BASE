@@ -1,5 +1,24 @@
 <menu-navbar></menu-navbar>
 
-<p>
-  message-page works!
-</p>
+<div class="container">
+  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <div *ngFor="let message of orderedMessages()"  class="row">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10  {{ message.isUserMessage && 'col-md-offset-2 col-lg-offset-2' }}">
+        <div class="well">
+          {{ message.text }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <textarea
+      class="form-control"
+      placeholder="Írja le az üzenetét"
+      [(ngModel)]="status.creator.message">
+    </textarea>
+    <button class="btn btn-default" (click)="send()">
+      Küldés
+    </button>
+  </div>
+</div>

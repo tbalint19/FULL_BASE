@@ -53,6 +53,8 @@ import { FaqPageComponent } from './component/faq-page/faq-page.component';
 import { CalendarPageComponent } from './component/calendar-page/calendar-page.component';
 import { MessagePageComponent } from './component/message-page/message-page.component';
 import { MainControllerComponent } from './component/main-controller/main-controller.component';
+import {MessagesStatus} from "./status/messages-status";
+import {PrivateMessageService} from "./service/private-message.service";
 
 @NgModule({
   declarations: [
@@ -98,6 +100,7 @@ import { MainControllerComponent } from './component/main-controller/main-contro
     ResetService,
     MessageService,
     ConfirmService,
+    PrivateMessageService,
     UsernameValidator,
     EmailValidator,
     CredentialValidator,
@@ -112,6 +115,7 @@ import { MainControllerComponent } from './component/main-controller/main-contro
     LoginStatus,
     ResetStatus,
     ResetStartStatus,
+    MessagesStatus,
     SignupStatus
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
