@@ -6,13 +6,13 @@
         [(ngModel)]="status.creator.credential"
         type="text"
         class="form-control"
-        placeholder="Username or email">
+        placeholder="Felhasználónév vagy email">
 
       <input
         [(ngModel)]="status.creator.password"
         type="password"
         class="form-control"
-        placeholder="Password">
+        placeholder="Jelszó">
     </div>
 
     <button
@@ -20,7 +20,7 @@
       [disabled]="status.isDisabled()"
       (click)="attemptLogin()">
       <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-      Login
+      Bejelentkezés
     </button>
 
     <reset-popup></reset-popup>

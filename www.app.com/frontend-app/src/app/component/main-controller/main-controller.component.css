@@ -1,0 +1,15 @@
+h4 {
+  text-align: center;
+  opacity: 0.8;
+}
+
+p {
+  color: #555;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.well {
+  padding-bottom: 50px;
+}

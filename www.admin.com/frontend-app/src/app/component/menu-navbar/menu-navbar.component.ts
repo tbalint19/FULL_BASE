@@ -18,7 +18,7 @@ export class MenuNavbarComponent implements OnInit {
 
   logout(){
     localStorage.removeItem("auth-token");
-    this.messages.add(new Note("Logout completed", "Be back soon"));
-    this.router.navigate(['start']);
+    this.messages.add(new Note("Sikeres", "Kijelentkezés"));
+    this.router.navigate(['']);
   }
 }

@@ -1,0 +1,29 @@
+<div class="well">
+  <h4>Bejelentkezett felhasználóknak</h4>
+
+  <hr>
+
+  <p>
+    Írjon privát üzenetet.
+    A mind a kérdését, mind a választ csak ön és én fogjuk látni.
+  </p>
+  <button
+    (click)="redirect('messages')"
+    class="btn btn-block btn-default">
+    <span class="glyphicon glyphicon-envelope"></span>
+    Üzenetek
+  </button>
+
+  <hr>
+
+  <p>
+    Válasszon eseményt, és foglaljon időpontot.
+  </p>
+  <button
+    (click)="redirect('calendar')"
+    class="btn btn-block btn-default">
+    <span class="glyphicon glyphicon-calendar"></span>
+    Időpontfoglalás
+  </button>
+</div>
+

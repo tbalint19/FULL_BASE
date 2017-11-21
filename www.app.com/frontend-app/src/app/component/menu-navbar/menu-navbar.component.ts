@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {MessageService} from "../../service/message.service";
-import {Message} from "../../model/message/message.model";
 import {Note} from "../../model/message/note.model";
 
 @Component({
@@ -17,9 +16,13 @@ export class MenuNavbarComponent implements OnInit {
     sessionStorage.removeItem("credential");
   }
 
+  redirect(route: string): void {
+    this.router.navigate([route]);
+  }
+
   logout(){
     localStorage.removeItem("auth-token");
-    this.messages.add(new Note("Logout completed", "Be back soon"));
+    this.messages.add(new Note("Sikeres", "Kijelentkezés"));
     this.router.navigate(['start']);
   }
 }

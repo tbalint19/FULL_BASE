@@ -1,0 +1,35 @@
+<menu-navbar></menu-navbar>
+
+<div class="container">
+  <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+    <div class="well">
+      <h4>Főoldalon megjelenő üzenet szerkesztése</h4>
+
+      <input
+        placeholder="Üzenet címe"
+        class="form-control"
+        [(ngModel)]="status.creator.title">
+
+      <input
+        placeholder="Üzenet tartalma"
+        class="form-control"
+        [(ngModel)]="status.creator.text">
+
+      <div class="buttons">
+        <select class="btn btn-default" [(ngModel)]="status.creator.type">
+          <option *ngFor="let infoType of infoTypes()"
+              [ngValue]="infoType" [selected]="infoType == status.creator.type">
+            {{ infoType }}
+          </option>
+        </select>
+
+        <button
+          [disabled]="status.isDisabled()"
+          class="btn btn-default"
+          (click)="saveMainMessage()">
+          Mentés
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

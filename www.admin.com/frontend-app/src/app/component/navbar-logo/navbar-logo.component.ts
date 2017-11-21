@@ -19,7 +19,7 @@ export class NavbarLogoComponent implements OnInit {
     ){
       localStorage.removeItem('auth-token');
     }
-    this.router.navigate(['']);
+    this.router.navigate(['dashboard']);
   }
 
 }

@@ -13,7 +13,7 @@
             class="form-control"
             [(ngModel)]="status.resetDtoCreator.password"
             type="password"
-            placeholder="New password"/>
+            placeholder="Új jelszó"/>
         </div>
       </div>
 
@@ -23,7 +23,7 @@
             class="form-control"
             [(ngModel)]="status.resetDtoCreator.passwordAgain"
             type="password"
-            placeholder="New password again"/>
+            placeholder="Új jelszó megerősítése"/>
         </div>
       </div>
 
@@ -32,14 +32,14 @@
           class="btn btn-success"
           [disabled]="status.isPending() || status.isSuspended()"
           (click)="attemptReset()">
-          Reset password
+          Jelszó beállítása
         </button>
       </div>
 
       <div class="info-container">
         <p>
-          Please be aware that you have approx. 5-10 minutes to complete this step, afterwards
-          your granted right to reset the password is lost, and you must apply for reset again.
+          A jelszó ezen a felületen körülbelül 5 percig megváltoztatható - utána érvényét veszti
+          a jogosultság, mely kiküldött emailen keresztül került kiosztásra.
         </p>
       </div>
     </div>

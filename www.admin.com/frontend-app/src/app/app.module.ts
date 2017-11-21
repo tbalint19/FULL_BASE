@@ -32,6 +32,20 @@ import {ResetCodeValidator} from "./validator/reset-code-validator";
 import {DtoFactory} from "./factory/dto-factory";
 import {ParamFactory} from "./factory/param-factory";
 import {AuthStatus} from "./status/auth-status";
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import {DashboardElementComponent} from "./component/dashboard-element/dashboard-element.component";
+import { CalendarPageComponent } from './component/calendar-page/calendar-page.component';
+import { MessagesPageComponent } from './component/messages-page/messages-page.component';
+import { EditPageComponent } from './component/edit-page/edit-page.component';
+import { SecurityPageComponent } from './component/security-page/security-page.component';
+import {MainMessageValidator} from "./validator/main-message-validator";
+import {InfoStatus} from "./status/info-status";
+import {MainMessageService} from "./service/main-message.service";
+import {CreatorFactory} from "./factory/creator-factory";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CalendarStatus} from "./status/calendar-status";
+import {CalendarService} from "./service/calendar.service";
+
 
 @NgModule({
   declarations: [
@@ -45,13 +59,20 @@ import {AuthStatus} from "./status/auth-status";
     NavbarLogoComponent,
     ResetPopupComponent,
     MenuNavbarComponent,
-    ResetNavbarComponent
+    ResetNavbarComponent,
+    DashboardComponent,
+    DashboardElementComponent,
+    CalendarPageComponent,
+    MessagesPageComponent,
+    EditPageComponent,
+    SecurityPageComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     AuthGuard,
@@ -59,18 +80,24 @@ import {AuthStatus} from "./status/auth-status";
     LoginService,
     ResetService,
     MessageService,
+    MainMessageService,
+    CalendarService,
     UsernameValidator,
     EmailValidator,
     CredentialValidator,
     PasswordValidator,
     ResetCodeValidator,
+    MainMessageValidator,
     RequestFactory,
     ParamFactory,
     DtoFactory,
+    CreatorFactory,
     AuthStatus,
     LoginStatus,
     ResetStatus,
-    ResetStartStatus
+    ResetStartStatus,
+    CalendarStatus,
+    InfoStatus
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

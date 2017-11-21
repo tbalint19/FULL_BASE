@@ -2,29 +2,29 @@
   class="form-control"
   [(ngModel)]="status.creator.email"
   (ngModelChange)="checkEmail()"
-  placeholder="Email"
+  placeholder="Email cím"
   [disabled]="status.isPending()">
 
 <input-info
   *ngIf="!status.emailIsValid()"
   [type]="'default'"
-  [text]="'Enter a valid email address'">
+  [text]="'Adjon meg egy érvényes email címet'">
 </input-info>
 
 <input-info
   *ngIf="status.emailIsValid() && status.emailIsChecked()"
   [type]="'default'"
-  [text]="'Checking...'">
+  [text]="'Ellenőrzés...'">
 </input-info>
 
 <input-info
   *ngIf="status.emailIsValid() && !status.emailIsChecked() && !status.emailIsAvailable()"
   [type]="'error'"
-  [text]="'Occupied'">
+  [text]="'Már használatban van!'">
 </input-info>
 
 <input-info
   *ngIf="status.emailIsValid() && !status.emailIsChecked() && status.emailIsAvailable()"
   [type]="'success'"
-  [text]="'Available'">
+  [text]="'Elfogadva'">
 </input-info>

@@ -1,0 +1,80 @@
+<menu-navbar></menu-navbar>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      <button (click)="nextWeek('back')" class="btn btn-default btn-block">
+        Előző hét
+      </button>
+
+      <button (click)="nextWeek('start')" class="btn btn-default btn-block">
+        Ma
+      </button>
+
+      <button (click)="nextWeek('forward')" class="btn btn-default btn-block">
+        Következő hét
+      </button>
+
+      <hr>
+
+      <div *ngFor="let e of status.allExistingEvents">
+        <span *ngIf="!(status.eventCreator.id == e.id)"></span>
+        <span *ngIf="status.eventCreator.id == e.id">
+          <input class="form-control" [(ngModel)]="e.name">
+          <input class="form-control" type="number" [(ngModel)]="e.requiredNumberOfSpots">
+          <input class="form-control" type="checkbox" [(ngModel)]="e.available">
+          <button *ngIf="status.eventCreator.id == e.id" class="btn btn-info">
+            Mégse
+          </button>
+          <button *ngIf="status.eventCreator.id == e.id" class="btn btn-info">
+            Mentés
+          </button>
+          <button *ngIf="!(status.eventCreator.id == e.id)" class="btn btn-info" (click)="selectEvent(e)">
+            Szerk.
+          </button>
+        </span>
+      </div>
+      <button class="btn btn-default btn-block">
+        Új esemény
+      </button>
+    </div>
+
+    <div *ngFor="let day of status.week()"
+         class="col-xs-12 col-sm-12 col-md-{{ selected(day) ? '3' : '1' }} col-lg-{{ selected(day) ? '3' : '1' }} block-container">
+      <div class="one-day">
+        <div class="day-header">
+          <h4>{{ printDate(day) }}</h4>
+          <button (click)="selectDay(day)" class="btn btn-default">
+            {{ printDayName(day.getDay()) }}
+          </button>
+
+          <button *ngIf="selected(day)" class="btn btn-default" (click)="addOrderDay(day)">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+          </button>
+        </div>
+        <hr>
+        <div class="day-body">
+          <div *ngFor="let quarter of status.quarters()" class="quarter">
+            <span class="quarter-time">
+              {{ printHours(quarter.getHours()) }}:{{ printMinutes(quarter.getMinutes()) }}
+            </span>
+
+            <span *ngIf="this.status.selectedDay.getDay() == day.getDay()">
+              <button class="btn btn-default">
+                <span class="glyphicon glyphicon-info-sign"></span>
+              </button>
+
+              <button class="btn btn-default">
+                <span class="glyphicon glyphicon-wrench"></span>
+              </button>
+
+              <button class="btn btn-default">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

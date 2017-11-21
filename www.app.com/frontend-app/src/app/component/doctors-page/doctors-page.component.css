@@ -1,0 +1,16 @@
+.block-container {
+  padding: 40px;
+}
+
+h3 {
+  text-align: center;
+  color: purple;
+}
+
+p {
+  text-align: center;
+}
+
+.time {
+  text-decoration: underline;
+}

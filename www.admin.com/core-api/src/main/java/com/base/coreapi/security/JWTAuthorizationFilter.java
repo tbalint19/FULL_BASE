@@ -55,7 +55,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             return null;
         }
         String permission = tokenService.parseTokenForPermission(token);
-        if (permission.equals("default-admin")) {
+        if (!permission.equals("default-admin")) {
             return null;
         }
         CredentialsContainer credentials = null;

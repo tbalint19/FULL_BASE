@@ -2,31 +2,31 @@
   class="form-control"
   [(ngModel)]="status.creator.username"
   (ngModelChange)="checkUsername()"
-  placeholder="Username"
+  placeholder="Felhasználónév"
   [disabled]="status.isPending()"/>
 
 <input-info
   *ngIf="!status.usernameIsValid()"
   [type]="'default'"
-  [text]="'10-25 characters, only letters and numbers'">
+  [text]="'10-25 karakter, betűk és számok'">
 </input-info>
 
 <input-info
   *ngIf="status.usernameIsValid() && status.usernameIsChecked()"
   [type]="'default'"
-  [text]="'Checking...'">
+  [text]="'Ellenőrzés'">
 </input-info>
 
 <input-info
   *ngIf="status.usernameIsValid() && !status.usernameIsChecked() && !status.usernameIsAvailable()"
   [type]="'error'"
-  [text]="'Occupied'">
+  [text]="'Már használatban van!'">
 </input-info>
 
 <input-info
   *ngIf="status.usernameIsValid() && !status.usernameIsChecked() && status.usernameIsAvailable()"
   [type]="'success'"
-  [text]="'Available.'">
+  [text]="'Elfogadva'">
 </input-info>
 
 

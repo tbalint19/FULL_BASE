@@ -4,6 +4,12 @@ h3 {
   margin-bottom: 30px;
 }
 
+p {
+  text-align: justify;
+  opacity: 0.8;
+  color: #555;
+}
+
 .disabled-signup {
   opacity: 0.5;
 }

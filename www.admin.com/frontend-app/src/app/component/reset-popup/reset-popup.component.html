@@ -14,32 +14,32 @@
   *ngIf="status.isOpen()"
   class="reset-modal-container"
   id="reset-modal">
-  <h3>Forgotten password</h3>
+  <h3>Elfelejtett jelszó</h3>
   <p>
-    Enter your username or email - in case it belongs to an existing account,
-    we will send you an email to the email address that belongs to it.
+    A felhasználónév/email cím megadása után egy email megy a jelszó átállításhoz szükséges
+    tudnivalókkal.
   </p>
   <p>
-    Follow the instructions we sent you with it.
+    Az instrukciók követésével a jelszó megváltoztatható.
   </p>
   <div class="input-container">
     <input
       class="form-control" id="full-width-fix"
       [(ngModel)]="status.creator.credential"
-      placeholder="Username or email address">
+      placeholder="Felhasználónév vagy email cím">
   </div>
 
   <div class="button-container">
     <button
       class="btn btn-default"
       (click)="closeReset()">
-      Back
+      Mégse
     </button>
 
     <button
       class="btn btn-success"
       (click)="requestReset()">
-      Reset
+      Visszaállítás
     </button>
   </div>
 

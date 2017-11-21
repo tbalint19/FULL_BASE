@@ -1,0 +1,27 @@
+.day-header {
+  text-align: center;
+}
+
+.block-container {
+  padding: 3px;
+}
+
+.one-day {
+  box-shadow: 0 0 5px #555;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.day-body {
+  min-height: 300px;
+}
+
+.quarter {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
+}
+
+.quarter-time {
+  padding: 7px;
+}

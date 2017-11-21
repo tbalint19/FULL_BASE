@@ -48,6 +48,11 @@ import {AuthStatus} from "./status/auth-status";
 import { ConfirmPageComponent } from './component/confirm-page/confirm-page.component';
 import { ConfirmCodeInputComponent } from './component/confirm-code-input/confirm-code-input.component';
 import {ConfirmNavbarComponent} from "./component/confirm-navbar/confirm-navbar.component";
+import { DoctorsPageComponent } from './component/doctors-page/doctors-page.component';
+import { FaqPageComponent } from './component/faq-page/faq-page.component';
+import { CalendarPageComponent } from './component/calendar-page/calendar-page.component';
+import { MessagePageComponent } from './component/message-page/message-page.component';
+import { MainControllerComponent } from './component/main-controller/main-controller.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +76,12 @@ import {ConfirmNavbarComponent} from "./component/confirm-navbar/confirm-navbar.
     SignupComponent,
     ConfirmPageComponent,
     ConfirmNavbarComponent,
-    ConfirmCodeInputComponent
+    ConfirmCodeInputComponent,
+    DoctorsPageComponent,
+    FaqPageComponent,
+    CalendarPageComponent,
+    MessagePageComponent,
+    MainControllerComponent
   ],
   imports: [
     BrowserModule,

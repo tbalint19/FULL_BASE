@@ -14,18 +14,18 @@
       class="btn btn-success"
       [disabled]="status.isPending() || status.isSuspended()"
       (click)="attemptConfirm()">
-      Confirm<span class="glyphicon glyphicon-ok-circle"></span>
+      Megerősítés<span class="glyphicon glyphicon-ok-circle"></span>
     </button>
   </div>
 
   <div class="info-container">
     <p>
-      Please be aware that you have approx. 5-10 minutes to complete this step, afterwards
-      not confirmed accounts are deleted. In case you did not receive it, you can
+      Körülbelül 1 órája van, hogy az email címét megerősítse - ez után (biztosnági okokból)
+      a meg nem erősített fiókokat töröljük. Amennyiben nem kapott email-t,
       <button
         class="inline-text-button"
         (click)="resendRequest()">
-        ask for a resend
+        kérje újra.
       </button>.
     </p>
   </div>
@@ -34,7 +34,7 @@
 <div *ngIf="minified" class="well">
   <p class="minified-alert">
     <span class="glyphicon glyphicon-alert"></span>&nbsp;&nbsp;
-    Please confirm your account - check your email.
+    Erősítse meg a fiókját - nézze meg az email-jeit.
   </p>
   <div class="input-group">
     <confirm-code-input></confirm-code-input>
@@ -43,7 +43,7 @@
         class="btn btn-default"
         [disabled]="status.isPending() || status.isSuspended()"
         (click)="attemptConfirm()">
-        Confirm<span class="glyphicon glyphicon-ok-circle"></span>
+        Megerősítés<span class="glyphicon glyphicon-ok-circle"></span>
       </button>
     </span>
   </div>

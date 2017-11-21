@@ -35,7 +35,7 @@ export class LoginNavbarComponent implements OnInit {
 
   public suspend(): void {
     this.status.setSuspended(true);
-    this.messages.add(new Error("Error", "Invalid login data"));
+    this.messages.add(new Error("Hiba", "Sikertelen bejelentkezés"));
     setTimeout(()=>{
       this.status.setSuspended(false);
     }, 5000);
@@ -52,11 +52,11 @@ export class LoginNavbarComponent implements OnInit {
   private handleSuccessfulLogin(token: string): void {
     if (token != null) {
       localStorage.setItem('auth-token', token);
-      this.messages.add(new Success("Successful login", "Welcome"));
+      this.messages.add(new Success("Sikeres", "Bejelentkezés"));
     }
   }
 
   private handleLoginError(){
-    this.messages.add(new Error("Invalid credentials", "Try again"));
+    this.messages.add(new Error("Hiba", "Sikertelen bejelentkezés"));
   }
 }

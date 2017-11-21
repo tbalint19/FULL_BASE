@@ -17,6 +17,8 @@
 
       <signup *ngIf="!authStatus.isAuthenticated()"></signup>
 
+      <main-controller *ngIf="authStatus.isAuthenticated()"></main-controller>
+
     </div>
   </div>
 
