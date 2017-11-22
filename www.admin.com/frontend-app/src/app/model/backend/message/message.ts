@@ -10,7 +10,7 @@ export class Message {
 
   public isUserMessage: boolean;
 
-  public created: Date;
+  public created: number;
 
   private constructor(){}
 }

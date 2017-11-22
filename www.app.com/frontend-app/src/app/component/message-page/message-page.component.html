@@ -12,12 +12,9 @@
   </div>
 
   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-    <textarea
-      class="form-control"
-      placeholder="Írja le az üzenetét"
-      [(ngModel)]="status.creator.message">
+    <textarea class="form-control" placeholder="Írja le az üzenetét" [(ngModel)]="status.creator.message">
     </textarea>
-    <button class="btn btn-default" (click)="send()">
+    <button class="btn btn-block btn-default" (click)="send()">
       Küldés
     </button>
   </div>

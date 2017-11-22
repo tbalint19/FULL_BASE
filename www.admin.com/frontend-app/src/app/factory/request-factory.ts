@@ -6,6 +6,8 @@ import {ResetDTO} from "../model/dto/reset-dto";
 import {MainMessageUpdateDto} from "../model/dto/main-message-update-dto";
 import {OrderDayParams} from "../model/params/order-day-params";
 import {NewOrderDayDTO} from "../model/dto/new-order-day-dto";
+import {ApplicationUser} from "../model/backend/auth/application-user";
+import {RespondDto} from "../model/dto/respond-dto";
 
 @Injectable()
 export class RequestFactory {
@@ -46,7 +48,7 @@ export class RequestFactory {
     return new HttpRequest("/api/message/all", "GET", {userId});
   }
 
-  createRespondRequest(): HttpRequest {
-    return new HttpRequest("/api/message/respond", "POST", null);
+  createRespondRequest(dto: RespondDto): HttpRequest {
+    return new HttpRequest("/api/message/respond", "POST", dto);
   }
 }
