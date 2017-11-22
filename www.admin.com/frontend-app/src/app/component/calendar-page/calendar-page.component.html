@@ -48,7 +48,7 @@
             {{ printDayName(day.getDay()) }}
           </button>
 
-          <button *ngIf="selected(day)" class="btn btn-default" (click)="addOrderDay(day)">
+          <button *ngIf="selected(day)" class="btn btn-default" (click)="addOrderDay()">
             <span class="glyphicon glyphicon-plus-sign"></span>
           </button>
         </div>

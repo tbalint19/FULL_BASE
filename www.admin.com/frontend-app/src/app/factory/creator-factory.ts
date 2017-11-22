@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {MainMessage} from "../model/main-message";
 import {MainMessageCreator} from "../model/creator/main-message-creator";
-import {Event} from "../model/event";
+import {Event} from "../model/backend/calendar/event";
 import {EventCreatorDtoCreator} from "../model/creator/event-creator-dto-creator";
 
 @Injectable()

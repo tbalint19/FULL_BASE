@@ -6,9 +6,11 @@ import {ResetDTO} from "../model/dto/reset-dto";
 import {MainMessageCreator} from "../model/creator/main-message-creator";
 import {MainMessageUpdateDto} from "../model/dto/main-message-update-dto";
 import {NewOrderDayDTO} from "../model/dto/new-order-day-dto";
-import {OrderDay} from "../model/order-day";
+import {OrderDay} from "../model/backend/calendar/order-day";
 import {RespondDto} from "../model/dto/respond-dto";
 import {RespondDtoCreator} from "../model/creator/respond-dto-creator";
+import {OrderDayDtoCreator} from "../model/creator/order-day-dto-creator";
+import {Slot} from "../model/backend/calendar/slot";
 
 @Injectable()
 export class DtoFactory {
@@ -38,9 +40,22 @@ export class DtoFactory {
     return dto;
   }
 
-  createNewOrderDayDTO(day: OrderDay): NewOrderDayDTO {
+  createNewOrderDayDTO(creator: OrderDayDtoCreator): NewOrderDayDTO {
     let dto = new NewOrderDayDTO();
-
+    dto.orderDay = new OrderDay();
+    let date = new Date();
+    date.setTime(creator.date);
+    dto.orderDay.date = date;
+    dto.events = creator.events;
+    let slots = [];
+    for (let time of creator.times){
+      let slot = new Slot();
+      slot.active = true;
+      let slotDate = new Date();
+      slotDate.setTime(time);
+      slot.start = slotDate;
+    }
+    dto.slots = slots;
     return dto;
   }
 

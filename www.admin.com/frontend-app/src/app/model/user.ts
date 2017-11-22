@@ -1,4 +1,4 @@
-import {Reservation} from "./reservation";
+import {Reservation} from "./backend/calendar/reservation";
 
 export class User {
 

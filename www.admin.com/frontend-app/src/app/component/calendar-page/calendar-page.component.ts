@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {CalendarStatus} from "../../status/calendar-status";
 import {CalendarService} from "../../service/calendar.service";
-import {OrderDay} from "../../model/order-day";
+import {OrderDay} from "../../model/backend/calendar/order-day";
 import {SuccessResponse} from "../../model/response/success-response";
 import {MessageService} from "../../service/message.service";
 import {Success} from "../../model/message/success.model";
 import {Error} from "../../model/message/error.model";
-import {Event} from "../../model/event";
+import {Event} from "../../model/backend/calendar/event";
 
 
 @Component({
@@ -34,24 +34,14 @@ export class CalendarPageComponent implements OnInit {
     )
   }
 
-  protected addOrderDay(day: Date): void {
-    this.service.addOrderDay(this.status.orderDaysOfTheWeek.find(
-      (orderDay: OrderDay) => orderDay.date.getTime() == day.getTime()
-    )).subscribe(
+  protected addOrderDay(): void {
+    this.service.addOrderDay(this.status.orderDayCreator).subscribe(
       (response: SuccessResponse) => this.messages.add(
         response.successful ?
           new Success("Hozzáadva", "Új rendelési nap készült") :
           new Error("Hiba", "Történt")
       )
     );
-  }
-
-  protected selectEvent(event: Event): void {
-    
-  }
-
-  private AddEvent(): void {
-
   }
 
   private getPreviousMonday(): Date {

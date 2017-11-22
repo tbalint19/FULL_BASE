@@ -3,9 +3,10 @@ import {HttpClient} from "../http/http.client";
 import {DtoFactory} from "../factory/dto-factory";
 import {RequestFactory} from "../factory/request-factory";
 import {Observable} from "rxjs/Observable";
-import {OrderDay} from "../model/order-day";
+import {OrderDay} from "../model/backend/calendar/order-day";
 import {ParamFactory} from "../factory/param-factory";
 import {SuccessResponse} from "../model/response/success-response";
+import {OrderDayDtoCreator} from "../model/creator/order-day-dto-creator";
 
 @Injectable()
 export class CalendarService {
@@ -22,9 +23,9 @@ export class CalendarService {
         this._paramFactory.createOrderDaysParams(monday)));
   }
 
-  addOrderDay(day: OrderDay): Observable<SuccessResponse> {
+  addOrderDay(creator: OrderDayDtoCreator): Observable<SuccessResponse> {
     return this._client.transfer(
       this._requestFactory.createNewOrderDayRequest(
-        this._dtoFactory.createNewOrderDayDTO(day)));
+        this._dtoFactory.createNewOrderDayDTO(creator)));
   }
 }

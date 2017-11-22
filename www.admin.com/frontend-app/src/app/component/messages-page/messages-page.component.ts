@@ -22,6 +22,8 @@ export class MessagesPageComponent implements OnInit {
 
   ngOnInit() {
     this.status.creator.reset();
+    this.status.messages = [];
+    this.status.selectedUser = null;
     this.getUsers();
   }
 
