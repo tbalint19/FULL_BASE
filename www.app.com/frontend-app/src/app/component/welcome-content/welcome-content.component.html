@@ -5,8 +5,9 @@
       <span class="title">Üdvözlöm!</span><br>
       Ön Dr. Baranyi Judit gyermekorvos weboldalát látja.<br>
       Köszönöm, hogy felkereste az oldalamat, és hogy ezen keresztül intézi gyermeke ügyét.
-      Tájékozódjon az elérhetőségeimről, a rendelőmben lévő védőnőkről, valamint
-      olvassa el a gyakran elhangzó kérdéseket akér regisztráció nélkül is. Amennyiben
+      Tájékozódjon az elérhetőségeimről, a rendelőmben lévő
+      <span class="welcome-link" (click)="redirect('doctors')">védőnőkről</span>, valamint
+      olvassa el a <span class="welcome-link" (click)="redirect('faq')">gyakran elhangzó kérdéseket</span> akár regisztráció nélkül is. Amennyiben
       kérdése van, regisztráljon - (természetesen ingyenes),
       és tegye fel privát kérdését, vagy foglaljon időpontot.
     </p>

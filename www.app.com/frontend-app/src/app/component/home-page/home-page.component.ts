@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthStatus} from "../../status/auth-status";
 import {Router} from "@angular/router";
-import {HttpClient} from "../../http/http.client";
-import {HttpRequest} from "../../model/http/http-request.model";
+import {InfoService} from "../../service/info.service";
+import {HomeStatus} from "../../status/home-status";
+import {MainMessage} from "../../model/backend/info/main-message";
 
 @Component({
   selector: 'app-home',
@@ -11,9 +12,15 @@ import {HttpRequest} from "../../model/http/http-request.model";
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(protected authStatus: AuthStatus, private client: HttpClient) { }
+  constructor(
+    protected status: HomeStatus,
+    protected authStatus: AuthStatus,
+    private service: InfoService) { }
 
   ngOnInit() {
+    this.service.getMainMessage().subscribe(
+      (message: MainMessage) => this.status.message = message
+    );
   }
 
 }

@@ -1,5 +1,64 @@
 <menu-navbar></menu-navbar>
 
-<p>
-  calendar-page works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <select
+        class="btn btn-default dropdown-toggle btn-block"
+        [(ngModel)]="status.selectedEvent"
+        (ngModelChange)="updateSelectedEvent()">
+        <option
+          [ngValue]="null"
+          [hidden] ="true"
+          [selected]="!status.selectedEvent">Válasszon eseményt</option>
+        <option
+          *ngFor="let event of status.allExistingEvents"
+          [ngValue]="event">
+          {{ event.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <select *ngIf="status.selectedEvent"
+        class="btn btn-default dropdown-toggle btn-block"
+        [(ngModel)]="status.selectedOrderDay"
+        (ngModelChange)="updateSelectedOrderDay()">
+        <option
+          [ngValue]="null"
+          [hidden] ="true"
+          [selected]="!status.selectedOrderDay">Válasszon napot</option>
+        <option
+          *ngFor="let orderDay of getFilteredOrderDays()"
+          [ngValue]="orderDay">
+          {{ showDate(orderDay.date) }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <select *ngIf="status.selectedOrderDay"
+        class="btn btn-default dropdown-toggle btn-block"
+        [(ngModel)]="status.selectedSlot"
+        (ngModelChange)="updateSelectedSlot()">
+        <option
+          [ngValue]="null"
+          [hidden] ="true"
+          [selected]="!status.selectedSlot">Válasszon időpontot</option>
+        <option
+          *ngFor="let slot of status.selectedOrderDay.slots"
+          [ngValue]="slot">
+          {{ showTime(slot.start) }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="button-container">
+      <button *ngIf="status.selectedSlot" class="btn btn-default" (click)="reserve()">
+        Foglalás
+      </button>
+    </div>
+  </div>
+</div>

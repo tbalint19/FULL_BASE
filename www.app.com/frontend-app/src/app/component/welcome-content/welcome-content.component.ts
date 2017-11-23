@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'welcome-content',
@@ -7,9 +8,13 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class WelcomeContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  protected redirect(route: string): void {
+    this.router.navigate([route]);
   }
 
 }

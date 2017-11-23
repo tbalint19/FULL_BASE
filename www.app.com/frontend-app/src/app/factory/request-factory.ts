@@ -9,6 +9,7 @@ import {CheckUsernameParams} from "../model/params/check-username-params.model";
 import {CheckEmailParams} from "../model/params/check-email-params.model";
 import {ResetDTO} from "../model/dto/reset-dto";
 import {MessageCreateDTO} from "../model/dto/message-create-dto";
+import {ReservationDto} from "../model/dto/reservation-dto";
 
 @Injectable()
 export class RequestFactory {
@@ -51,5 +52,21 @@ export class RequestFactory {
 
   public createNewMessageRequest(dto: MessageCreateDTO): HttpRequest {
     return new HttpRequest("/api/message/send", "POST", dto);
+  }
+
+  public createMainMessageRequest(): HttpRequest {
+    return new HttpRequest("/api/info/mainmessage/get", "GET", null);
+  }
+
+  public createEventsRequest(): HttpRequest {
+    return new HttpRequest("/api/calendar/event/all", "GET", null);
+  }
+
+  public createOrderDaysRequest(): HttpRequest {
+    return new HttpRequest("/api/calendar/orderday/all", "GET", null);
+  }
+
+  public createReservationRequest(dto: ReservationDto): HttpRequest {
+    return new HttpRequest("/api/calendar/reservation/reserve", "POST", dto);
   }
 }

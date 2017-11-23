@@ -9,6 +9,11 @@ import {ResetDtoCreator} from "../model/creator/reset-dto-creator";
 import {ResetDTO} from "../model/dto/reset-dto";
 import {MessageCreateDtoCreator} from "../model/creator/message-create-dto-creator";
 import {MessageCreateDTO} from "../model/dto/message-create-dto";
+import {ResetService} from "../service/reset.service";
+import {ReservationDto} from "../model/dto/reservation-dto";
+import {Slot} from "../model/backend/calendar/slot";
+import {Event} from "../model/backend/calendar/event";
+
 
 @Injectable()
 export class DtoFactory {
@@ -49,4 +54,10 @@ export class DtoFactory {
     return dto;
   }
 
+  createReservationDTO(event: Event, slot: Slot): ReservationDto {
+    let dto = new ReservationDto();
+    dto.slot = slot;
+    dto.event = event;
+    return dto;
+  }
 }

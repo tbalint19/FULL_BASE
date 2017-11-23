@@ -55,6 +55,10 @@ import { MessagePageComponent } from './component/message-page/message-page.comp
 import { MainControllerComponent } from './component/main-controller/main-controller.component';
 import {MessagesStatus} from "./status/messages-status";
 import {PrivateMessageService} from "./service/private-message.service";
+import {InfoService} from "./service/info.service";
+import {HomeStatus} from "./status/home-status";
+import {CalendarStatus} from "./status/calendar-status";
+import {CalendarService} from "./service/calendar.service";
 
 @NgModule({
   declarations: [
@@ -100,6 +104,8 @@ import {PrivateMessageService} from "./service/private-message.service";
     ResetService,
     MessageService,
     ConfirmService,
+    CalendarService,
+    InfoService,
     PrivateMessageService,
     UsernameValidator,
     EmailValidator,
@@ -112,9 +118,11 @@ import {PrivateMessageService} from "./service/private-message.service";
     DtoFactory,
     AuthStatus,
     ConfirmStatus,
+    HomeStatus,
     LoginStatus,
     ResetStatus,
     ResetStartStatus,
+    CalendarStatus,
     MessagesStatus,
     SignupStatus
   ],

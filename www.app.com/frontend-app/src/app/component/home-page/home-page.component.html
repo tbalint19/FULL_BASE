@@ -2,6 +2,14 @@
 <login-navbar *ngIf="!authStatus.isAuthenticated()"></login-navbar>
 
 <div class="container">
+  <div *ngIf="status.message" class="row">
+    <div class="well">
+      <p class="{{ status.message.type == 'ERROR' && 'error-message' }}">
+        {{ status.message.title }}&nbsp;&nbsp;{{ status.message.text }}
+      </p>
+    </div>
+  </div>
+
   <div *ngIf="authStatus.isAuthenticated() && !authStatus.isConfirmed()" class="row">
     <confirm [minified]="true"></confirm>
   </div>
