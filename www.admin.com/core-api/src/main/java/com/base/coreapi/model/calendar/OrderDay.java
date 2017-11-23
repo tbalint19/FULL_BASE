@@ -26,7 +26,7 @@ public class OrderDay {
     private List<Slot> slots;
 
     @JsonIgnore
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.MERGE })
     @JoinTable(name = "OrderDay_Event",
         joinColumns = { @JoinColumn(name = "orderDay_id") },
         inverseJoinColumns = { @JoinColumn(name = "event_id") })

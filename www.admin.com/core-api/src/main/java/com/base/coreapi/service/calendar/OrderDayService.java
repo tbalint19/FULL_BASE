@@ -28,6 +28,7 @@ public class OrderDayService {
 
     public OrderDay getByDate(Long date) {
         Date asDate = new Date();
+        asDate.setTime(date);
 
         Calendar startDate = Calendar.getInstance();
         startDate.setTime(asDate);

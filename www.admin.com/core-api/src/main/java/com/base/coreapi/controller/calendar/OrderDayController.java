@@ -10,6 +10,7 @@ import com.base.coreapi.service.calendar.OrderDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,10 +31,14 @@ public class OrderDayController {
 
     @PostMapping("/add")
     public SuccessResponse addNewOrderDay(@RequestBody OrderDayCreatorDTO dto){
-        OrderDay orderDay = orderDayService.getByDateOrCreate(dto.getDate());
-        orderDay.setEvents((Set)dto.getEvents());
-        orderDay.setSlots(dto.getSlots());
+        OrderDay orderDay = dto.getOrderDay();
+        Set<Event> events = new HashSet<>(dto.getEvents());
+        orderDay.setEvents(events);
         orderDayService.save(orderDay);
+        for (Slot slot: dto.getSlots()){
+            slot.setOrderDay(orderDay);
+            slotRepository.save(slot);
+        }
         return new SuccessResponse(true);
     }
 }

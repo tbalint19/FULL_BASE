@@ -37,7 +37,8 @@ export class RequestFactory {
   }
 
   createNewOrderDayRequest(dto: NewOrderDayDTO): HttpRequest {
-    return new HttpRequest("/api/calendar/orderday/new", "POST", dto);
+    console.log(dto);
+    return new HttpRequest("/api/calendar/orderday/add", "POST", dto);
   }
 
   createGetUsersRequest(): HttpRequest {
@@ -50,5 +51,9 @@ export class RequestFactory {
 
   createRespondRequest(dto: RespondDto): HttpRequest {
     return new HttpRequest("/api/message/respond", "POST", dto);
+  }
+
+  public createGetEventsRequest(): HttpRequest {
+    return new HttpRequest("/api/calendar/event/all", "GET", null);
   }
 }

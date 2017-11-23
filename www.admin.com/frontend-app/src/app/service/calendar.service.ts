@@ -7,6 +7,8 @@ import {OrderDay} from "../model/backend/calendar/order-day";
 import {ParamFactory} from "../factory/param-factory";
 import {SuccessResponse} from "../model/response/success-response";
 import {OrderDayDtoCreator} from "../model/creator/order-day-dto-creator";
+import {Event} from "../model/backend/calendar/event";
+
 
 @Injectable()
 export class CalendarService {
@@ -16,6 +18,11 @@ export class CalendarService {
     private _dtoFactory: DtoFactory,
     private _paramFactory: ParamFactory,
     private _requestFactory: RequestFactory) { }
+
+  public getEvents(): Observable<Event[]> {
+    return this._client.transfer(
+      this._requestFactory.createGetEventsRequest());
+  }
 
   public getOrderDays(monday: Date): Observable<OrderDay[]> {
     return this._client.transfer(

@@ -26,12 +26,39 @@ export class CalendarPageComponent implements OnInit {
     this.status.selectedMonday = this.getPreviousMonday();
     this.status.selectedDay = new Date();
     this.getOrderDays();
+    this.getEvents();
+    this.updateCreator();
+  }
+
+  private updateCreator(): void {
+    this.status.orderDayCreator.date = this.status.selectedDay.getTime();
+    this.status.orderDayCreator.times = this.status.quarters().map((entry: Date) => entry.getTime());
+  }
+
+  private getEvents(): void {
+    this.service.getEvents().subscribe(
+      (events: Event[]) => this.status.allExistingEvents = events
+    );
   }
 
   private getOrderDays(): void {
     this.service.getOrderDays(this.status.selectedMonday).subscribe(
       (orderDays: OrderDay[]) => this.status.orderDaysOfTheWeek = orderDays
     )
+  }
+
+  protected containsEvent(event: Event): boolean {
+    return this.status.orderDayCreator.events.filter((entry: Event) => entry.id == event.id).length > 0;
+  }
+
+  protected toggleEvent(event: Event): void {
+    if (this.containsEvent(event)) {
+      this.status.orderDayCreator.events = this.status.orderDayCreator.events.filter(
+        (entry: Event) => entry.id != event.id
+      );
+    } else {
+      this.status.orderDayCreator.events.push(event);
+    }
   }
 
   protected addOrderDay(): void {
@@ -44,6 +71,12 @@ export class CalendarPageComponent implements OnInit {
     );
   }
 
+  protected showDate(dateNumber: number): string {
+    let date = new Date();
+    date.setTime(dateNumber);
+    return date.getFullYear() + "." + (date.getMonth()+1) + "." + date.getDate();
+  }
+
   private getPreviousMonday(): Date {
     let prevMonday = new Date();
     prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
@@ -52,6 +85,7 @@ export class CalendarPageComponent implements OnInit {
 
   protected selectDay(day: Date): void {
     this.status.selectedDay = day;
+    this.updateCreator();
   }
 
   protected nextWeek(direction: string): void {
@@ -65,6 +99,7 @@ export class CalendarPageComponent implements OnInit {
       this.status.selectedMonday = newMonday;
       this.status.selectedDay = newMonday.getTime() == this.getPreviousMonday().getTime() ? new Date() : newMonday;
     }
+    this.updateCreator();
   }
 
   protected selected(day: Date): boolean {

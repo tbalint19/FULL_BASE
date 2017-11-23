@@ -54,6 +54,7 @@ export class DtoFactory {
       let slotDate = new Date();
       slotDate.setTime(time);
       slot.start = slotDate;
+      slots.push(slot);
     }
     dto.slots = slots;
     return dto;

@@ -17,25 +17,25 @@
 
       <hr>
 
-      <div *ngFor="let e of status.allExistingEvents">
-        <span *ngIf="!(status.eventCreator.id == e.id)"></span>
-        <span *ngIf="status.eventCreator.id == e.id">
-          <input class="form-control" [(ngModel)]="e.name">
-          <input class="form-control" type="number" [(ngModel)]="e.requiredNumberOfSpots">
-          <input class="form-control" type="checkbox" [(ngModel)]="e.available">
-          <button *ngIf="status.eventCreator.id == e.id" class="btn btn-info">
-            Mégse
-          </button>
-          <button *ngIf="status.eventCreator.id == e.id" class="btn btn-info">
-            Mentés
-          </button>
-          <button *ngIf="!(status.eventCreator.id == e.id)" class="btn btn-info" (click)="selectEvent(e)">
-            Szerk.
-          </button>
-        </span>
-      </div>
-      <button class="btn btn-default btn-block">
-        Új esemény
+      <h4>Új rendelési nap</h4>
+
+      <hr>
+
+      <button
+        *ngFor="let event of status.allExistingEvents"
+        (click)="toggleEvent(event)"
+        class="btn btn-block {{ containsEvent(event) ? 'btn-info' : 'btn-default' }}">
+        {{ event.name }}
+      </button>
+
+      <hr>
+
+      <p>{{ showDate(status.orderDayCreator.date) }}</p>
+
+      <button
+        (click)="addOrderDay()"
+        class="btn btn-default btn-block">
+        Hozzáadás
       </button>
     </div>
 
