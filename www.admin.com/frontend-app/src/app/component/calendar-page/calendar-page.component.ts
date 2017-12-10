@@ -246,6 +246,7 @@ export class CalendarPageComponent implements OnInit {
   }
 
   protected editQuarter(quarter: Date): void {
+    this.status.selectedReservation = null;
     this.status.selectedUser = null;
     this.status.selectedEvent = null;
     if (this.hasReservation(quarter)) {
