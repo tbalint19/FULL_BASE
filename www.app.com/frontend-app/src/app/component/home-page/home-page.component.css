@@ -1,3 +1,24 @@
 .error-message {
   color: #d9534f;
 }
+
+.main-message {
+  padding: 3px 15px;
+  border-radius: 3px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 15px #555;
+}
+
+.main-message-ERROR {
+  background-color: #d9534f;
+}
+
+.main-message-SUCCESS {
+  background-color: #5cb85c;
+}
+
+.main-message-DEFAULT {
+  background-color: #999999;
+}

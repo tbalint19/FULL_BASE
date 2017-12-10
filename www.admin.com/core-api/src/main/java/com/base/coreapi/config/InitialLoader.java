@@ -2,14 +2,10 @@ package com.base.coreapi.config;
 
 import com.base.coreapi.model.admin.Admin;
 import com.base.coreapi.model.admin.Permission;
-import com.base.coreapi.model.calendar.Event;
-import com.base.coreapi.model.calendar.OrderDay;
 import com.base.coreapi.model.info.InfoType;
 import com.base.coreapi.model.info.MainMessage;
 import com.base.coreapi.repository.admin.AdminRepository;
 import com.base.coreapi.repository.admin.PermissionRepository;
-import com.base.coreapi.repository.calendar.EventRepository;
-import com.base.coreapi.repository.calendar.OrderDayRepository;
 import com.base.coreapi.repository.info.MainMessageRepository;
 import com.base.coreapi.service.admin.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +30,6 @@ public class InitialLoader {
     @Autowired
     private AuthService authService;
 
-    @Autowired
-    private OrderDayRepository orderDayRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
-
     @PostConstruct
     @Transactional
     public void InitialPermission() {
@@ -59,32 +49,19 @@ public class InitialLoader {
         admin.setPermissions(permissions);
         adminRepository.save(admin);
 
-        MainMessage mainMessage = new MainMessage();
-        mainMessage.setTitle("Figyelem");
-        mainMessage.setText("December 24-25-26 nincs rendelés!");
-        mainMessage.setType(InfoType.DEFAULT);
-        mainMessage.setIdentifier("only-one");
-        mainMessageRepository.save(mainMessage);
+        MainMessage mainMessageHome = new MainMessage();
+        mainMessageHome.setTitle("Figyelem");
+        mainMessageHome.setText("December 24-25-26 nincs rendelés!");
+        mainMessageHome.setType(InfoType.DEFAULT);
+        mainMessageHome.setIdentifier("home-message");
+        mainMessageRepository.save(mainMessageHome);
 
-        Event event_1 = new Event();
-        event_1.setName("Általános rendelés");
-        event_1.setAvailable(true);
-        event_1.setRequiredNumberOfSpots(1);
-        event_1.setOrderDays(new HashSet<>());
-        eventRepository.save(event_1);
+        MainMessage mainMessageCalendar = new MainMessage();
+        mainMessageCalendar.setTitle("Üdvözlöm");
+        mainMessageCalendar.setText("(Ide jöhet az üzenet...)");
+        mainMessageCalendar.setType(InfoType.DEFAULT);
+        mainMessageCalendar.setIdentifier("calendar-message");
+        mainMessageRepository.save(mainMessageCalendar);
 
-        Event event_2 = new Event();
-        event_2.setName("Bárányhimlő oltás");
-        event_2.setAvailable(true);
-        event_2.setRequiredNumberOfSpots(1);
-        event_2.setOrderDays(new HashSet<>());
-        eventRepository.save(event_2);
-
-        Event event_3 = new Event();
-        event_3.setName("Valami nagyon hosszú");
-        event_3.setAvailable(true);
-        event_3.setRequiredNumberOfSpots(2);
-        event_3.setOrderDays(new HashSet<>());
-        eventRepository.save(event_3);
     }
 }

@@ -15,11 +15,11 @@ import {ReservationDto} from "../model/dto/reservation-dto";
 export class RequestFactory {
 
   public createUsernameCheckRequest(params: CheckUsernameParams): HttpRequest {
-    return new HttpRequest("/api/check/username", "GET", params);
+    return new HttpRequest("/api/user/check/username", "GET", params);
   }
 
   public createEmailCheckRequest(params: CheckEmailParams): HttpRequest {
-    return new HttpRequest("/api/check/email", "GET", params);
+    return new HttpRequest("/api/user/check/email", "GET", params);
   }
 
   public createSignupRequest(user: SignupDTO): HttpRequest {
@@ -31,11 +31,11 @@ export class RequestFactory {
   }
 
   public createConfirmEmailRequest(params: ConfirmEmailParams): HttpRequest {
-    return new HttpRequest("/api/confirm/start", "GET", params);
+    return new HttpRequest("/api/confirm/request", "GET", params);
   }
 
   public createConfirmRequest(confirmation: ConfirmationDTO): HttpRequest {
-    return new HttpRequest("/api/confirm/finish", "POST", confirmation);
+    return new HttpRequest("/api/confirm/complete", "POST", confirmation);
   }
 
   public createResetEmailRequest(params: ResetEmailParams): HttpRequest{

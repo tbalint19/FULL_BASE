@@ -18,9 +18,9 @@ export class HomePageComponent implements OnInit {
     private service: InfoService) { }
 
   ngOnInit() {
-    this.service.getMainMessage().subscribe(
-      (message: MainMessage) => this.status.message = message
-    );
+    // this.service.getMainMessage().subscribe(
+    //   (message: MainMessage) => this.status.message = message
+    // );
   }
 
 }

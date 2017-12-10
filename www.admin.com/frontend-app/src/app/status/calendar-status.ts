@@ -1,16 +1,12 @@
 import {Injectable} from "@angular/core";
-import {OrderDay} from "../model/backend/calendar/order-day";
-import {CalendarService} from "../service/calendar.service";
-import {EventCreatorDtoCreator} from "../model/creator/event-creator-dto-creator";
-import {NewOrderDayDTO} from "../model/dto/new-order-day-dto";
-import {Slot} from "../model/backend/calendar/slot";
-import {Event} from "../model/backend/calendar/event";
 import {Reservation} from "../model/backend/calendar/reservation";
-import {OrderDayDtoCreator} from "../model/creator/order-day-dto-creator";
-import {ReservationDtoCreator} from "../model/creator/reservation-dto-creator";
 import {HttpClient} from "../http/http.client";
 import {DtoFactory} from "../factory/dto-factory";
 import {ParamFactory} from "../factory/param-factory";
+import {Addition} from "../model/backend/calendar/addition";
+import {Restriction} from "../model/backend/calendar/restriction";
+import {Holiday} from "../model/backend/calendar/holiday";
+import {ApplicationUser} from "../model/backend/auth/application-user";
 
 @Injectable()
 export class CalendarStatus {
@@ -18,28 +14,38 @@ export class CalendarStatus {
   public selectedMonday: Date;
   public selectedDay: Date;
 
-  public orderDaysOfTheWeek: OrderDay[];
-  public allExistingEvents: Event[];
-  public selectedDaysSlots: Slot[];
   public selectedDaysReservations: Reservation[];
 
-  public eventCreator: EventCreatorDtoCreator;
-  public orderDayCreator: OrderDayDtoCreator;
-  public reservationCreator: ReservationDtoCreator;
+  public additionsOfTheWeek: Addition[];
+  public restrictionsOfTheWeek: Restriction[];
+  public holidaysOfTheWeek: Holiday[];
+  public reservationsOfTheWeek: Reservation[];
+
+  public users: ApplicationUser[];
+  public selectedUser: ApplicationUser;
+  public selectedEvent: string;
+  public selectedQuarter: Date;
+
+  public selectedReservation: Reservation;
+  public reservationEditorOpened: boolean;
+
+  public events: string[];
 
   constructor(
     private _requestObserver: HttpClient,
     private _dtoFactory: DtoFactory,
     private _paramFactory: ParamFactory){
-    this.orderDaysOfTheWeek = [];
-    this.allExistingEvents = [];
-    this.selectedDaysSlots = [];
     this.selectedDaysReservations = [];
+    this.reservationsOfTheWeek = [];
+    this.restrictionsOfTheWeek = [];
+    this.additionsOfTheWeek = [];
+    this.holidaysOfTheWeek = [];
     this.selectedMonday = null;
     this.selectedDay = null;
-    this.eventCreator = new EventCreatorDtoCreator();
-    this.orderDayCreator = new OrderDayDtoCreator();
-    this.reservationCreator = new ReservationDtoCreator();
+    this.selectedUser = null;
+    this.selectedEvent = null;
+    this.selectedReservation = null;
+    this.events = ["Általános vizsgálat", "Oltás", "Szünet"];
   }
 
   public week(): Date[] {
@@ -52,10 +58,10 @@ export class CalendarStatus {
     return week;
   }
 
-  public quarters(): Date[] {
+  public quarters(day: Date): Date[] {
     let quarters = [];
     let morning8 = new Date();
-    morning8.setTime(this.selectedDay.getTime());
+    morning8.setTime(day.getTime());
     morning8.setHours(10, 0, 0);
     for (let x=0; x<32; x++) {
       let timeStamp = new Date();

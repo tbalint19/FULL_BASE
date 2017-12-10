@@ -6,24 +6,47 @@
 }
 
 .info-container {
-  padding: 0 50px 0 50px;
-}
-
-.title {
-  text-align: center;
-  color: purple;
-  margin-bottom: 20px;
-  font-size: 1.5em;
-  display: block;
-}
-
-p {
   text-align: justify;
   font-size: 1.2em;
   color: #555;
 }
 
+.hoverable-container {
+  padding: 20px;
+  transition: 1.2s;
+
+}
+
+.hoverable-container:hover {
+  background-color: rosybrown;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rosybrown;
+  transition: 1.2s;
+  cursor: all-scroll;
+}
+
+h4, h6 {
+  text-align: center;
+  color: purple;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
 .welcome-link {
   color: purple;
   cursor: pointer;
+}
+
+.mini-container {
+  text-align: center;
+}
+
+.one-time {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 20px;
+}
+
+.buttons {
+  padding: 2px 20px 50px;
 }

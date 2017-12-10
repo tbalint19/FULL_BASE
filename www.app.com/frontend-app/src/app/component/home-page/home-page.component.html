@@ -1,33 +1,29 @@
 <menu-navbar *ngIf="authStatus.isAuthenticated()"></menu-navbar>
 <login-navbar *ngIf="!authStatus.isAuthenticated()"></login-navbar>
 
-<div class="container">
-  <div *ngIf="status.message" class="row">
-    <div class="well">
-      <p class="{{ status.message.type == 'ERROR' && 'error-message' }}">
-        {{ status.message.title }}&nbsp;&nbsp;{{ status.message.text }}
-      </p>
-    </div>
-  </div>
-
-  <div *ngIf="authStatus.isAuthenticated() && !authStatus.isConfirmed()" class="row">
-    <confirm [minified]="true"></confirm>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 block-container welcome-container">
-
-      <welcome-content></welcome-content>
-
+<div id="background">
+  <div class="container">
+    <div *ngIf="status.message" class="row block-container">
+      <div class="main-message main-message-{{ status.message.type }}">
+        {{ status.message.title }}:&nbsp;&nbsp;{{ status.message.text }}
+      </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 block-container">
-
-      <signup *ngIf="!authStatus.isAuthenticated()"></signup>
-
-      <main-controller *ngIf="authStatus.isAuthenticated()"></main-controller>
-
+    <div *ngIf="authStatus.isAuthenticated() && !authStatus.isConfirmed()" class="row">
+      <confirm [minified]="true"></confirm>
     </div>
-  </div>
 
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 block-container welcome-container">
+        <welcome-content></welcome-content>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 block-container">
+        <signup *ngIf="!authStatus.isAuthenticated()"></signup>
+
+        <main-controller *ngIf="authStatus.isAuthenticated()"></main-controller>
+      </div>
+    </div>
+
+  </div>
 </div>

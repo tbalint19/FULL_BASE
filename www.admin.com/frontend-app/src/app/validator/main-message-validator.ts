@@ -5,10 +5,12 @@ export class MainMessageValidator {
 
   private _validcontent: RegExp;
   private _identifierPattern: string;
+  private _identifierPatternCalendar: string;
 
   constructor(){
     this._validcontent = /^([a-zA-Z0-9_-]){5,25}$/;
-    this._identifierPattern = "only-one";
+    this._identifierPattern = "home-message";
+    this._identifierPatternCalendar = "calendar-message";
   }
 
   public isValidContent(content: string): boolean {
@@ -17,5 +19,9 @@ export class MainMessageValidator {
 
   public onlyOneIsUpdated(identifier: string): boolean {
     return identifier == this._identifierPattern;
+  }
+
+  public calendarIsUpdated(identifier: string): boolean {
+    return identifier == this._identifierPatternCalendar;
   }
 }

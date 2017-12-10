@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
 import {MessageService} from "../../service/message.service";
 import {Note} from "../../model/message/note.model";
+import {Router} from "@angular/router";
+import {AuthStatus} from "../../status/auth-status";
 
 @Component({
   selector: 'menu-navbar',
@@ -10,7 +11,10 @@ import {Note} from "../../model/message/note.model";
 })
 export class MenuNavbarComponent implements OnInit {
 
-  constructor(private router: Router, private messages: MessageService) { }
+  constructor(
+    private authStatus: AuthStatus,
+    private router: Router,
+    private messages: MessageService) { }
 
   ngOnInit() {
     sessionStorage.removeItem("credential");
@@ -24,5 +28,15 @@ export class MenuNavbarComponent implements OnInit {
     localStorage.removeItem("auth-token");
     this.messages.add(new Note("Sikeres", "Kijelentkezés"));
     this.router.navigate(['start']);
+  }
+
+  showMessages(): boolean {
+    return this.router.url != "/messages" &&
+      this.authStatus.isAuthenticated();
+  }
+
+  showCalendar(): boolean {
+    return this.router.url != "/calendar" &&
+      this.authStatus.isAuthenticated();
   }
 }

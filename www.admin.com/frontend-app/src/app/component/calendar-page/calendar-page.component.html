@@ -17,59 +17,78 @@
 
       <hr>
 
-      <h4>Új rendelési nap</h4>
+      <div class="well" *ngIf="status.reservationEditorOpened">
+        <h4>Új foglalás</h4>
+        <hr>
+        <select [(ngModel)]="status.selectedUser" class="btn btn-default btn-block">
+          <option [ngValue]="null"
+            [selected]="status.selectedUser == null">
+            Nincs felhasználó
+          </option>
+          <option *ngFor="let user of status.users" [ngValue]="user">
+            {{ user.username }}
+          </option>
+        </select>
 
-      <hr>
+        <select [(ngModel)]="status.selectedEvent" class="btn btn-default btn-block">
+          <option [ngValue]="null"
+            [hidden]="true" [selected]="status.selectedEvent == null">
+            Esemény
+          </option>
+          <option *ngFor="let event of status.events" [ngValue]="event">
+            {{ event }}
+          </option>
+        </select>
 
-      <button
-        *ngFor="let event of status.allExistingEvents"
-        (click)="toggleEvent(event)"
-        class="btn btn-block {{ containsEvent(event) ? 'btn-info' : 'btn-default' }}">
-        {{ event.name }}
-      </button>
+        <hr>
 
-      <hr>
+        <button *ngIf="!status.selectedReservation"
+                [disabled]="disabled()"
+                class="btn btn-default btn-block" (click)="addReservation()">
+          Mentés
+        </button>
+        <button *ngIf="status.selectedReservation"
+                class="btn btn-default btn-block" (click)="deleteReservation()">
+          Törlés
+        </button>
+        <button class="btn btn-default btn-block" (click)="closeEditor()">Mégse</button>
+      </div>
 
-      <p>{{ showDate(status.orderDayCreator.date) }}</p>
-
-      <button
-        (click)="addOrderDay()"
-        class="btn btn-default btn-block">
-        Hozzáadás
-      </button>
     </div>
 
     <div *ngFor="let day of status.week()"
          class="col-xs-12 col-sm-12 col-md-{{ selected(day) ? '3' : '1' }} col-lg-{{ selected(day) ? '3' : '1' }} block-container">
-      <div class="one-day">
+      <div class="one-day {{ isHoliday(day) && 'holiday-disabled' }}">
         <div class="day-header">
           <h4>{{ printDate(day) }}</h4>
           <button (click)="selectDay(day)" class="btn btn-default">
             {{ printDayName(day.getDay()) }}
           </button>
 
-          <button *ngIf="selected(day)" class="btn btn-default" (click)="addOrderDay()">
-            <span class="glyphicon glyphicon-plus-sign"></span>
-          </button>
+          <button (click)="addHoliday()"
+            *ngIf="selected(day) && ((!hasHoliday(day) && isWeekDay(day)) || (!hasHoliday(day) && !isWeekDay(day) && hasAddition(day)))"
+            class="btn btn-default">Nincs rendelés</button>
+
+          <button *ngIf="selected(day) && hasHoliday(day)" (click)="deleteHoliday()"
+                  class="btn btn-default">Szabadság törlése</button>
+
+          <button *ngIf="selected(day) && !isWeekDay(day) && !hasAddition(day)" (click)="addAddition()"
+                  class="btn btn-default">Munkanap</button>
+
+          <button *ngIf="selected(day) && hasAddition(day)" (click)="deleteAddition()"
+                  class="btn btn-default">Munkanap törlése</button>
         </div>
         <hr>
         <div class="day-body">
-          <div *ngFor="let quarter of status.quarters()" class="quarter">
+          <div *ngFor="let quarter of status.quarters(day)"
+               class="quarter {{ hasUserReservation(quarter) && 'reservation-colored'}} {{ hasBreak(quarter) && 'break-colored' }}">
             <span class="quarter-time">
               {{ printHours(quarter.getHours()) }}:{{ printMinutes(quarter.getMinutes()) }}
             </span>
 
             <span *ngIf="this.status.selectedDay.getDay() == day.getDay()">
-              <button class="btn btn-default">
+              <button class="btn btn-default" (click)="editQuarter(quarter)">
                 <span class="glyphicon glyphicon-info-sign"></span>
-              </button>
-
-              <button class="btn btn-default">
-                <span class="glyphicon glyphicon-wrench"></span>
-              </button>
-
-              <button class="btn btn-default">
-                <span class="glyphicon glyphicon-remove"></span>
               </button>
             </span>
           </div>

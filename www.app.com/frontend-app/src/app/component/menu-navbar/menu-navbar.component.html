@@ -1,10 +1,31 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top" id="margin-fix">
   <navbar-logo></navbar-logo>
   <div class="navbar-form navbar-right" id="navbar-margin-fix">
+    <button *ngIf="showMessages()"
+      class="btn btn-default"
+      (click)="redirect('messages')">
+      <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+      Üzenetek
+    </button>
+
+    <button *ngIf="showCalendar()"
+      class="btn btn-default"
+      (click)="redirect('calendar')">
+      <span class="glyphicon glyphicon-calendarn" aria-hidden="true"></span>
+      Időpontfoglalás
+    </button>
+
+    <button
+      class="btn btn-default"
+      (click)="redirect('me')">
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+      Rólam
+    </button>
+
     <button
       class="btn btn-default"
       (click)="redirect('doctors')">
-      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
       Védőnők
     </button>
 

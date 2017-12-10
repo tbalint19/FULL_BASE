@@ -19,6 +19,10 @@ export class MainMessageService {
     return this._client.transfer(this._requestFactory.createMainMessageGetRequest())
   }
 
+  public getCalendarMessage(): Observable<MainMessage> {
+    return this._client.transfer(this._requestFactory.createCalendarMessageGetRequest())
+  }
+
   public updateMainMessage(creator: MainMessageCreator): Observable<SuccessResponse> {
     return this._client.transfer(
       this._requestFactory.createMainMessageUpdateRequest(

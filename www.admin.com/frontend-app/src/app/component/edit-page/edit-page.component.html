@@ -2,33 +2,67 @@
 
 <div class="container">
   <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-    <div class="well">
-      <h4>Főoldalon megjelenő üzenet szerkesztése</h4>
+    <div class="row">
+      <div class="well">
+        <h4>Főoldalon megjelenő üzenet szerkesztése</h4>
 
-      <input
-        placeholder="Üzenet címe"
-        class="form-control"
-        [(ngModel)]="status.creator.title">
+        <input
+          placeholder="Üzenet címe"
+          class="form-control"
+          [(ngModel)]="status.creator.title">
 
-      <input
-        placeholder="Üzenet tartalma"
-        class="form-control"
-        [(ngModel)]="status.creator.text">
+        <input
+          placeholder="Üzenet tartalma"
+          class="form-control"
+          [(ngModel)]="status.creator.text">
 
-      <div class="buttons">
-        <select class="btn btn-default" [(ngModel)]="status.creator.type">
-          <option *ngFor="let infoType of infoTypes()"
-              [ngValue]="infoType" [selected]="infoType == status.creator.type">
-            {{ infoType }}
-          </option>
-        </select>
+        <div class="buttons">
+          <select class="btn btn-default" [(ngModel)]="status.creator.type">
+            <option *ngFor="let infoType of infoTypes()"
+                    [ngValue]="infoType" [selected]="infoType == status.creator.type">
+              {{ infoType }}
+            </option>
+          </select>
 
-        <button
-          [disabled]="status.isDisabled()"
-          class="btn btn-default"
-          (click)="saveMainMessage()">
-          Mentés
-        </button>
+          <button
+            [disabled]="status.isDisabled()"
+            class="btn btn-default"
+            (click)="saveMainMessage()">
+            Mentés
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="well">
+        <h4>A naptár felett megjelenő üzenet szerkesztése</h4>
+
+        <input
+          placeholder="Üzenet címe"
+          class="form-control"
+          [(ngModel)]="status.calendarCreator.title">
+
+        <input
+          placeholder="Üzenet tartalma"
+          class="form-control"
+          [(ngModel)]="status.calendarCreator.text">
+
+        <div class="buttons">
+          <select class="btn btn-default" [(ngModel)]="status.calendarCreator.type">
+            <option *ngFor="let infoType of infoTypes()"
+                    [ngValue]="infoType" [selected]="infoType == status.calendarCreator.type">
+              {{ infoType }}
+            </option>
+          </select>
+
+          <button
+            [disabled]="status.isDisabledCalendar()"
+            class="btn btn-default"
+            (click)="saveCalendarMessage()">
+            Mentés
+          </button>
+        </div>
       </div>
     </div>
   </div>

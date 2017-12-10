@@ -25,3 +25,17 @@
 .quarter-time {
   padding: 7px;
 }
+
+.holiday-disabled {
+  background-color: #999;
+}
+
+.reservation-colored {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.break-colored {
+  background-color: #999999;
+  color: white;
+}

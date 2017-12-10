@@ -25,6 +25,7 @@ export class EditPageComponent implements OnInit {
 
   ngOnInit() {
     this.getMainMessage();
+    this.getCalendarMessage();
   }
 
   protected getMainMessage(): void {
@@ -35,11 +36,30 @@ export class EditPageComponent implements OnInit {
     );
   }
 
+  protected getCalendarMessage(): void {
+    this.service.getCalendarMessage().subscribe(
+      (message: MainMessage) => {
+        this.status.calendarCreator = this.factory.createMainMessageCreator(message);
+      }
+    );
+  }
+
   protected saveMainMessage(): void {
     this.service.updateMainMessage(this.status.creator).subscribe(
       (response: SuccessResponse) => {
         this.messages.add(response.successful ?
           new Success("Mentve", "Főoldali üzenet módosítva") :
+          new Error("Hiba", "..."));
+        this.getMainMessage();
+      }
+    );
+  }
+
+  protected saveCalendarMessage(): void {
+    this.service.updateMainMessage(this.status.calendarCreator).subscribe(
+      (response: SuccessResponse) => {
+        this.messages.add(response.successful ?
+          new Success("Mentve", "Naptár oldali üzenet módosítva") :
           new Error("Hiba", "..."));
         this.getMainMessage();
       }

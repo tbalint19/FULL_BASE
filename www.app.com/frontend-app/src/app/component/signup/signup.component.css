@@ -13,3 +13,7 @@ p {
 .disabled-signup {
   opacity: 0.5;
 }
+
+.well {
+  /*box-shadow: 0 0 15px #555;*/
+}

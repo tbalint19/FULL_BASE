@@ -1,0 +1,11 @@
+textarea {
+  margin-bottom: 10px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.with-ws {
+  white-space: pre-line;
+}

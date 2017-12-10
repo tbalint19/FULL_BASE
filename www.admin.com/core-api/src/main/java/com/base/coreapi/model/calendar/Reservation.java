@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -19,7 +20,7 @@ public class Reservation {
     @ManyToOne
     private ApplicationUser user;
 
-    @JsonIgnore
-    @ManyToOne
-    private Event event;
+    private String event;
+
+    private Date date;
 }

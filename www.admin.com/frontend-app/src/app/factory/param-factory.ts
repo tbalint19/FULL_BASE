@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ResetEmailParamsCreator} from "../model/creator/reset-email-params-creator";
 import {ResetEmailParams} from "../model/params/reset-email-params.model";
-import {OrderDayParams} from "../model/params/order-day-params";
+import {StartParams} from "../model/params/start-params";
 
 @Injectable()
 export class ParamFactory {
@@ -12,9 +12,9 @@ export class ParamFactory {
     return params;
   }
 
-  createOrderDaysParams(monday: Date) {
-    let params = new OrderDayParams();
-    params.monday = monday.getTime();
+  public createStartParams(monday: number): StartParams {
+    let params = new StartParams();
+    params.start = monday;
     return params;
   }
 }

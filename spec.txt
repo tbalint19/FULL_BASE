@@ -1,0 +1,7 @@
+Főoldal
+  - navbar buttin redirect + about
+  - main message design
+  - homepage calendar
+
+Calendar admin
+  - 

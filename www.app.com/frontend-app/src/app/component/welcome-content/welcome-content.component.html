@@ -1,15 +1,40 @@
 <div>
-  <div class="info-container">
-    <p>
-      <img src="assets/profile.jpg" width="250" class="floating-image"/>
-      <span class="title">Üdvözlöm!</span><br>
-      Ön Dr. Baranyi Judit gyermekorvos weboldalát látja.<br>
-      Köszönöm, hogy felkereste az oldalamat, és hogy ezen keresztül intézi gyermeke ügyét.
-      Tájékozódjon az elérhetőségeimről, a rendelőmben lévő
-      <span class="welcome-link" (click)="redirect('doctors')">védőnőkről</span>, valamint
-      olvassa el a <span class="welcome-link" (click)="redirect('faq')">gyakran elhangzó kérdéseket</span> akár regisztráció nélkül is. Amennyiben
-      kérdése van, regisztráljon - (természetesen ingyenes),
-      és tegye fel privát kérdését, vagy foglaljon időpontot.
-    </p>
+  <div class="row">
+    <div class="hoverable-container info-container">
+      <h4>Üdvözlöm!</h4>
+      <p>
+        Ön Dr. Baranyi Judit gyermekorvos weboldalát látja.<br>
+        Köszönöm, hogy felkereste az oldalamat, és hogy ezen keresztül intézi gyermeke ügyét.
+        Tájékozódjon az elérhetőségeimről, a rendelőmben lévő
+        <span class="welcome-link" (click)="redirect('doctors')">védőnőkről</span>, valamint
+        olvassa el a <span class="welcome-link" (click)="redirect('faq')">gyakran elhangzó kérdéseket</span> akár regisztráció nélkül is. Amennyiben
+        kérdése van, regisztráljon - (természetesen ingyenes),
+        és tegye fel privát kérdését, vagy foglaljon időpontot.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="hoverable-container mini-container">
+        <h6>Rendelés</h6>
+        <p class="one-time"><span>Hétfő</span><span>8:00 - 12:00</span></p>
+        <p class="one-time"><span>Kedd</span><span>12:00 - 18:00</span></p>
+        <p class="one-time"><span>Szerda</span><span>8:00 - 18:00</span></p>
+        <p class="one-time"><span>Csütörtök</span><span>12:00 - 18:00</span></p>
+        <p class="one-time"><span>Péntek</span><span>8:00 - 12:00</span></p>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="hoverable-container">
+        <h6>Böngésszen tovább</h6>
+        <div class="buttons">
+          <button class="btn btn-default btn-block" (click)="redirect('me')">Rólam</button>
+          <button class="btn btn-default btn-block" (click)="redirect('doctors')">Védőnők</button>
+          <button class="btn btn-default btn-block" (click)="redirect('faq')">Gyakori kérdések</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

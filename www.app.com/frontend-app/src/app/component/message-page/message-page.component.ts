@@ -31,6 +31,10 @@ export class MessagePageComponent implements OnInit {
   }
 
   protected send(): void {
+    if (this.status.creator.message.length < 1) {
+      this.messages.add(new Error("Hiba", "Üres üzenet"));
+      return;
+    }
     this.service.send(this.status.creator).subscribe(
       (response: SuccessResponse) => {
         if (response.successful) {
