@@ -18,27 +18,35 @@
       <hr>
 
       <div class="well" *ngIf="status.reservationEditorOpened">
-        <h4>Új foglalás</h4>
+        <h4 *ngIf="!status.selectedReservation">Új foglalás</h4>
+        <h4 *ngIf="status.selectedReservation">Foglalás megtekintése</h4>
         <hr>
-        <select [(ngModel)]="status.selectedUser" class="btn btn-default btn-block">
-          <option [ngValue]="null"
-            [selected]="status.selectedUser == null">
-            Nincs felhasználó
-          </option>
-          <option *ngFor="let user of status.users" [ngValue]="user">
-            {{ user.username }}
-          </option>
-        </select>
+        <div *ngIf="!status.selectedReservation">
+          <select [(ngModel)]="status.selectedUser" class="btn btn-default btn-block">
+            <option [ngValue]="null"
+                    [selected]="status.selectedUser == null">
+              Nincs felhasználó
+            </option>
+            <option *ngFor="let user of status.users" [ngValue]="user">
+              {{ user.username }}
+            </option>
+          </select>
 
-        <select [(ngModel)]="status.selectedEvent" class="btn btn-default btn-block">
-          <option [ngValue]="null"
-            [hidden]="true" [selected]="status.selectedEvent == null">
-            Esemény
-          </option>
-          <option *ngFor="let event of status.events" [ngValue]="event">
-            {{ event }}
-          </option>
-        </select>
+          <select [(ngModel)]="status.selectedEvent" class="btn btn-default btn-block">
+            <option [ngValue]="null"
+                    [hidden]="true" [selected]="status.selectedEvent == null">
+              Esemény
+            </option>
+            <option *ngFor="let event of status.events" [ngValue]="event">
+              {{ event }}
+            </option>
+          </select>
+        </div>
+
+        <div *ngIf="status.selectedReservation">
+          <p>{{ status.selectedReservation.user }}</p>
+          <p>{{ status.selectedReservation.event }}</p>
+        </div>
 
         <hr>
 
