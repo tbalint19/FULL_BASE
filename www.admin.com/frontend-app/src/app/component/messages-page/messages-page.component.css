@@ -1,0 +1,8 @@
+.flex-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.glyphicon-share-alt {
+  color: #d9534f;
+}

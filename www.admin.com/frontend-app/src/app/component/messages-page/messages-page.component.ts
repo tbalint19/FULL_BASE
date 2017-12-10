@@ -15,10 +15,14 @@ import {Error} from "../../model/message/error.model";
 })
 export class MessagesPageComponent implements OnInit {
 
+  protected orderedUsers: ApplicationUser[];
+
   constructor(
     private messages: MessageService,
     protected status: MessageStatus,
-    private service: PrivateMessageService) { }
+    private service: PrivateMessageService) {
+    this.orderedUsers = [];
+  }
 
   ngOnInit() {
     this.status.creator.reset();
@@ -29,7 +33,7 @@ export class MessagesPageComponent implements OnInit {
 
   private getUsers(): void {
     this.service.getUsers().subscribe(
-      (users: ApplicationUser[]) => this.status.users = users
+      (users: ApplicationUser[]) => this.status.users = this.orderUsers(users)
     );
   }
 
@@ -70,4 +74,34 @@ export class MessagesPageComponent implements OnInit {
     )
   }
 
+  protected orderUsers(users: ApplicationUser[]): ApplicationUser[] {
+    return users.sort(
+      (one, other) => {
+        // let oneIsUsers = one.channel.messages[one.channel.messages.length - 1].isUserMessage;
+        // let otherIsUsers = other.channel.messages[other.channel.messages.length - 1].isUserMessage;
+        // let sameStatus = oneIsUsers == otherIsUsers;
+        // return sameStatus ? this.sortByDate(one, other) : this.sortByStatus(one, other);
+        return this.sortByDate(one, other);
+      }
+    )
+  }
+
+  protected sortByStatus(one: ApplicationUser, other: ApplicationUser): number {
+    let oneIsUsers = one.channel.messages[one.channel.messages.length - 1].isUserMessage;
+    let otherIsUsers = other.channel.messages[other.channel.messages.length - 1].isUserMessage;
+    return oneIsUsers ? 1 : -1;
+  }
+
+  protected sortByDate(one: ApplicationUser, other: ApplicationUser): number {
+    let oneLast = one.channel.messages[one.channel.messages.length - 1].created;
+    let otherLast = other.channel.messages[other.channel.messages.length - 1].created;
+    return oneLast < otherLast ? 1 : -1;
+  }
+
+  protected lastTime(user: ApplicationUser): string {
+    let date = user.channel.messages[user.channel.messages.length - 1].created;
+    let actualDate = new Date();
+    actualDate.setTime(date);
+    return "" + actualDate.getDate() + actualDate.getHours() + actualDate.getMinutes();
+  }
 }
