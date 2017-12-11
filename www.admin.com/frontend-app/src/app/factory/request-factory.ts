@@ -11,6 +11,7 @@ import {Restriction} from "../model/backend/calendar/restriction";
 import {Addition} from "../model/backend/calendar/addition";
 import {Holiday} from "../model/backend/calendar/holiday";
 import {Reservation} from "../model/backend/calendar/reservation";
+import {Faq} from "../model/backend/faq/faq";
 
 @Injectable()
 export class RequestFactory {
@@ -97,5 +98,17 @@ export class RequestFactory {
 
   createDeleteReservationRequest(reservation: Reservation) {
     return new HttpRequest("/api/calendar/reservation/delete", "POST", reservation);
+  }
+
+  createGetFaqRequest(): HttpRequest {
+    return new HttpRequest("/api/faq/all", "GET", null);
+  }
+
+  createFaqEditRequest(faq: Faq): HttpRequest {
+    return new HttpRequest("/api/faq/create", "POST", faq);
+  }
+
+  createFaqDeleteRequest(faq: Faq): HttpRequest {
+    return new HttpRequest("/api/faq/delete", "POST", faq);
   }
 }

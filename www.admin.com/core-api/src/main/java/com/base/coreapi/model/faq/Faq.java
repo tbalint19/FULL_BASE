@@ -2,11 +2,9 @@ package com.base.coreapi.model.faq;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -21,7 +19,11 @@ public class Faq {
 
     private String text;
 
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     private byte[] picture1;
 
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     private byte[] picture2;
 }

@@ -1,46 +1,5 @@
-<button
-  class="btn btn-default"
-  (click)="openReset()">
-  <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-</button>
-
-<div
-  *ngIf="status.isOpen()"
-  class="reset-modal-background"
-  id="reset-modal-background">
-</div>
-
-<div
-  *ngIf="status.isOpen()"
-  class="reset-modal-container"
-  id="reset-modal">
-  <h3>Elfelejtett jelszó</h3>
-  <p>
-    A felhasználónév/email cím megadása után egy email megy a jelszó átállításhoz szükséges
-    tudnivalókkal.
-  </p>
-  <p>
-    Az instrukciók követésével a jelszó megváltoztatható.
-  </p>
-  <div class="input-container">
-    <input
-      class="form-control" id="full-width-fix"
-      [(ngModel)]="status.creator.credential"
-      placeholder="Felhasználónév vagy email cím">
-  </div>
-
-  <div class="button-container">
-    <button
-      class="btn btn-default"
-      (click)="closeReset()">
-      Mégse
-    </button>
-
-    <button
-      class="btn btn-success"
-      (click)="requestReset()">
-      Visszaállítás
-    </button>
-  </div>
-
-</div>
+ <button
+    class="btn btn-default"
+    (click)="requestReset()">
+    Jelszó csere
+  </button>

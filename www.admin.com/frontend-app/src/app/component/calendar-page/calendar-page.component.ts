@@ -40,6 +40,10 @@ export class CalendarPageComponent implements OnInit {
   }
 
   protected getWeeklyData(): void {
+    this.status.restrictionsOfTheWeek = [];
+    this.status.additionsOfTheWeek = [];
+    this.status.reservationsOfTheWeek = [];
+    this.status.holidaysOfTheWeek = [];
     this.getAdditions();
     this.getReservations();
     this.getRestrictions();
@@ -74,8 +78,8 @@ export class CalendarPageComponent implements OnInit {
     );
   }
 
-  protected addRestriction(): void {
-    this.service.addRestriction(this.status.selectedDay).subscribe(
+  protected addRestriction(quarter: Date): void {
+    this.service.addRestriction(quarter).subscribe(
       (response: SuccessResponse) => this.handleResponse(response)
     );
   }
@@ -146,9 +150,16 @@ export class CalendarPageComponent implements OnInit {
     return date.getFullYear() + "." + (date.getMonth()+1) + "." + date.getDate();
   }
 
+  protected showDateTime(dateNumber: number): string {
+    let date = new Date();
+    date.setTime(dateNumber);
+    return (date.getMonth()+1) + "." + date.getDate() + " ---> " + date.getHours() + ":" + date.getMinutes();
+  }
+
   private getPreviousMonday(): Date {
     let prevMonday = new Date();
     prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
+    prevMonday.setHours(0, 0, 0);
     return prevMonday;
   }
 
@@ -167,6 +178,7 @@ export class CalendarPageComponent implements OnInit {
       this.status.selectedMonday = newMonday;
       this.status.selectedDay = newMonday.getTime() == this.getPreviousMonday().getTime() ? new Date() : newMonday;
     }
+    this.getWeeklyData();
   }
 
   protected selected(day: Date): boolean {
@@ -249,6 +261,7 @@ export class CalendarPageComponent implements OnInit {
     this.status.selectedReservation = null;
     this.status.selectedUser = null;
     this.status.selectedEvent = null;
+    this.status.selectedQuarter = null;
     if (this.hasReservation(quarter)) {
       this.status.selectedReservation = this.status.reservationsOfTheWeek.filter(
         r => this.matchWithFullDate(r, quarter)
@@ -261,6 +274,13 @@ export class CalendarPageComponent implements OnInit {
 
   protected closeEditor(): void {
     this.status.reservationEditorOpened = false;
+  }
+
+  protected getRelatedRestriction(quarter: Date): Restriction {
+    let filtered = this.status.restrictionsOfTheWeek.filter(
+      (r) => this.matchWithFullDate(r, quarter)
+    );
+    return filtered.length > 0 ? filtered[0] : null;
   }
 
 }

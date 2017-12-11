@@ -19,7 +19,9 @@
 
       <div class="well" *ngIf="status.reservationEditorOpened">
         <h4 *ngIf="!status.selectedReservation">Új foglalás</h4>
+        <h4 *ngIf="!status.selectedReservation">{{ showDateTime(this.status.selectedQuarter) }}</h4>
         <h4 *ngIf="status.selectedReservation">Foglalás megtekintése</h4>
+        <h4 *ngIf="status.selectedReservation">{{ showDateTime(status.selectedReservation.date) }}</h4>
         <hr>
         <div *ngIf="!status.selectedReservation">
           <select [(ngModel)]="status.selectedUser" class="btn btn-default btn-block">
@@ -95,6 +97,16 @@
             </span>
 
             <span *ngIf="this.status.selectedDay.getDay() == day.getDay()">
+              <button *ngIf="getRelatedRestriction(quarter) == null"
+                class="btn btn-default" (click)="addRestriction(quarter)">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+
+              <button *ngIf="getRelatedRestriction(quarter) != null"
+                class="btn btn-default" (click)="deleteRestriction(getRelatedRestriction(quarter))">
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>
+
               <button class="btn btn-default" (click)="editQuarter(quarter)">
                 <span class="glyphicon glyphicon-info-sign"></span>
               </button>

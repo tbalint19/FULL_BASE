@@ -6,9 +6,11 @@ import {CalendarPageComponent} from "./component/calendar-page/calendar-page.com
 import {MessagesPageComponent} from "./component/messages-page/messages-page.component";
 import {EditPageComponent} from "./component/edit-page/edit-page.component";
 import {SecurityPageComponent} from "./component/security-page/security-page.component";
+import {FaqPageComponent} from "./component/faq-page/faq-page.component";
 
 const appRoutes: Routes = [
   { path: 'calendar', component: CalendarPageComponent, canActivate: [AuthGuard] },
+  { path: 'faq', component: FaqPageComponent, canActivate: [AuthGuard] },
   { path: 'messages', component: MessagesPageComponent, canActivate: [AuthGuard] },
   { path: 'edit', component: EditPageComponent, canActivate: [AuthGuard] },
   { path: 'security', component: SecurityPageComponent, canActivate: [AuthGuard] },

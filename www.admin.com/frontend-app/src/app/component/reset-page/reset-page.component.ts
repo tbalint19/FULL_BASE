@@ -47,7 +47,7 @@ export class ResetPageComponent implements OnInit {
   }
 
   private suspend(): void {
-    this.messages.add(new Error("Error", "Unsuccessful password reset attempt"));
+    this.messages.add(new Error("Hiba", "Sikertelen kísérlet"));
     this.status.setSuspended(true);
     setTimeout(()=>{
       this.status.setSuspended(false);
@@ -69,12 +69,12 @@ export class ResetPageComponent implements OnInit {
   }
 
   private handleSuccess(): void {
-    this.messages.add(new Success("Successful reset", "You can log in now with your new password"));
+    this.messages.add(new Success("Sikeresen", "Átállítva"));
     this.router.navigate(['start']);
   }
 
   private handleError(): void {
-    this.messages.add(new Error("Error", "Unsuccessful password reset attempt"));
+    this.messages.add(new Error("Hiba", "Sikertelen kísérlet"));
   }
 
 }

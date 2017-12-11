@@ -1,0 +1,44 @@
+<menu-navbar></menu-navbar>
+
+<div class="container">
+  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <h4>Kérdések</h4>
+    <hr>
+
+    <div *ngFor="let faq of status.faqs" class="well">
+      <p>{{ faq.question }}</p>
+      <button class="btn btn-default btn-block" (click)="openEditor(faq)">
+        Szerkesztés
+      </button>
+    </div>
+
+    <div class="well">
+      <button class="btn btn-default btn-block" (click)="openEditor()">
+        Új kérdés
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="status.editorActive" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+    <h4>Szerkesztés</h4>
+    <input class="form-control" [(ngModel)]="status.selectedFaq.question" placeholder="Kérdés">
+    <hr>
+    <textarea class="form-control" [(ngModel)]="status.selectedFaq.text" rows="5" placeholder="Válasz">
+    </textarea>
+    <hr>
+
+    <input type="file" class="form-control" (change)="onFileAdded($event, 1)">
+
+    <input type="file" class="form-control" (change)="onFileAdded($event, 2)">
+
+    <button class="btn btn-default" (click)="saveFaq()">
+      Mentés
+    </button>
+
+    <button *ngIf="status.selectedFaq.id" class="btn btn-default" (click)="deleteFaq()">
+      Törlés
+    </button>
+
+    <img src="data:image/jpg;base64, {{ image }}"/>
+  </div>
+</div>

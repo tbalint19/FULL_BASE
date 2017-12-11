@@ -47,6 +47,9 @@ import {CalendarStatus} from "./status/calendar-status";
 import {CalendarService} from "./service/calendar.service";
 import {MessageStatus} from "./status/message-status";
 import {PrivateMessageService} from "./service/private-message.service";
+import { FaqPageComponent } from './component/faq-page/faq-page.component';
+import {FaqStatus} from "./status/faq-status";
+import {FaqService} from "./service/faq.service";
 
 
 @NgModule({
@@ -67,7 +70,8 @@ import {PrivateMessageService} from "./service/private-message.service";
     CalendarPageComponent,
     MessagesPageComponent,
     EditPageComponent,
-    SecurityPageComponent
+    SecurityPageComponent,
+    FaqPageComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +86,7 @@ import {PrivateMessageService} from "./service/private-message.service";
     LoginService,
     ResetService,
     MessageService,
+    FaqService,
     MainMessageService,
     PrivateMessageService,
     CalendarService,
@@ -96,6 +101,7 @@ import {PrivateMessageService} from "./service/private-message.service";
     DtoFactory,
     CreatorFactory,
     AuthStatus,
+    FaqStatus,
     MessageStatus,
     LoginStatus,
     ResetStatus,
