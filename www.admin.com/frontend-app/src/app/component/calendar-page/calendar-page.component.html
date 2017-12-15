@@ -46,7 +46,7 @@
         </div>
 
         <div *ngIf="status.selectedReservation">
-          <p>{{ status.selectedReservation.user }}</p>
+          <p>{{ status.selectedReservation.user ? status.selectedReservation.user.username : null }}</p>
           <p>{{ status.selectedReservation.event }}</p>
         </div>
 
@@ -97,15 +97,19 @@
             </span>
 
             <span *ngIf="this.status.selectedDay.getDay() == day.getDay()">
-              <button *ngIf="getRelatedRestriction(quarter) == null"
-                class="btn btn-default" (click)="addRestriction(quarter)">
-                <span class="glyphicon glyphicon-remove"></span>
-              </button>
+              <span *ngIf="isPossibleVaccinate(quarter)">
+                <button *ngIf="getRelatedRestriction(quarter) == null"
+                        class="btn btn-default" (click)="addRestriction(quarter)">
+                  <i class="material-icons md-12">colorize</i>
+                  <span class="glyphicon glyphicon-check"></span>
+                </button>
 
-              <button *ngIf="getRelatedRestriction(quarter) != null"
-                class="btn btn-default" (click)="deleteRestriction(getRelatedRestriction(quarter))">
-                <span class="glyphicon glyphicon-ok"></span>
-              </button>
+                <button *ngIf="getRelatedRestriction(quarter) != null"
+                        class="btn btn-default" (click)="deleteRestriction(getRelatedRestriction(quarter))">
+                  <i class="material-icons md-12">colorize</i>
+                  <span class="glyphicon glyphicon-unchecked"></span>
+                </button>
+              </span>
 
               <button class="btn btn-default" (click)="editQuarter(quarter)">
                 <span class="glyphicon glyphicon-info-sign"></span>

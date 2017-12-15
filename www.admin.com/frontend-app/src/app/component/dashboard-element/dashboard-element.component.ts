@@ -22,7 +22,7 @@ export class DashboardElementComponent implements OnInit {
   @Input()
   public text: string;
 
-  protected redirect(): void {
+  public redirect(): void {
     this.router.navigate([this.route]);
   }
 

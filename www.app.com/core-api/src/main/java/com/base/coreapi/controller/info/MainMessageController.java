@@ -14,8 +14,13 @@ public class MainMessageController {
     @Autowired
     private MainMessageRepository repository;
 
-    @GetMapping("/get")
-    public MainMessage getOnly(){
-        return repository.findByIdentifier("only-one");
+    @GetMapping("/get/home")
+    public MainMessage getHome() {
+        return repository.findByIdentifier("home-message");
+    }
+
+    @GetMapping("/get/calendar")
+    public MainMessage getCalendar() {
+        return repository.findByIdentifier("calendar-message");
     }
 }

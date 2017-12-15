@@ -20,7 +20,7 @@ export class ResetPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private messages: MessageService,
-    protected status: ResetStatus,
+    public status: ResetStatus,
     private location: Location) { }
 
   ngOnInit() {

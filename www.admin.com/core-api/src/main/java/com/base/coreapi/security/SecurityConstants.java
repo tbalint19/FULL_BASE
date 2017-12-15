@@ -9,4 +9,5 @@ public class SecurityConstants {
     public static final String DEFAULT_LOGIN_URL = "/login";
     public static final String AUTH_URLS = "/api/admin/**";
     public static final String RESET_URLS = "/api/reset/**";
+    public static final String APP_URL = "/";
 }

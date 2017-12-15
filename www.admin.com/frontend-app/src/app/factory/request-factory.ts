@@ -111,4 +111,8 @@ export class RequestFactory {
   createFaqDeleteRequest(faq: Faq): HttpRequest {
     return new HttpRequest("/api/faq/delete", "POST", faq);
   }
+
+  createGetImageNamesRequest(): HttpRequest {
+    return new HttpRequest("/api/faq/images", "GET", null);
+  }
 }

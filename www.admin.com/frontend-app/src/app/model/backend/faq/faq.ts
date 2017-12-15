@@ -6,7 +6,12 @@ export class Faq {
 
   public text: string;
 
-  public picture1: ByteString;
+  public picture1name: string;
 
-  public picture2: ByteString;
+  public picture2name: string;
+
+  constructor() {
+    this.picture1name = null;
+    this.picture2name = null;
+  }
 }

@@ -9,7 +9,7 @@ import {HttpClient} from "../../http/http.client";
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(protected authStatus: AuthStatus, private client: HttpClient) { }
+  constructor(public authStatus: AuthStatus, private client: HttpClient) { }
 
   ngOnInit() {
   }

@@ -17,7 +17,6 @@ public class Channel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "channel")
     private List<Message> messages = new ArrayList<>();
 }

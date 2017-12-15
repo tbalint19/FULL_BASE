@@ -16,7 +16,7 @@ export class LoginNavbarComponent implements OnInit {
 
   constructor(
     private service: LoginService,
-    protected status: LoginStatus,
+    public status: LoginStatus,
     private messages: MessageService) { }
 
   ngOnInit() {
@@ -36,9 +36,7 @@ export class LoginNavbarComponent implements OnInit {
   public suspend(): void {
     this.status.setSuspended(true);
     this.messages.add(new Error("Hiba", "Sikertelen bejelentkezés"));
-    setTimeout(()=>{
-      this.status.setSuspended(false);
-    }, 5000);
+    setTimeout(() => this.status.setSuspended(false), 5000);
   }
 
   private handleLoginResponse(token: string){

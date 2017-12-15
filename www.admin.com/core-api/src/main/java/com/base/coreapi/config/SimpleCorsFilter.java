@@ -34,6 +34,7 @@ public class SimpleCorsFilter implements Filter {
             chain.doFilter(req, res);
         }
     }
+
     public void init(FilterConfig filterConfig) {
     }
 

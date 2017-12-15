@@ -10,8 +10,13 @@ export class FaqStatus {
 
   public editorActive: boolean;
 
+  public imageNames: string[];
+  public preview: string;
+
   constructor() {
     this.faqs = [];
+    this.imageNames = [];
     this.editorActive = false;
+    this.preview = null;
   }
 }

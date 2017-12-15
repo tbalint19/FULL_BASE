@@ -18,9 +18,9 @@
 }
 
 .hoverable-container:hover {
-  background-color: rosybrown;
+  background-color: white;
   border-radius: 20px;
-  box-shadow: 0 0 20px rosybrown;
+  box-shadow: 0 0 20px white;
   transition: 1.2s;
   cursor: all-scroll;
 }

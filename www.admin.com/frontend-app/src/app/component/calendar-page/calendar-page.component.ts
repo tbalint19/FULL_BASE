@@ -21,7 +21,7 @@ import {Reservation} from "../../model/backend/calendar/reservation";
 export class CalendarPageComponent implements OnInit {
 
   constructor(
-    protected status: CalendarStatus,
+    public status: CalendarStatus,
     private service: CalendarService,
     private userService: PrivateMessageService,
     private messages: MessageService) { }
@@ -33,13 +33,13 @@ export class CalendarPageComponent implements OnInit {
     this.getWeeklyData();
   }
 
-  protected getUsers(): void {
+  getUsers(): void {
     this.userService.getUsers().subscribe(
       (users: ApplicationUser[]) => this.status.users = users
     );
   }
 
-  protected getWeeklyData(): void {
+  getWeeklyData(): void {
     this.status.restrictionsOfTheWeek = [];
     this.status.additionsOfTheWeek = [];
     this.status.reservationsOfTheWeek = [];
@@ -50,13 +50,13 @@ export class CalendarPageComponent implements OnInit {
     this.getHolidays();
   }
 
-  protected addHoliday(): void {
+  addHoliday(): void {
     this.service.addHoliday(this.status.selectedDay).subscribe(
       (response: SuccessResponse) => this.handleResponse(response)
     );
   }
 
-  protected deleteHoliday(): void {
+  deleteHoliday(): void {
     let holiday = this.status.holidaysOfTheWeek.find(
       h => this.matchWToday(h, this.status.selectedDay));
     this.service.deleteHoliday(holiday).subscribe(
@@ -64,13 +64,13 @@ export class CalendarPageComponent implements OnInit {
     );
   }
 
-  protected addAddition(): void {
+  addAddition(): void {
     this.service.addAddition(this.status.selectedDay).subscribe(
       (response: SuccessResponse) => this.handleResponse(response)
     );
   }
 
-  protected deleteAddition(): void {
+  deleteAddition(): void {
     let addition = this.status.additionsOfTheWeek.find(
       a => this.matchWToday(a, this.status.selectedDay));
     this.service.deleteAddition(addition).subscribe(
@@ -78,19 +78,19 @@ export class CalendarPageComponent implements OnInit {
     );
   }
 
-  protected addRestriction(quarter: Date): void {
+  addRestriction(quarter: Date): void {
     this.service.addRestriction(quarter).subscribe(
       (response: SuccessResponse) => this.handleResponse(response)
     );
   }
 
-  protected deleteRestriction(restriction: Restriction): void {
+  deleteRestriction(restriction: Restriction): void {
     this.service.deleteRestriction(restriction).subscribe(
       (response: SuccessResponse) => this.handleResponse(response)
     );
   }
 
-  protected addReservation(): void {
+  addReservation(): void {
     let date = this.status.selectedQuarter;
     let user = this.status.selectedUser;
     let event = this.status.selectedEvent;
@@ -100,18 +100,18 @@ export class CalendarPageComponent implements OnInit {
     );
   }
 
-  protected deleteReservation(): void {
+  deleteReservation(): void {
     this.status.reservationEditorOpened = false;
     this.service.deleteReservation(this.status.selectedReservation).subscribe(
       (response: SuccessResponse) => this.handleResponse(response)
     );
   }
 
-  protected disabled(): boolean {
+  disabled(): boolean {
     return this.status.selectedEvent == null || (this.status.selectedEvent != "Szünet" && this.status.selectedUser == null);
   }
 
-  protected handleResponse(response: SuccessResponse): void {
+  handleResponse(response: SuccessResponse): void {
     if (response && response.successful) {
       this.messages.add(new Success("Sikeres", "Módosítás"));
       this.getWeeklyData();
@@ -120,54 +120,54 @@ export class CalendarPageComponent implements OnInit {
     }
   }
 
-  protected getAdditions(): void {
+  getAdditions(): void {
     this.service.getAdditions(this.status.selectedMonday.getTime()).subscribe(
       (additions: Addition[]) => this.status.additionsOfTheWeek = additions
     );
   }
 
-  protected getHolidays(): void {
+  getHolidays(): void {
     this.service.getHolidays(this.status.selectedMonday.getTime()).subscribe(
       (holidays: Holiday[]) => this.status.holidaysOfTheWeek = holidays
     );
   }
 
-  protected getRestrictions(): void {
+  getRestrictions(): void {
     this.service.getRestrictions(this.status.selectedMonday.getTime()).subscribe(
       (restricions: Restriction[]) => this.status.restrictionsOfTheWeek = restricions
     );
   }
 
-  protected getReservations(): void {
+  getReservations(): void {
     this.service.getReservations(this.status.selectedMonday.getTime()).subscribe(
       (reservations: Reservation[]) => this.status.reservationsOfTheWeek = reservations
     );
   }
 
-  protected showDate(dateNumber: number): string {
+  showDate(dateNumber: number): string {
     let date = new Date();
     date.setTime(dateNumber);
     return date.getFullYear() + "." + (date.getMonth()+1) + "." + date.getDate();
   }
 
-  protected showDateTime(dateNumber: number): string {
+  showDateTime(dateNumber: number): string {
     let date = new Date();
     date.setTime(dateNumber);
-    return (date.getMonth()+1) + "." + date.getDate() + " ---> " + date.getHours() + ":" + date.getMinutes();
+    return (date.getMonth()+1) + "." + date.getDate() + " (" + date.getHours() + ":" + date.getMinutes() + ")";
   }
 
-  private getPreviousMonday(): Date {
+  getPreviousMonday(): Date {
     let prevMonday = new Date();
     prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
     prevMonday.setHours(0, 0, 0);
     return prevMonday;
   }
 
-  protected selectDay(day: Date): void {
+  selectDay(day: Date): void {
     this.status.selectedDay = day;
   }
 
-  protected nextWeek(direction: string): void {
+  nextWeek(direction: string): void {
     if (direction == 'start') {
       this.status.selectedMonday = this.getPreviousMonday();
       this.status.selectedDay = new Date();
@@ -181,11 +181,11 @@ export class CalendarPageComponent implements OnInit {
     this.getWeeklyData();
   }
 
-  protected selected(day: Date): boolean {
+  selected(day: Date): boolean {
     return day.getDay() == this.status.selectedDay.getDay()
   }
 
-  protected printDayName(day: number): string {
+  printDayName(day: number): string {
     switch (day){
       case 0: return "Vasárnap";
       case 1: return "Hétfő";
@@ -197,67 +197,67 @@ export class CalendarPageComponent implements OnInit {
     }
   }
 
-  protected printHours(hour: number): string {
+  printHours(hour: number): string {
     return hour.toString().length == 1 ? "0" +  hour.toString() : hour.toString();
   }
 
-  protected printMinutes(minute: number): string {
+  printMinutes(minute: number): string {
     return minute.toString().length == 1 ? "0" +  minute.toString() : minute.toString();
   }
 
-  protected printDate(day: Date): string {
+  printDate(day: Date): string {
     return day.getTime() == this.status.selectedDay.getTime() ?
       day.getFullYear().toString() + "." + (day.getMonth()+1).toString() + "." + day.getDate().toString() :
       day.getDate().toString();
   }
 
-  protected isWeekDay(day: Date): boolean {
+  isWeekDay(day: Date): boolean {
     return !(day.getDay() == 6 || day.getDay() == 0);
   }
 
-  protected hasHoliday(day: Date): boolean {
+  hasHoliday(day: Date): boolean {
     return this.status.holidaysOfTheWeek.filter(
       h => this.matchWToday(h, day)).length > 0;
   }
 
-  protected hasAddition(day: Date): boolean {
+  hasAddition(day: Date): boolean {
     return this.status.additionsOfTheWeek.filter(
       a => this.matchWToday(a, day)).length > 0;
   }
 
-  protected isHoliday(day: Date): boolean {
+  isHoliday(day: Date): boolean {
     return this.hasHoliday(day) || (!this.isWeekDay(day) && !this.hasAddition(day));
   }
 
-  protected matchWToday(fckinBugDate: any, day: Date): boolean {
+  matchWToday(fckinBugDate: any, day: Date): boolean {
     let date = new Date();
     date.setTime(fckinBugDate.date);
     return date.getDay() == day.getDay()
   }
 
-  protected matchWithFullDate(fckinBugDate: any, day: Date): boolean {
+  matchWithFullDate(fckinBugDate: any, day: Date): boolean {
     let date = new Date();
     date.setTime(fckinBugDate.date);
     return date.getDay() == day.getDay() && day.getHours() == date.getHours() && day.getMinutes() == date.getMinutes();
   }
 
-  protected hasReservation(date: Date): boolean {
+  hasReservation(date: Date): boolean {
     return this.status.reservationsOfTheWeek.filter(
       r => this.matchWithFullDate(r, date)
     ).length > 0;
   }
 
-  protected hasUserReservation(date: Date): boolean {
+  hasUserReservation(date: Date): boolean {
     return this.hasReservation(date) && this.status.reservationsOfTheWeek.filter(
       r => this.matchWithFullDate(r, date))[0].event != "Szünet";
   }
 
-  protected hasBreak(date: Date): boolean {
+  hasBreak(date: Date): boolean {
     return this.hasReservation(date) && this.status.reservationsOfTheWeek.filter(
       r => this.matchWithFullDate(r, date))[0].event == "Szünet";
   }
 
-  protected editQuarter(quarter: Date): void {
+  editQuarter(quarter: Date): void {
     this.status.selectedReservation = null;
     this.status.selectedUser = null;
     this.status.selectedEvent = null;
@@ -272,15 +272,24 @@ export class CalendarPageComponent implements OnInit {
     this.status.reservationEditorOpened = true;
   }
 
-  protected closeEditor(): void {
+  closeEditor(): void {
     this.status.reservationEditorOpened = false;
   }
 
-  protected getRelatedRestriction(quarter: Date): Restriction {
+  getRelatedRestriction(quarter: Date): Restriction {
     let filtered = this.status.restrictionsOfTheWeek.filter(
       (r) => this.matchWithFullDate(r, quarter)
     );
     return filtered.length > 0 ? filtered[0] : null;
   }
 
+  isPossibleVaccinate(date: Date): boolean {
+    let day = date.getDay();
+    let hours = date.getHours();
+    let tuesdayProper = day == 2 && 14 <= hours && hours < 16;
+    let wednesdayProper = day == 3 && 8 <= hours && hours < 10;
+    let thursdayProper = day == 4 && 14 <= hours && hours < 16;
+    let properTime = tuesdayProper || wednesdayProper || thursdayProper;
+    return properTime;
+  }
 }

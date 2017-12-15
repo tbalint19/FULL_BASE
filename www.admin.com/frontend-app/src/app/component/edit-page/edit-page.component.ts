@@ -18,7 +18,7 @@ import {Error} from "../../model/message/error.model";
 export class EditPageComponent implements OnInit {
 
   constructor(
-    protected status: InfoStatus,
+    public status: InfoStatus,
     private service: MainMessageService,
     private factory: CreatorFactory,
     private messages: MessageService) { }
@@ -28,7 +28,7 @@ export class EditPageComponent implements OnInit {
     this.getCalendarMessage();
   }
 
-  protected getMainMessage(): void {
+  public getMainMessage(): void {
     this.service.getMainMessage().subscribe(
       (message: MainMessage) => {
         this.status.creator = this.factory.createMainMessageCreator(message);
@@ -36,7 +36,7 @@ export class EditPageComponent implements OnInit {
     );
   }
 
-  protected getCalendarMessage(): void {
+  public getCalendarMessage(): void {
     this.service.getCalendarMessage().subscribe(
       (message: MainMessage) => {
         this.status.calendarCreator = this.factory.createMainMessageCreator(message);
@@ -44,7 +44,7 @@ export class EditPageComponent implements OnInit {
     );
   }
 
-  protected saveMainMessage(): void {
+  public saveMainMessage(): void {
     this.service.updateMainMessage(this.status.creator).subscribe(
       (response: SuccessResponse) => {
         this.messages.add(response.successful ?
@@ -55,7 +55,7 @@ export class EditPageComponent implements OnInit {
     );
   }
 
-  protected saveCalendarMessage(): void {
+  public saveCalendarMessage(): void {
     this.service.updateMainMessage(this.status.calendarCreator).subscribe(
       (response: SuccessResponse) => {
         this.messages.add(response.successful ?
@@ -66,7 +66,7 @@ export class EditPageComponent implements OnInit {
     );
   }
 
-  protected infoTypes(): string[] {
+  public infoTypes(): string[] {
     return [InfoType.SUCCESS, InfoType.ERROR, InfoType.DEFAULT]
       .map((e) => InfoType[e]);
   }

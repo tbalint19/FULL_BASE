@@ -7,6 +7,7 @@ import {SuccessResponse} from "../../model/response/success-response";
 import {MessageService} from "../../service/message.service";
 import {Success} from "../../model/message/success.model";
 import {Error} from "../../model/message/error.model";
+import {init} from "protractor/built/launcher";
 
 @Component({
   selector: 'app-messages-page',
@@ -15,46 +16,47 @@ import {Error} from "../../model/message/error.model";
 })
 export class MessagesPageComponent implements OnInit {
 
-  protected orderedUsers: ApplicationUser[];
-
   constructor(
     private messages: MessageService,
-    protected status: MessageStatus,
+    public status: MessageStatus,
     private service: PrivateMessageService) {
-    this.orderedUsers = [];
   }
 
   ngOnInit() {
+    this.init();
+  }
+
+  init(): void {
     this.status.creator.reset();
     this.status.messages = [];
     this.status.selectedUser = null;
     this.getUsers();
   }
 
-  private getUsers(): void {
+  getUsers(): void {
     this.service.getUsers().subscribe(
       (users: ApplicationUser[]) => this.status.users = this.orderUsers(users)
     );
   }
 
-  private getMessages(): void {
+  getMessages(): void {
     this.service.getMessages(this.status.selectedUser).subscribe(
       (messages: Message[]) => this.status.messages = messages
     );
   }
 
-  protected selectUser(user: ApplicationUser): void {
+  selectUser(user: ApplicationUser): void {
     this.status.selectedUser = user;
     this.status.creator.user = user;
     this.getMessages();
   }
 
-  protected send(): void {
+  send(): void {
     this.service.respond(this.status.creator).subscribe(
       (response: SuccessResponse) => {
         if (response.successful) {
           this.messages.add(new Success("Sikeres", "Válasz"));
-          this.getMessages();
+          this.init();
         } else {
           this.messages.add(new Error("Hiba", "Sikertelen"));
         }
@@ -62,7 +64,7 @@ export class MessagesPageComponent implements OnInit {
     );
   }
 
-  protected orderedMessages(): Message[] {
+  orderedMessages(): Message[] {
     return this.status.messages.sort(
       (one: Message, other: Message) => {
         let firstDate = new Date();
@@ -74,7 +76,7 @@ export class MessagesPageComponent implements OnInit {
     )
   }
 
-  protected orderUsers(users: ApplicationUser[]): ApplicationUser[] {
+  orderUsers(users: ApplicationUser[]): ApplicationUser[] {
     return users.sort(
       (one, other) => {
         // let oneIsUsers = one.channel.messages[one.channel.messages.length - 1].isUserMessage;
@@ -86,22 +88,26 @@ export class MessagesPageComponent implements OnInit {
     )
   }
 
-  protected sortByStatus(one: ApplicationUser, other: ApplicationUser): number {
+  sortByStatus(one: ApplicationUser, other: ApplicationUser): number {
     let oneIsUsers = one.channel.messages[one.channel.messages.length - 1].isUserMessage;
     let otherIsUsers = other.channel.messages[other.channel.messages.length - 1].isUserMessage;
     return oneIsUsers ? 1 : -1;
   }
 
-  protected sortByDate(one: ApplicationUser, other: ApplicationUser): number {
+  sortByDate(one: ApplicationUser, other: ApplicationUser): number {
     let oneLast = one.channel.messages[one.channel.messages.length - 1].created;
     let otherLast = other.channel.messages[other.channel.messages.length - 1].created;
     return oneLast < otherLast ? 1 : -1;
   }
 
-  protected lastTime(user: ApplicationUser): string {
+  lastTime(user: ApplicationUser): string {
     let date = user.channel.messages[user.channel.messages.length - 1].created;
     let actualDate = new Date();
     actualDate.setTime(date);
-    return "" + actualDate.getDate() + actualDate.getHours() + actualDate.getMinutes();
+    return "" + actualDate.getMonth() + "." + actualDate.getDate() + " (" + actualDate.getHours() + ":" + actualDate.getMinutes() + ")";
+  }
+
+  lastIsUsers(user: ApplicationUser): boolean {
+    return user.channel.messages[user.channel.messages.length - 1].isUserMessage;
   }
 }

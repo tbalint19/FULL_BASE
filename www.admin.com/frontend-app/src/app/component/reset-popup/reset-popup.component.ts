@@ -16,14 +16,14 @@ export class ResetPopupComponent implements OnInit {
   constructor(
     private service: ResetService,
     private messages: MessageService,
-    protected status: ResetStartStatus
+    public status: ResetStartStatus
   ) { }
 
   ngOnInit() {
     this.status.creator.reset();
   }
 
-  protected openReset(): void {
+  public openReset(): void {
     this.status.toggle(true);
     this.status.creator.reset();
   }

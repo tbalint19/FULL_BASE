@@ -27,9 +27,25 @@
     </textarea>
     <hr>
 
-    <input type="file" class="form-control" (change)="onFileAdded($event, 1)">
+    <select class="btn btn-default" [(ngModel)]="status.selectedFaq.picture1name">
+      <option [ngValue]="null" [selected]="status.selectedFaq.picture1name == null">
+        -
+      </option>
+      <option *ngFor="let name of status.imageNames"
+              [ngValue]="name" [selected]="name == status.selectedFaq.picture1name">
+        {{ name }}
+      </option>
+    </select>
 
-    <input type="file" class="form-control" (change)="onFileAdded($event, 2)">
+    <select class="btn btn-default" [(ngModel)]="status.selectedFaq.picture2name">
+      <option [ngValue]="null" [selected]="status.selectedFaq.picture2name == null">
+        -
+      </option>
+      <option *ngFor="let name of status.imageNames"
+              [ngValue]="name" [selected]="name == status.selectedFaq.picture2name">
+        {{ name }}
+      </option>
+    </select>
 
     <button class="btn btn-default" (click)="saveFaq()">
       Mentés
@@ -39,6 +55,36 @@
       Törlés
     </button>
 
-    <img src="data:image/jpg;base64, {{ image }}"/>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <hr>
+    <form ngNoForm method="POST" enctype="multipart/form-data" action="http://localhost:9000/api/upload/file">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <input type="file" name="file" class="form-control"/>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <input type="submit" value="Upload" class="form-control"/>
+      </div>
+    </form>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <select class="btn btn-default btn-block" [(ngModel)]="status.preview">
+        <option [ngValue]="null" [selected]="status.preview == null">
+          -
+        </option>
+        <option *ngFor="let name of status.imageNames"
+                [ngValue]="name" [selected]="name == status.preview">
+          {{ name }}
+        </option>
+      </select>
+
+      <hr>
+
+      <img *ngIf="status.preview"
+           class="img-responsive"
+           src="ext-images/{{ status.preview }}">
+    </div>
   </div>
 </div>

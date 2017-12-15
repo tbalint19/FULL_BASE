@@ -7,12 +7,16 @@ import {Addition} from "../model/backend/calendar/addition";
 import {Restriction} from "../model/backend/calendar/restriction";
 import {Holiday} from "../model/backend/calendar/holiday";
 import {ApplicationUser} from "../model/backend/auth/application-user";
+import {Schema} from "../model/schema";
+import {DayInfo} from "../model/day-info";
 
 @Injectable()
 export class CalendarStatus {
 
   public selectedMonday: Date;
   public selectedDay: Date;
+
+  public schema: Schema;
 
   public selectedDaysReservations: Reservation[];
 
@@ -34,7 +38,8 @@ export class CalendarStatus {
   constructor(
     private _requestObserver: HttpClient,
     private _dtoFactory: DtoFactory,
-    private _paramFactory: ParamFactory){
+    private _paramFactory: ParamFactory)
+  {
     this.selectedDaysReservations = [];
     this.reservationsOfTheWeek = [];
     this.restrictionsOfTheWeek = [];
@@ -58,19 +63,39 @@ export class CalendarStatus {
     return week;
   }
 
-  public quarters(day: Date): Date[] {
+  public quarters(day: Date, dayInfo: DayInfo): Date[] {
     let quarters = [];
-    let morning8 = new Date();
-    morning8.setTime(day.getTime());
-    morning8.setHours(10, 0, 0);
-    for (let x=0; x<32; x++) {
+    let start = new Date();
+    start.setTime(day.getTime());
+    start.setHours(dayInfo.start, 0, 0);
+    for (let x=0; x<dayInfo.length; x++) {
       let timeStamp = new Date();
-      timeStamp.setTime(morning8.getTime());
-      timeStamp.setHours(morning8.getHours());
-      timeStamp.setMinutes(morning8.getMinutes() + x*15);
+      timeStamp.setTime(start.getTime());
+      timeStamp.setHours(start.getHours());
+      timeStamp.setMinutes(start.getMinutes() + x*15);
       quarters.push(timeStamp);
     }
     return quarters;
+  }
+
+  public start(day: Date): number {
+    return
+  }
+
+  public getCurrentSchema(): any {
+    this.schema = new Schema(this.weekIsOdd());
+  }
+
+  public weekIsOdd(): boolean {
+    return this.getWeekNumber(this.selectedMonday) % 2 == 0;
+  }
+
+  public getWeekNumber(date: Date): number {
+    date.setHours(0, 0, 0, 0);
+    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+    let week1 = new Date(date.getFullYear(), 0, 4);
+    return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
+      - 3 + (week1.getDay() + 6) % 7) / 7);
   }
 
 }

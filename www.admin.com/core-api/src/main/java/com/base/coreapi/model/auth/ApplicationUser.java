@@ -42,7 +42,6 @@ public class ApplicationUser {
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Reset> resets;
 
-    @JsonIgnore
     @OneToOne
     private Channel channel;
 

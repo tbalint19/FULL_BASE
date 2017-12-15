@@ -10,6 +10,10 @@ export class FaqService {
 
   constructor(private client: HttpClient, private factory: RequestFactory) { }
 
+  public getImageNames(): Observable<string[]> {
+    return this.client.transfer(this.factory.createGetImageNamesRequest());
+  }
+
   public getAll(): Observable<Faq[]> {
     return this.client.transfer(this.factory.createGetFaqRequest());
   }

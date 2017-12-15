@@ -14,61 +14,51 @@ import {Error} from "../../model/message/error.model";
 })
 export class FaqPageComponent implements OnInit {
 
-  protected image: any;
-
   constructor(
     private messages: MessageService,
-    protected status: FaqStatus,
+    public status: FaqStatus,
     private service: FaqService) { }
 
   ngOnInit() {
     this.getFaqs();
+    this.getImageNames();
   }
 
-  protected getFaqs(): void {
+  getImageNames(): void {
+    this.service.getImageNames().subscribe(
+      (imageNames: string[]) => this.status.imageNames = imageNames
+    );
+  }
+
+  getFaqs(): void {
     this.service.getAll().subscribe(
       (faqs: Faq[]) => this.status.faqs = faqs
     );
   }
 
-  protected openEditor(faq?: Faq): void {
+  openEditor(faq?: Faq): void {
+    this.getImageNames();
     this.status.selectedFaq = faq ? faq : new Faq();
     this.status.editorActive = true;
   }
 
-  protected onFileAdded(event, number): void {
-    // let reader = new FileReader();
-    // if(event.target.files && event.target.files.length > 0) {
-    //   let file = event.target.files[0];
-    //   reader.readAsDataURL(file);
-    //   reader.onload = () => {
-    //     if (number == 1) {
-    //       this.status.selectedFaq.picture1 = reader.result.split(',')[1];
-    //     } else {
-    //       this.status.selectedFaq.picture2 = reader.result.split(',')[1];
-    //     }
-    //   };
-    // }
-  }
-
-  protected saveFaq(): void {
+  saveFaq(): void {
     this.service.create(this.status.selectedFaq).subscribe(
       (response: SuccessResponse) => this.handleResponse(response)
     );
   }
 
-
-
-  protected deleteFaq(): void {
+  deleteFaq(): void {
     this.service.delete(this.status.selectedFaq).subscribe(
       (response: SuccessResponse) => this.handleResponse(response)
     );
   }
 
-  private handleResponse(response: SuccessResponse): void {
+  handleResponse(response: SuccessResponse): void {
     if (response && response.successful) {
       this.messages.add(new Success("Sikeresen", "Mentve"));
       this.getFaqs();
+      this.getImageNames();
       this.status.editorActive = false;
     } else {
       this.messages.add(new Error("Ooops", "Próbálja újra"));

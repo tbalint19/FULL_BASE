@@ -10,16 +10,17 @@ import {CheckEmailParams} from "../model/params/check-email-params.model";
 import {ResetDTO} from "../model/dto/reset-dto";
 import {MessageCreateDTO} from "../model/dto/message-create-dto";
 import {ReservationDto} from "../model/dto/reservation-dto";
+import {StartParams} from "../model/params/start-params";
 
 @Injectable()
 export class RequestFactory {
 
   public createUsernameCheckRequest(params: CheckUsernameParams): HttpRequest {
-    return new HttpRequest("/api/user/check/username", "GET", params);
+    return new HttpRequest("/api/check/username", "GET", params);
   }
 
   public createEmailCheckRequest(params: CheckEmailParams): HttpRequest {
-    return new HttpRequest("/api/user/check/email", "GET", params);
+    return new HttpRequest("/api/check/email", "GET", params);
   }
 
   public createSignupRequest(user: SignupDTO): HttpRequest {
@@ -35,7 +36,7 @@ export class RequestFactory {
   }
 
   public createConfirmRequest(confirmation: ConfirmationDTO): HttpRequest {
-    return new HttpRequest("/api/confirm/complete", "POST", confirmation);
+    return new HttpRequest("/api/confirm/finish", "POST", confirmation);
   }
 
   public createResetEmailRequest(params: ResetEmailParams): HttpRequest{
@@ -58,15 +59,27 @@ export class RequestFactory {
     return new HttpRequest("/api/info/mainmessage/get", "GET", null);
   }
 
-  public createEventsRequest(): HttpRequest {
-    return new HttpRequest("/api/calendar/event/all", "GET", null);
+  createGetReservationsRequest(params: StartParams): HttpRequest {
+    return new HttpRequest("/api/calendar/reservation/all", "GET", params);
   }
 
-  public createOrderDaysRequest(): HttpRequest {
-    return new HttpRequest("/api/calendar/orderday/all", "GET", null);
+  createGetHolidaysRequest(params: StartParams): HttpRequest {
+    return new HttpRequest("/api/calendar/holiday/all", "GET", params);
+  }
+
+  createGetRestrictionsRequest(params: StartParams): HttpRequest {
+    return new HttpRequest("/api/calendar/restriction/all", "GET", params);
+  }
+
+  createGetAdditionsRequest(params: StartParams): HttpRequest {
+    return new HttpRequest("/api/calendar/addition/all", "GET", params);
   }
 
   public createReservationRequest(dto: ReservationDto): HttpRequest {
     return new HttpRequest("/api/calendar/reservation/reserve", "POST", dto);
+  }
+
+  createGetFaqRequest(): HttpRequest {
+    return new HttpRequest("/api/faq/all", "GET", null);
   }
 }

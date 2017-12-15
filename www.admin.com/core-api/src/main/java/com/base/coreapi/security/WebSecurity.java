@@ -18,12 +18,31 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
+                .regexMatchers(".*js$").permitAll()
+                .regexMatchers(".*css$").permitAll()
+                .regexMatchers(".*ico$").permitAll()
+                .regexMatchers(".*woff2$").permitAll()
+                .regexMatchers(".*woff$").permitAll()
+                .regexMatchers(".*ttf$").permitAll()
+                .regexMatchers(".*png$").permitAll()
+                .regexMatchers(".*jpg$").permitAll()
+                .regexMatchers(".*jpeg$").permitAll()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers(HttpMethod.GET, "/calendar").permitAll()
+                .antMatchers(HttpMethod.GET, "/messages").permitAll()
+                .antMatchers(HttpMethod.GET, "/faq").permitAll()
+                .antMatchers(HttpMethod.GET, "/reset").permitAll()
+                .antMatchers(HttpMethod.GET, "/security").permitAll()
+                .antMatchers(HttpMethod.GET, "/edit").permitAll()
                 .antMatchers(HttpMethod.POST, AUTH_URLS).permitAll()
+                .antMatchers(HttpMethod.POST, "/api/upload/file").permitAll()
                 .antMatchers(RESET_URLS).permitAll()
                 .antMatchers(DEFAULT_LOGIN_URL).denyAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
+                .antMatchers(HttpMethod.GET, APP_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager));
     }
+
 }

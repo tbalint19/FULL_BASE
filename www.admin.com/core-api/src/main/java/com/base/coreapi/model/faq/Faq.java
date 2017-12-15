@@ -19,11 +19,7 @@ public class Faq {
 
     private String text;
 
-    @Lob
-    @Type(type="org.hibernate.type.BinaryType")
-    private byte[] picture1;
+    private String picture1name;
 
-    @Lob
-    @Type(type="org.hibernate.type.BinaryType")
-    private byte[] picture2;
+    private String picture2name;
 }
