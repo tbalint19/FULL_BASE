@@ -27,7 +27,7 @@
 }
 
 .holiday-disabled {
-  background-color: #999;
+  opacity: 0.5;
 }
 
 .reservation-colored {
@@ -42,4 +42,10 @@
 
 .material-icons.md-12 {
   font-size: 12px;
+}
+
+.addition-selector {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 100px;
 }

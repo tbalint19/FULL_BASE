@@ -17,16 +17,16 @@
 
       <hr>
 
-      <div class="well" *ngIf="status.reservationEditorOpened">
-        <h4 *ngIf="!status.selectedReservation">Új foglalás</h4>
-        <h4 *ngIf="!status.selectedReservation">{{ showDateTime(this.status.selectedQuarter) }}</h4>
-        <h4 *ngIf="status.selectedReservation">Foglalás megtekintése</h4>
-        <h4 *ngIf="status.selectedReservation">{{ showDateTime(status.selectedReservation.date) }}</h4>
+      <div class="well" *ngIf="status.editedReservation">
+        <h4 *ngIf="status.editedReservation.id">Foglalás megtekintése</h4>
+        <h4 *ngIf="!status.editedReservation.id">Új foglalás</h4>
+        <h4>{{ printer.showDateTime(this.status.editedReservation.date) }}</h4>
         <hr>
-        <div *ngIf="!status.selectedReservation">
-          <select [(ngModel)]="status.selectedUser" class="btn btn-default btn-block">
+        <div *ngIf="!status.editedReservation.id">
+          <select [(ngModel)]="status.editedReservation.user"
+                  class="btn btn-default btn-block">
             <option [ngValue]="null"
-                    [selected]="status.selectedUser == null">
+                    [selected]="status.editedReservation.user == null">
               Nincs felhasználó
             </option>
             <option *ngFor="let user of status.users" [ngValue]="user">
@@ -34,9 +34,10 @@
             </option>
           </select>
 
-          <select [(ngModel)]="status.selectedEvent" class="btn btn-default btn-block">
-            <option [ngValue]="null"
-                    [hidden]="true" [selected]="status.selectedEvent == null">
+          <select [(ngModel)]="status.editedReservation.event"
+                  class="btn btn-default btn-block">
+            <option [ngValue]="null" [hidden]="true"
+                    [selected]="!status.editedReservation.event">
               Esemény
             </option>
             <option *ngFor="let event of status.events" [ngValue]="event">
@@ -45,76 +46,101 @@
           </select>
         </div>
 
-        <div *ngIf="status.selectedReservation">
-          <p>{{ status.selectedReservation.user ? status.selectedReservation.user.username : null }}</p>
-          <p>{{ status.selectedReservation.event }}</p>
+        <div *ngIf="status.editedReservation.id">
+          <p>{{ status.editedReservation.user ? status.editedReservation.user.username : null }}</p>
+          <p>{{ status.editedReservation.event }}</p>
         </div>
 
         <hr>
 
-        <button *ngIf="!status.selectedReservation"
-                [disabled]="disabled()"
+        <button *ngIf="!status.editedReservation.id"
+                [disabled]="status.disabledNewReservation()"
                 class="btn btn-default btn-block" (click)="addReservation()">
           Mentés
         </button>
-        <button *ngIf="status.selectedReservation"
-                class="btn btn-default btn-block" (click)="deleteReservation()">
+        <button *ngIf="status.editedReservation.id"
+                class="btn btn-default btn-block"
+                (click)="deleteReservation()">
           Törlés
         </button>
-        <button class="btn btn-default btn-block" (click)="closeEditor()">Mégse</button>
+        <button class="btn btn-default btn-block"
+                (click)="closeEditor()">
+          Mégse
+        </button>
       </div>
 
     </div>
 
-    <div *ngFor="let day of status.week()"
-         class="col-xs-12 col-sm-12 col-md-{{ selected(day) ? '3' : '1' }} col-lg-{{ selected(day) ? '3' : '1' }} block-container">
-      <div class="one-day {{ isHoliday(day) && 'holiday-disabled' }}">
-        <div class="day-header">
-          <h4>{{ printDate(day) }}</h4>
-          <button (click)="selectDay(day)" class="btn btn-default">
-            {{ printDayName(day.getDay()) }}
-          </button>
+    <div *ngIf="weeklyData">
+      <div *ngFor="let day of weeklyData.days"
+           class="col-xs-12 col-sm-12 col-md-{{ isSelected(day.date) ? '3' : '1' }} col-lg-{{ isSelected(day.date) ? '3' : '1' }} block-container">
+        <div class="one-day {{ colorHoliday(day) && 'holiday-disabled' }}">
+          <div class="day-header">
+            <h4>{{ printer.printDate(day.date, isSelected(day.date)) }}</h4>
 
-          <button (click)="addHoliday()"
-            *ngIf="selected(day) && ((!hasHoliday(day) && isWeekDay(day)) || (!hasHoliday(day) && !isWeekDay(day) && hasAddition(day)))"
-            class="btn btn-default">Nincs rendelés</button>
+            <button (click)="selectDay(day.date)" class="btn btn-default">
+              {{ printer.printDayName(day.date.getDay()) }}
+            </button>
 
-          <button *ngIf="selected(day) && hasHoliday(day)" (click)="deleteHoliday()"
-                  class="btn btn-default">Szabadság törlése</button>
+            <button class="btn btn-default"
+                    (click)="addHoliday()" *ngIf="showAddHoliday(day)">
+              <span class="glyphicon glyphicon-home"></span>
+              <span class="glyphicon glyphicon-check"></span>
+            </button>
+            <button class="btn btn-default"
+                    (click)="deleteAddition(day.addition)" *ngIf="showRemoveAddition(day)">
+              <span class="glyphicon glyphicon-home"></span>
+              <span class="glyphicon glyphicon-check"></span>
+            </button>
+            <button class="btn btn-default"
+                    (click)="addAddition()" *ngIf="showAddAddition(day)">
+              <span class="glyphicon glyphicon-home"></span>
+              <span class="glyphicon glyphicon-unchecked"></span>
+            </button>
+            <button class="btn btn-default"
+                    (click)="deleteHoliday(day.holiday)" *ngIf="showRemoveHoliday(day)">
+              <span class="glyphicon glyphicon-home"></span>
+              <span class="glyphicon glyphicon-unchecked"></span>
+            </button>
 
-          <button *ngIf="selected(day) && !isWeekDay(day) && !hasAddition(day)" (click)="addAddition()"
-                  class="btn btn-default">Munkanap</button>
-
-          <button *ngIf="selected(day) && hasAddition(day)" (click)="deleteAddition()"
-                  class="btn btn-default">Munkanap törlése</button>
-        </div>
-        <hr>
-        <div class="day-body">
-          <div *ngFor="let quarter of status.quarters(day)"
-               class="quarter {{ hasUserReservation(quarter) && 'reservation-colored'}} {{ hasBreak(quarter) && 'break-colored' }}">
+            <button class="btn btn-default"
+                    (click)="addRestriction()" *ngIf="showAddRestriction(day)">
+              <i class="material-icons md-12">colorize</i>
+              <span class="glyphicon glyphicon-check"></span>
+            </button>
+            <button class="btn btn-default"
+                    (click)="deleteRestriction(day.restriction)" *ngIf="showRemoveRestriction(day)">
+              <i class="material-icons md-12">colorize</i>
+              <span class="glyphicon glyphicon-unchecked"></span>
+            </button>
+          </div>
+          <hr>
+          <div class="day-body">
+            <div *ngFor="let slot of day.slots"
+                 class="quarter {{ colorReservation(slot) && 'reservation-colored'}} {{ colorBreak(slot) && 'break-colored' }}">
             <span class="quarter-time">
-              {{ printHours(quarter.getHours()) }}:{{ printMinutes(quarter.getMinutes()) }}
+              {{ printer.printHours(slot.start.getHours()) }}:{{ printer.printMinutes(slot.start.getMinutes()) }}
             </span>
 
-            <span *ngIf="this.status.selectedDay.getDay() == day.getDay()">
-              <span *ngIf="isPossibleVaccinate(quarter)">
-                <button *ngIf="getRelatedRestriction(quarter) == null"
-                        class="btn btn-default" (click)="addRestriction(quarter)">
-                  <i class="material-icons md-12">colorize</i>
-                  <span class="glyphicon glyphicon-check"></span>
-                </button>
-
-                <button *ngIf="getRelatedRestriction(quarter) != null"
-                        class="btn btn-default" (click)="deleteRestriction(getRelatedRestriction(quarter))">
-                  <i class="material-icons md-12">colorize</i>
-                  <span class="glyphicon glyphicon-unchecked"></span>
-                </button>
-              </span>
-
-              <button class="btn btn-default" (click)="editQuarter(quarter)">
+            <span *ngIf="isSelected(day.date)">
+              <button class="btn btn-default" (click)="openEditor(slot)">
                 <span class="glyphicon glyphicon-info-sign"></span>
               </button>
             </span>
+            </div>
+
+            <div *ngIf="showSelector(day)" class="addition-selector">
+              <select [(ngModel)]="status.selectedSchema"
+                      class="btn btn-default btn-block">
+                <option [ngValue]="null"
+                        [selected]="status.selectedSchema == null">
+                  -
+                </option>
+                <option *ngFor="let schema of daySchemas()" [ngValue]="schema">
+                  {{ schema.name }}
+                </option>
+              </select>
+            </div>
           </div>
         </div>
       </div>

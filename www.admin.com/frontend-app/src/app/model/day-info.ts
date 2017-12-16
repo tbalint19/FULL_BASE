@@ -1,57 +1,39 @@
+import {Addition} from "./backend/calendar/addition";
+import {Restriction} from "./backend/calendar/restriction";
+import {Holiday} from "./backend/calendar/holiday";
+import {Reservation} from "./backend/calendar/reservation";
+import {Slot} from "./slot";
+import {DaySchema} from "./day-schema";
+
 export class DayInfo {
 
-  public start: number;
+  public schemaName: string;
 
-  public length: number;
+  public date: Date;
 
-  public vaccinateStart: number;
+  public addition: Addition;
+  public restriction: Restriction;
+  public holiday: Holiday;
+  public slots: Slot[];
 
-  public vaccinateLength: number;
+  constructor(day: Date, schema: DaySchema) {
+    this.schemaName = schema.name;
+    this.slots = [];
+    this.date = day;
+    this.assignSlots(day, schema);
+  }
 
-  constructor(dayName?: string) {
-    switch (dayName) {
-      case "Monday":
-        this.start = 16;
-        this.length = 16;
-        this.vaccinateStart = null;
-        this.vaccinateLength = 0;
-        break;
-      case "Tuesday":
-        this.start = 16;
-        this.length = 16;
-        this.vaccinateStart = null;
-        this.vaccinateLength = 8;
-        break;
-      case "Wednesday":
-        this.start = 16;
-        this.length = 16;
-        this.vaccinateStart = null;
-        this.vaccinateLength = 8;
-        break;
-      case "Thursday":
-        this.start = 16;
-        this.length = 16;
-        this.vaccinateStart = null;
-        this.vaccinateLength = 8;
-        break;
-      case "OddFriday":
-        this.start = 16;
-        this.length = 16;
-        this.vaccinateStart = null;
-        this.vaccinateLength = 0;
-        break;
-      case "EvenFriday":
-        this.start = 16;
-        this.length = 16;
-        this.vaccinateStart = null;
-        this.vaccinateLength = 0;
-        break;
-      default:
-        this.start = null;
-        this.length = 0;
-        this.vaccinateStart = null;
-        this.vaccinateLength = 0;
-        break;
+  assignSlots(day: Date, schema: DaySchema): void {
+    let startDate = new Date();
+    startDate.setTime(day.getTime());
+    startDate.setHours(schema.start, 0, 0);
+    for (let x=0; x<(schema.active ? 16 : 0); x++) {
+      let timeStamp = new Date();
+      timeStamp.setTime(startDate.getTime());
+      timeStamp.setHours(startDate.getHours());
+      timeStamp.setMinutes(startDate.getMinutes() + x*15);
+      let isVaccinateTime = schema.startsWithVaccinate && x < 8;
+      this.slots.push(new Slot(timeStamp, isVaccinateTime));
     }
   }
 }

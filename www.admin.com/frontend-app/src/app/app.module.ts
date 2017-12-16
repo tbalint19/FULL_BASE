@@ -50,6 +50,7 @@ import {PrivateMessageService} from "./service/private-message.service";
 import { FaqPageComponent } from './component/faq-page/faq-page.component';
 import {FaqStatus} from "./status/faq-status";
 import {FaqService} from "./service/faq.service";
+import {DatePrinter} from "./service/date-printer.service";
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import {FaqService} from "./service/faq.service";
     MainMessageService,
     PrivateMessageService,
     CalendarService,
+    DatePrinter,
     UsernameValidator,
     EmailValidator,
     CredentialValidator,

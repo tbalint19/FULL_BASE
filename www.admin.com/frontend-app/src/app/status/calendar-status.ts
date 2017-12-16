@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import {Reservation} from "../model/backend/calendar/reservation";
 import {HttpClient} from "../http/http.client";
 import {DtoFactory} from "../factory/dto-factory";
@@ -7,95 +7,62 @@ import {Addition} from "../model/backend/calendar/addition";
 import {Restriction} from "../model/backend/calendar/restriction";
 import {Holiday} from "../model/backend/calendar/holiday";
 import {ApplicationUser} from "../model/backend/auth/application-user";
-import {Schema} from "../model/schema";
+import {WeeklyData} from "../model/weekly-data";
 import {DayInfo} from "../model/day-info";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Slot} from "../model/slot";
+import {DaySchema} from "../model/day-schema";
 
 @Injectable()
 export class CalendarStatus {
 
-  public selectedMonday: Date;
-  public selectedDay: Date;
-
-  public schema: Schema;
-
-  public selectedDaysReservations: Reservation[];
-
-  public additionsOfTheWeek: Addition[];
-  public restrictionsOfTheWeek: Restriction[];
-  public holidaysOfTheWeek: Holiday[];
-  public reservationsOfTheWeek: Reservation[];
-
   public users: ApplicationUser[];
-  public selectedUser: ApplicationUser;
-  public selectedEvent: string;
-  public selectedQuarter: Date;
-
-  public selectedReservation: Reservation;
-  public reservationEditorOpened: boolean;
-
   public events: string[];
+  public weeklyData: BehaviorSubject<WeeklyData>;
+
+  public selectedMonday: BehaviorSubject<Date>;
+  public selectedDay: BehaviorSubject<Date>;
+
+  public editedReservation: Reservation;
+
+  public selectedSchema: DaySchema;
 
   constructor(
     private _requestObserver: HttpClient,
     private _dtoFactory: DtoFactory,
     private _paramFactory: ParamFactory)
   {
-    this.selectedDaysReservations = [];
-    this.reservationsOfTheWeek = [];
-    this.restrictionsOfTheWeek = [];
-    this.additionsOfTheWeek = [];
-    this.holidaysOfTheWeek = [];
-    this.selectedMonday = null;
-    this.selectedDay = null;
-    this.selectedUser = null;
-    this.selectedEvent = null;
-    this.selectedReservation = null;
+    this.selectedDay = new BehaviorSubject(new Date());
+    this.selectedDay.subscribe(
+      (day: Date) => this.getPreviousMonday(day));
+    this.selectedMonday.subscribe(
+      (day: Date) => this.updateWeeklyData(day));
     this.events = ["Általános vizsgálat", "Oltás", "Szünet"];
   }
 
-  public week(): Date[] {
-    let week = [];
-    for (let x=0; x<7; x++){
-      let day = new Date();
-      day.setTime(this.selectedMonday.getTime() + 1000*60*60*24*x);
-      week.push(day);
+  disabledNewReservation(): boolean {
+    return this.editedReservation.event == null ||
+      (this.editedReservation.event != "Szünet" &&
+        this.editedReservation.user == null);
+  }
+
+  private getPreviousMonday(day: Date): void {
+    let prevMonday = new Date(day.getTime());
+    prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
+    prevMonday.setHours(0, 0, 0);
+    if (!this.selectedMonday){
+      this.selectedMonday = new BehaviorSubject(prevMonday);
+    } else if (prevMonday.getDate() != this.selectedMonday.getValue().getDate()) {
+      this.selectedMonday.next(prevMonday);
     }
-    return week;
   }
 
-  public quarters(day: Date, dayInfo: DayInfo): Date[] {
-    let quarters = [];
-    let start = new Date();
-    start.setTime(day.getTime());
-    start.setHours(dayInfo.start, 0, 0);
-    for (let x=0; x<dayInfo.length; x++) {
-      let timeStamp = new Date();
-      timeStamp.setTime(start.getTime());
-      timeStamp.setHours(start.getHours());
-      timeStamp.setMinutes(start.getMinutes() + x*15);
-      quarters.push(timeStamp);
+  private updateWeeklyData(monday: Date): void {
+    if (!this.weeklyData){
+      this.weeklyData = new BehaviorSubject(new WeeklyData(monday));
+    } else {
+      this.weeklyData.next(new WeeklyData(monday));
     }
-    return quarters;
-  }
-
-  public start(day: Date): number {
-    return
-  }
-
-  public getCurrentSchema(): any {
-    this.schema = new Schema(this.weekIsOdd());
-  }
-
-  public weekIsOdd(): boolean {
-    return this.getWeekNumber(this.selectedMonday) % 2 == 0;
-  }
-
-  public getWeekNumber(date: Date): number {
-    date.setHours(0, 0, 0, 0);
-    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-    let week1 = new Date(date.getFullYear(), 0, 4);
-    return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
-      - 3 + (week1.getDay() + 6) % 7) / 7);
   }
 
 }

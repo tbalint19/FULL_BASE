@@ -45,10 +45,10 @@ export class CalendarService {
         this._paramFactory.createStartParams(monday)));
   }
 
-  public addAddition(day: Date): Observable<SuccessResponse> {
+  public addAddition(day: Date, schemaName: string): Observable<SuccessResponse> {
     return this._client.transfer(
       this._requestFactory.createNewAdditionRequest(
-        new Addition(day)));
+        new Addition(day, schemaName)));
   }
 
   public deleteAddition(addition: Addition): Observable<SuccessResponse> {
@@ -81,10 +81,10 @@ export class CalendarService {
         this._paramFactory.createStartParams(monday)));
   }
 
-  public addReservation(day: Date, event: string, user: ApplicationUser): Observable<SuccessResponse> {
+  public addReservation(reservation: Reservation): Observable<SuccessResponse> {
     return this._client.transfer(
       this._requestFactory.createNewReservationRequest(
-        new Reservation(user, event, day)));
+        reservation));
   }
 
   public deleteReservation(reservation: Reservation): Observable<SuccessResponse> {

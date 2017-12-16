@@ -4,8 +4,11 @@ export class Addition {
 
   public date: Date;
 
-  constructor(date: Date) {
+  public schemaName: string;
+
+  constructor(date: Date, schemaName: string) {
     this.date = date;
+    this.schemaName = schemaName;
   }
 
 }
