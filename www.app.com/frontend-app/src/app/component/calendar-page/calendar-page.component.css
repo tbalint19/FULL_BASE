@@ -2,3 +2,43 @@
   text-align: center;
   padding: 50px;
 }
+
+.main-message {
+  padding: 3px 15px;
+  border-radius: 3px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 15px #555;
+}
+
+.main-message-ERROR {
+  background-color: #d9534f;
+}
+
+.main-message-SUCCESS {
+  background-color: #5cb85c;
+}
+
+.main-message-DEFAULT {
+  background-color: #999999;
+}
+
+.main-message-NONE {
+  display: none;
+}
+
+.about-reservation-container {
+  text-align: center;
+  padding: 20px 40px;
+}
+
+.about-reservation {
+  text-align: center;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 5px white;
+  color: #5cb85c;
+  font-weight: bold;
+}

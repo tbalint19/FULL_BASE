@@ -12,12 +12,12 @@ export class SignupUsernameInputComponent implements OnInit {
 
   constructor(
     private service: SignupService,
-    protected status: SignupStatus) { }
+    public status: SignupStatus) { }
 
   ngOnInit() {
   }
 
-  protected checkUsername(): void {
+  public checkUsername(): void {
     if (!this.status.usernameIsValid()){ return; }
     this.service.checkUsername(this.status.creator)
       .subscribe((response: CheckResponse) => this.handleResponse(response));

@@ -24,7 +24,7 @@ export class ConfirmComponent implements OnInit {
 
   constructor(
     private confirmService: ConfirmService,
-    protected status: ConfirmStatus,
+    public status: ConfirmStatus,
     private authStatus: AuthStatus,
     private activatedRoute: ActivatedRoute,
     private location: Location,
@@ -71,7 +71,7 @@ export class ConfirmComponent implements OnInit {
 
   private suspendConfirm(): void {
     this.status.setSuspended(true);
-    this.messages.add(new Error("Error", "Invalid data"));
+    this.messages.add(new Error("Sikertelen", "Próbálkozás"));
     setTimeout(() => {
       this.status.setSuspended(false);
     }, 5000)
@@ -79,9 +79,9 @@ export class ConfirmComponent implements OnInit {
 
   private handleResendResponse(response: SuccessResponse): void {
     if (response.successful){
-      this.messages.add(new Success("Email sent", "Check inbox for the code"));
+      this.messages.add(new Success("Email", "Kiküldve"));
     } else {
-      this.messages.add(new Error("No email sent", "Invalid email or out of time"));
+      this.messages.add(new Error("Sikertelen", "Próbálkozás"));
     }
   }
 
@@ -95,12 +95,12 @@ export class ConfirmComponent implements OnInit {
 
   private handleSuccessfulConfirm(token: string): void {
     localStorage.setItem('auth-token', token);
-    this.messages.add(new Success("Welcome" , "Your account is confirmed"))
+    this.messages.add(new Success("Fiók" , "Megerősítve"))
     this.router.navigate(['']);
   }
 
   private handleFailedConfirm(): void {
-    this.messages.add(new Error("Unsuccessful confirmation", "Invalid code or out of time"));
+    this.messages.add(new Error("Sikertelen", "Próbálkozás"));
     localStorage.removeItem("aut-token");
     this.router.navigate([""]);
   }

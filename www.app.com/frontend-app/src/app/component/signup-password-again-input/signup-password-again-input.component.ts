@@ -9,7 +9,7 @@ import {SignupStatus} from "../../status/signup-status";
 export class SignupPasswordAgainInputComponent implements OnInit {
 
   constructor(
-    protected status: SignupStatus
+    public status: SignupStatus
   ) { }
 
   ngOnInit() {

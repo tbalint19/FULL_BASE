@@ -16,7 +16,7 @@ export class MessagePageComponent implements OnInit {
 
   constructor(
     private messages: MessageService,
-    protected status: MessagesStatus,
+    public status: MessagesStatus,
     private service: PrivateMessageService) { }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class MessagePageComponent implements OnInit {
     );
   }
 
-  protected send(): void {
+  public send(): void {
     if (this.status.creator.message.length < 1) {
       this.messages.add(new Error("Hiba", "Üres üzenet"));
       return;
@@ -48,7 +48,7 @@ export class MessagePageComponent implements OnInit {
     );
   }
 
-  protected orderedMessages(): Message[] {
+  public orderedMessages(): Message[] {
     return this.status.messages.sort(
       (one: Message, other: Message) => {
         let firstDate = new Date();

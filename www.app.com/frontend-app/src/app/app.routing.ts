@@ -8,6 +8,7 @@ import {MessagePageComponent} from "./component/message-page/message-page.compon
 import {DoctorsPageComponent} from "./component/doctors-page/doctors-page.component";
 import {FaqPageComponent} from "./component/faq-page/faq-page.component";
 import {ConfirmGuard} from "./guard/confirm.guard";
+import {AboutPageComponent} from "./component/about-page/about-page.component";
 
 const appRoutes: Routes = [
   { path: 'faq', component: FaqPageComponent },
@@ -16,6 +17,7 @@ const appRoutes: Routes = [
   { path: 'calendar', component: CalendarPageComponent, canActivate: [AuthGuard, ConfirmGuard] },
   { path: 'confirm', component: ConfirmPageComponent },
   { path: 'reset', component: ResetPageComponent },
+  { path: 'about', component: AboutPageComponent },
   { path: '', component: HomePageComponent },
 
   { path: '**', redirectTo: '' }

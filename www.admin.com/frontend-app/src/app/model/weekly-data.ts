@@ -17,6 +17,7 @@ export class WeeklyData {
 
   constructor(monday: Date) {
     let mondayData = new Date(monday.getTime());
+    mondayData.setHours(12);
     this.days = [];
     let weekDaysDates = this.getWeekDaysDates(mondayData);
     let weekIsOdd = this.weekIsOdd(mondayData);

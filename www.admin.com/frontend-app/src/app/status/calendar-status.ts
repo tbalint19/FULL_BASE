@@ -46,6 +46,10 @@ export class CalendarStatus {
         this.editedReservation.user == null);
   }
 
+  disabledNewAddition(): boolean {
+    return this.selectedSchema == null;
+  }
+
   private getPreviousMonday(day: Date): void {
     let prevMonday = new Date(day.getTime());
     prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);

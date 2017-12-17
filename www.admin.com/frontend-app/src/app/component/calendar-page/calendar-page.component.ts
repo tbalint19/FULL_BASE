@@ -162,7 +162,10 @@ export class CalendarPageComponent implements OnInit {
 
   deleteAddition(addition: Addition): void {
     this.service.deleteAddition(addition).subscribe(
-      (response: SuccessResponse) => this.handleAddResponse(response)
+      (response: SuccessResponse) => {
+        this.handleAddResponse(response);
+        location.reload();
+      }
     );
   }
 
@@ -273,22 +276,36 @@ export class CalendarPageComponent implements OnInit {
       (day) => day.addition = null
     );
     let newDays = [];
-    let bothDaysHas = additions.length == 2;
     additions.forEach(
       (addition) => {
         let aDate = new Date(addition.date);
-        let relatedDay = this.status.weeklyData.getValue().days[0].date.getDay == aDate.getDay ?
-          this.status.weeklyData.getValue().days[0] :
-          this.status.weeklyData.getValue().days[1];
+        let relatedDay = this.status.weeklyData.getValue().days[5].date.getDay() == aDate.getDay() ?
+          this.status.weeklyData.getValue().days[5] :
+          this.status.weeklyData.getValue().days[6];
         relatedDay.addition = addition;
         let relatedSchema = WeeklyData.GET_SCHEMA(addition.schemaName);
-        let dayInfo = new DayInfo(relatedDay.date, relatedSchema);
+        let newDate = new Date(relatedDay.date);
+        let dayInfo = new DayInfo(newDate, relatedSchema);
         newDays.push(dayInfo);
       }
     );
-    // newDays.forEach(
-    //
-    // );
+    let toAdd = []
+    newDays.forEach(
+      (dayInfo) => {
+        let indexOfToReplace = this.weeklyData.days.findIndex(
+          (d) => d.date.getDay() == dayInfo.date.getDay());
+        if (indexOfToReplace > 0) {
+          if (this.weeklyData.days[indexOfToReplace].slots.length == 0) {
+            this.weeklyData.days[indexOfToReplace] = dayInfo;
+            toAdd.push(dayInfo);
+          }
+        }
+      }
+    );
+    if (toAdd.length > 0) {
+      let newData = Object.assign({}, this.weeklyData);
+      this.status.weeklyData.next(newData);
+    }
   }
 
   private assignRestrictions(restrictions: Restriction[]): void {

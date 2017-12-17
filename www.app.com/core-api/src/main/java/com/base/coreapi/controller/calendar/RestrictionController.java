@@ -19,7 +19,7 @@ public class RestrictionController {
     @GetMapping("/all")
     public List<Restriction> getAll(@RequestParam Long start) {
         Date monday = new Date(start);
-        Date sunday = new Date(start + 604800000);
+        Date sunday = new Date(start + 1814400000);
         return repository.findByDateBetween(monday, sunday);
     }
 

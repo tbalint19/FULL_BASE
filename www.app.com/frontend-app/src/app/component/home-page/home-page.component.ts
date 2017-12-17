@@ -13,14 +13,14 @@ import {MainMessage} from "../../model/backend/info/main-message";
 export class HomePageComponent implements OnInit {
 
   constructor(
-    protected status: HomeStatus,
-    protected authStatus: AuthStatus,
+    public status: HomeStatus,
+    public authStatus: AuthStatus,
     private service: InfoService) { }
 
   ngOnInit() {
-    // this.service.getMainMessage().subscribe(
-    //   (message: MainMessage) => this.status.message = message
-    // );
+    this.service.getMainMessage().subscribe(
+      (message: MainMessage) => this.status.message = message
+    );
   }
 
 }

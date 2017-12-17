@@ -8,7 +8,7 @@ import {ConfirmStatus} from "../../status/confirm-status";
 })
 export class ConfirmCodeInputComponent implements OnInit {
 
-  constructor(protected status: ConfirmStatus) { }
+  constructor(public status: ConfirmStatus) { }
 
   ngOnInit() {
   }

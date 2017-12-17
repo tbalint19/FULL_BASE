@@ -1,64 +1,105 @@
-<!--<menu-navbar></menu-navbar>-->
+<menu-navbar></menu-navbar>
 
-<!--<div class="container">-->
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">-->
-      <!--<select-->
-        <!--class="btn btn-default dropdown-toggle btn-block"-->
-        <!--[(ngModel)]="status.selectedEvent"-->
-        <!--(ngModelChange)="updateSelectedEvent()">-->
-        <!--<option-->
-          <!--[ngValue]="null"-->
-          <!--[hidden] ="true"-->
-          <!--[selected]="!status.selectedEvent">Válasszon eseményt</option>-->
-        <!--<option-->
-          <!--*ngFor="let event of status.allExistingEvents"-->
-          <!--[ngValue]="event">-->
-          <!--{{ event.name }}-->
-        <!--</option>-->
-      <!--</select>-->
-    <!--</div>-->
+<div id="background">
+  <div class="container">
+    <div *ngIf="status.message" class="row block-container">
+      <div class="main-message main-message-{{ status.message.type }}">
+        {{ status.message.title }}:&nbsp;&nbsp;{{ status.message.text }}
+      </div>
+    </div>
 
-    <!--<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">-->
-      <!--<select *ngIf="status.selectedEvent"-->
-        <!--class="btn btn-default dropdown-toggle btn-block"-->
-        <!--[(ngModel)]="status.selectedOrderDay"-->
-        <!--(ngModelChange)="updateSelectedOrderDay()">-->
-        <!--<option-->
-          <!--[ngValue]="null"-->
-          <!--[hidden] ="true"-->
-          <!--[selected]="!status.selectedOrderDay">Válasszon napot</option>-->
-        <!--<option-->
-          <!--*ngFor="let orderDay of getFilteredOrderDays()"-->
-          <!--[ngValue]="orderDay">-->
-          <!--{{ showDate(orderDay.date) }}-->
-        <!--</option>-->
-      <!--</select>-->
-    <!--</div>-->
+    <hr *ngIf="status.message">
 
-    <!--<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">-->
-      <!--<select *ngIf="status.selectedOrderDay"-->
-        <!--class="btn btn-default dropdown-toggle btn-block"-->
-        <!--[(ngModel)]="status.selectedSlot"-->
-        <!--(ngModelChange)="updateSelectedSlot()">-->
-        <!--<option-->
-          <!--[ngValue]="null"-->
-          <!--[hidden] ="true"-->
-          <!--[selected]="!status.selectedSlot">Válasszon időpontot</option>-->
-        <!--<option-->
-          <!--*ngFor="let slot of status.selectedOrderDay.slots"-->
-          <!--[ngValue]="slot">-->
-          <!--{{ showTime(slot.start) }}-->
-        <!--</option>-->
-      <!--</select>-->
-    <!--</div>-->
-  <!--</div>-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <calendar-info></calendar-info>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div *ngFor="let reservation of status.ownReservations" class="well">
+          <p class="flex-p">
+            <span>{{ reservation.event }}</span>
+            <span>
+              {{ printer.showDate(reservation.date) }}
+              &nbsp;-&nbsp;
+              {{ printer.showTime(reservation.date) }}
+            </span>
+          </p>
+          <button class="btn btn-default btn-block" (click)="deleteReservation(reservation)">
+            Lemondás
+          </button>
+        </div>
 
-  <!--<div class="row">-->
-    <!--<div class="button-container">-->
-      <!--<button *ngIf="status.selectedSlot" class="btn btn-default" (click)="reserve()">-->
-        <!--Foglalás-->
-      <!--</button>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+        <div class="well" *ngIf="!status.editorOpened">
+          <button class="btn btn-default btn-block" (click)="openEditor()">
+            Új foglalás
+          </button>
+        </div>
+
+        <div *ngIf="status.editorOpened" class="well">
+          <div class="about-reservation-container">
+            <div class="about-reservation">
+              <p *ngIf="status.selectedEvent">{{ status.selectedEvent }}</p>
+              <p *ngIf="status.selectedDay" class="flex-p">
+                <span>{{ printer.showDate(status.selectedDay) }}</span>
+                <span *ngIf="status.selectedSlot">{{ printer.showTime(status.selectedSlot.date) }}</span>
+              </p>
+            </div>
+          </div>
+
+          <select *ngIf="status.showEventSelect()"
+                  class="btn btn-default dropdown-toggle btn-block"
+                  [(ngModel)]="status.selectedEvent">
+
+            <option [ngValue]="null" [hidden] ="true"
+                    [selected]="!status.selectedEvent">
+              Válasszon eseményt
+            </option>
+
+            <option *ngFor="let event of getEvents()" [ngValue]="event">
+              {{ event }}
+            </option>
+
+          </select>
+
+          <select *ngIf="status.showDaySelect()"
+                  class="btn btn-default dropdown-toggle btn-block"
+                  [(ngModel)]="status.selectedDay">
+
+            <option [ngValue]="null" [hidden] ="true"
+                    [selected]="!status.selectedDay">
+              Válasszon napot
+            </option>
+
+            <option *ngFor="let day of getDays()" [ngValue]="day">
+              {{ printer.showDate(day) }}
+            </option>
+
+          </select>
+
+          <select *ngIf="status.showSlotSelect()"
+                  class="btn btn-default dropdown-toggle btn-block"
+                  [(ngModel)]="status.selectedSlot">
+
+            <option [ngValue]="null" [hidden] ="true"
+                    [selected]="!status.selectedSlot">
+              Válasszon időpontot
+            </option>
+
+            <option *ngFor="let slot of getSlots()" [ngValue]="slot">
+              {{ printer.showTime(slot.date) }}
+            </option>
+
+          </select>
+
+          <button  *ngIf="status.showCreateButton()" class="button-container"
+            class="btn btn-default btn-block" (click)="createReservation()">
+            Foglalás
+          </button>
+          <button class="btn btn-default btn-block" (click)="closeEditor()">
+            Mégse
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

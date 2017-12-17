@@ -19,7 +19,7 @@ export class LoginNavbarComponent implements OnInit {
     private router: Router,
     private authStatus: AuthStatus,
     private service: LoginService,
-    protected status: LoginStatus,
+    public status: LoginStatus,
     private messages: MessageService) { }
 
   ngOnInit() {
@@ -55,11 +55,11 @@ export class LoginNavbarComponent implements OnInit {
   private handleSuccessfulLogin(token: string): void {
     if (token != null) {
       localStorage.setItem('auth-token', token);
-      this.messages.add(new Success("Successful login", "Welcome"));
+      this.messages.add(new Success("Sikeres", "Bejelentkezés"));
     }
   }
 
   private handleLoginError(){
-    this.messages.add(new Error("Invalid credentials", "Try again"));
+    this.messages.add(new Error("Sikertelen", "Próbálkozás"));
   }
 }

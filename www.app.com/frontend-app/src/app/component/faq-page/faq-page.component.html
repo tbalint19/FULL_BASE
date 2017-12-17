@@ -1,80 +1,65 @@
 <menu-navbar *ngIf="authStatus.isAuthenticated()"></menu-navbar>
 <login-navbar *ngIf="!authStatus.isAuthenticated()"></login-navbar>
 
-<h3>Gyakran ismételt kérdések</h3>
+<div id="background">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+        <h3>Gyakori kérdések</h3>
+        <hr>
+        <div class="well">
+          <button *ngFor="let faq of status.faqs"
+                  class="btn btn-default btn-block" (click)="select(faq)">
+            {{ faq.question }}
+          </button>
+        </div>
+      </div>
 
-<div class="row block-container">
-  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-    <h4>Mit tegyek, ha fáj a gyerek hasa?</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-  </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+        <div *ngIf="status.selected">
+          <h3>{{ status.selected.question }}</h3>
+          <hr>
+          <div *ngIf="numberOfPictures(status.selected) == 0">
+            <div class="one-big-text">
+              {{ status.selected.text }}
+            </div>
+          </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-    <img src="/assets/poci.jpg" class="img-responsive"/>
-  </div>
-</div>
+          <div *ngIf="numberOfPictures(status.selected) == 1">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="one-big-text">
+                  {{ status.selected.text }}
+                </div>
+              </div>
 
-<div class="row block-container">
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-    <img src="/assets/poci.jpg" class="img-responsive"/>
-  </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <img src="ext-images/{{ getOneImage(status.selected) }}" class="img-responsive">
+              </div>
+            </div>
+          </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-    <h4>Mit tegyek, ha fáj a gyerek hasa?</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-  </div>
-</div>
+          <div *ngIf="numberOfPictures(status.selected) == 2">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="one-big-text">
+                  {{ status.selected.text }}
+                </div>
+              </div>
+            </div>
 
-<div class="row block-container">
-  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-    <h4>Mit tegyek, ha fáj a gyerek hasa?</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-  </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <img src="ext-images/{{ status.selected.picture1name }}" class="img-responsive">
+              </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-    <img src="/assets/poci.jpg" class="img-responsive"/>
-  </div>
-</div>
-
-<div class="row block-container">
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-    <img src="/assets/poci.jpg" class="img-responsive"/>
-  </div>
-
-  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-    <h4>Mit tegyek, ha fáj a gyerek hasa?</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-  </div>
-</div>
-
-<div class="row block-container">
-  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-    <h4>Mit tegyek, ha fáj a gyerek hasa?</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-  </div>
-
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-    <img src="/assets/poci.jpg" class="img-responsive"/>
-  </div>
-</div>
-
-<div class="row block-container">
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-    <img src="/assets/poci.jpg" class="img-responsive"/>  </div>
-  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-    <h4>Mit tegyek, ha fáj a gyerek hasa?</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <img src="ext-images/{{ status.selected.picture2name }}" class="img-responsive">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -93,6 +93,7 @@
               <span class="glyphicon glyphicon-check"></span>
             </button>
             <button class="btn btn-default"
+                    [disabled]="status.disabledNewAddition()"
                     (click)="addAddition()" *ngIf="showAddAddition(day)">
               <span class="glyphicon glyphicon-home"></span>
               <span class="glyphicon glyphicon-unchecked"></span>

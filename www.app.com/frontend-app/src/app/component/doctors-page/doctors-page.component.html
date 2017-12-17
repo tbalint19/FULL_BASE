@@ -1,78 +1,181 @@
 <menu-navbar *ngIf="authStatus.isAuthenticated()"></menu-navbar>
 <login-navbar *ngIf="!authStatus.isAuthenticated()"></login-navbar>
 
-<h3>Védőnők</h3>
+<div id="background">
+  <div class="container">
+    <div class="row">
 
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 block-container">
-    <div class="well">
-      <p class="name">Dr. Kovács Béla - Fogorvos</p>
-      <p class="time">Rendel:</p>
-      <p class="slot">Hétfő: 10-18</p>
-      <p class="slot">Kedd: 10-18</p>
-      <p class="slot">Szerda: 10-18</p>
-      <p class="slot">Csütörtök: 10-18</p>
-      <p class="slot">Péntek: 10-18</p>
     </div>
-  </div>
-
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 block-container">
-    <div class="well">
-      <p class="name">Dr. Kovács Béla - Fogorvos</p>
-      <p class="time">Rendel:</p>
-      <p class="slot">Hétfő: 10-18</p>
-      <p class="slot">Kedd: 10-18</p>
-      <p class="slot">Szerda: 10-18</p>
-      <p class="slot">Csütörtök: 10-18</p>
-      <p class="slot">Péntek: 10-18</p>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <input class="form-control" placeholder="Keresés" [(ngModel)]="searchString">
+          <div class="hoverable-container">
+            <div *ngFor="let row of filteredList()" class="one-street">
+              <p class="row-street">{{ displayStreet(row) }}</p>
+              <p class="row-name">{{ displayName(row) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <div class="well">
+            <p class="name">Fekete Nóra</p>
+            <p class="phone">06-20/411-52-10</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Várandós tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan csütörtök</span>
+                  <span>16-18</span>
+                </p>
+                <p class="slot">
+                  <span>Páros kedd</span>
+                  <span>8-10</span>
+                </p>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Védőnői tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan kedd</span>
+                  <span>8-10</span>
+                </p>
+                <p class="slot">
+                  <span>Páros csütörtök</span>
+                  <span>16-18</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 block-container">
-    <div class="well">
-      <p class="name">Dr. Kovács Béla - Fogorvos</p>
-      <p class="time">Rendel:</p>
-      <p class="slot">Hétfő: 10-18</p>
-      <p class="slot">Kedd: 10-18</p>
-      <p class="slot">Szerda: 10-18</p>
-      <p class="slot">Csütörtök: 10-18</p>
-      <p class="slot">Péntek: 10-18</p>
-    </div>
-  </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <div class="well">
+            <p class="name">Hegedűs Ágnes</p>
+            <p class="phone">06-20/409-21-00</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Várandós tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan hétfő</span>
+                  <span>15-17</span>
+                </p>
+                <p class="slot">
+                  <span>Páros péntek</span>
+                  <span>8-10</span>
+                </p>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Védőnői tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan péntek</span>
+                  <span>8-10</span>
+                </p>
+                <p class="slot">
+                  <span>Páros hétfő</span>
+                  <span>15-17</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 block-container">
-    <div class="well">
-      <p class="name">Dr. Kovács Béla - Fogorvos</p>
-      <p class="time">Rendel:</p>
-      <p class="slot">Hétfő: 10-18</p>
-      <p class="slot">Kedd: 10-18</p>
-      <p class="slot">Szerda: 10-18</p>
-      <p class="slot">Csütörtök: 10-18</p>
-      <p class="slot">Péntek: 10-18</p>
-    </div>
-  </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <div class="well">
+            <p class="name">Kerepeczki Ágnes</p>
+            <p class="phone">06-20/411-44-55</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Várandós tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan csütörtök</span>
+                  <span>14-16</span>
+                </p>
+                <p class="slot">
+                  <span>Páros hétfő</span>
+                  <span>8-10</span>
+                </p>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Védőnői tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan kedd</span>
+                  <span>16-18</span>
+                </p>
+                <p class="slot">
+                  <span>Páros kedd</span>
+                  <span>8-10</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 block-container">
-    <div class="well">
-      <p class="name">Dr. Kovács Béla - Fogorvos</p>
-      <p class="time">Rendel:</p>
-      <p class="slot">Hétfő: 10-18</p>
-      <p class="slot">Kedd: 10-18</p>
-      <p class="slot">Szerda: 10-18</p>
-      <p class="slot">Csütörtök: 10-18</p>
-      <p class="slot">Péntek: 10-18</p>
-    </div>
-  </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <div class="well">
+            <p class="name">Kirbsziné Opóczki Gabriella</p>
+            <p class="phone">06-20/409-05-09</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Várandós tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan péntek</span>
+                  <span>8-10</span>
+                </p>
+                <p class="slot">
+                  <span>Páros hétfő</span>
+                  <span>15-17</span>
+                </p>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Védőnői tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan hétfő</span>
+                  <span>15-17</span>
+                </p>
+                <p class="slot">
+                  <span>Páros péntek</span>
+                  <span>8-10</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 block-container">
-    <div class="well">
-      <p class="name">Dr. Kovács Béla - Fogorvos</p>
-      <p class="time">Rendel:</p>
-      <p class="slot">Hétfő: 10-18</p>
-      <p class="slot">Kedd: 10-18</p>
-      <p class="slot">Szerda: 10-18</p>
-      <p class="slot">Csütörtök: 10-18</p>
-      <p class="slot">Péntek: 10-18</p>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <div class="well">
+            <p class="name">Majsai Péterné Györgyi</p>
+            <p class="phone">06-20/411-34-31</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Várandós tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan szerda</span>
+                  <span>16-18</span>
+                </p>
+                <p class="slot">
+                  <span>Páros csütörtök</span>
+                  <span>8-10</span>
+                </p>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <p class="time-type">Védőnői tanácsadás</p>
+                <p class="slot">
+                  <span>Páratlan csütörtök</span>
+                  <span>8-10</span>
+                </p>
+                <p class="slot">
+                  <span>Páros szerda</span>
+                  <span>16-18</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

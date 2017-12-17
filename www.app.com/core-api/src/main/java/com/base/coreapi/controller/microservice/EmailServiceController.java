@@ -16,7 +16,7 @@ public class EmailServiceController {
     private RestTemplate restTemplate;
 
     private static final String API_URL = "http://localhost:8000";
-    private static final String APP_URL = "http://localhost:4200";
+    private static final String APP_URL = "http://localhost:8000";
     private static final String SERVICE_URL = "http://localhost:8001/api/send";
 
     private AttemptResponse post(String url, Object data){

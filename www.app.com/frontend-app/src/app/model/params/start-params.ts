@@ -1,4 +1,8 @@
 export class StartParams {
 
-  public start: Date;
+  public start: number;
+
+  constructor(date: Date) {
+    this.start = date.getTime();
+  }
 }

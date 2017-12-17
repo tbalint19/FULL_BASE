@@ -8,7 +8,7 @@ import {ResetStatus} from "../../status/reset-status";
 })
 export class ResetNavbarComponent implements OnInit {
 
-  constructor(protected status: ResetStatus) { }
+  constructor(public status: ResetStatus) { }
 
   ngOnInit() {
   }

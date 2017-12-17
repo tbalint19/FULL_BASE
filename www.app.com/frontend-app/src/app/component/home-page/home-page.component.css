@@ -22,3 +22,7 @@
 .main-message-DEFAULT {
   background-color: #999999;
 }
+
+.main-message-NONE {
+  display: none;
+}

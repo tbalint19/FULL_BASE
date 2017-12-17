@@ -1,0 +1,19 @@
+p {
+  text-align: justify;
+  font-weight: bold;
+}
+
+.red {
+  color: #d9534f;
+}
+
+.green {
+  color: #5cb85c;
+}
+
+.white-container {
+  background-color: white;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: 0 0 5px white;
+}

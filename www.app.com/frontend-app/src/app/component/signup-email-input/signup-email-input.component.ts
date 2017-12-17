@@ -12,13 +12,13 @@ export class SignupEmailInputComponent implements OnInit {
 
   constructor(
     private service: SignupService,
-    protected status: SignupStatus
+    public status: SignupStatus
   ) { }
 
   ngOnInit() {
   }
 
-  protected checkEmail(): void {
+  public checkEmail(): void {
     if (!this.status.emailIsValid()){ return; }
     this.service.checkEmail(this.status.creator)
       .subscribe((response: CheckResponse) => this.handleResponse(response));

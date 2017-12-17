@@ -13,7 +13,7 @@ export class WelcomeContentComponent implements OnInit {
   ngOnInit() {
   }
 
-  protected redirect(route: string): void {
+  public redirect(route: string): void {
     this.router.navigate([route]);
   }
 

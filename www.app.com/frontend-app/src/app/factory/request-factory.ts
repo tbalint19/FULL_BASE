@@ -11,6 +11,7 @@ import {ResetDTO} from "../model/dto/reset-dto";
 import {MessageCreateDTO} from "../model/dto/message-create-dto";
 import {ReservationDto} from "../model/dto/reservation-dto";
 import {StartParams} from "../model/params/start-params";
+import {Reservation} from "../model/backend/calendar/reservation";
 
 @Injectable()
 export class RequestFactory {
@@ -56,7 +57,7 @@ export class RequestFactory {
   }
 
   public createMainMessageRequest(): HttpRequest {
-    return new HttpRequest("/api/info/mainmessage/get", "GET", null);
+    return new HttpRequest("/api/info/mainmessage/get/home", "GET", null);
   }
 
   createGetReservationsRequest(params: StartParams): HttpRequest {
@@ -75,11 +76,23 @@ export class RequestFactory {
     return new HttpRequest("/api/calendar/addition/all", "GET", params);
   }
 
-  public createReservationRequest(dto: ReservationDto): HttpRequest {
-    return new HttpRequest("/api/calendar/reservation/reserve", "POST", dto);
+  createReservationRequest(reservation: Reservation): HttpRequest {
+    return new HttpRequest("/api/calendar/reservation/create", "POST", reservation);
   }
 
   createGetFaqRequest(): HttpRequest {
     return new HttpRequest("/api/faq/all", "GET", null);
+  }
+
+  createGetMyReservationsRequest() {
+    return new HttpRequest("/api/calendar/reservation/users", "GET", null);
+  }
+
+  createDeleteReservationRequest(reservation: Reservation) {
+    return new HttpRequest("/api/calendar/reservation/delete", "POST", reservation);
+  }
+
+  createCalendarMessageRequest() {
+    return new HttpRequest("/api/info/mainmessage/get/calendar", "GET", null);
   }
 }

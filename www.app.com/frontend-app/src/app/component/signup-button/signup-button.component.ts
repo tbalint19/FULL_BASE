@@ -18,7 +18,7 @@ export class SignupButtonComponent implements OnInit {
   constructor(
     private service: SignupService,
     public messages: MessageService,
-    protected status: SignupStatus
+    public status: SignupStatus
   ) { }
 
   ngOnInit() {
@@ -44,10 +44,10 @@ export class SignupButtonComponent implements OnInit {
 
   private handleSignupResponse(successful: boolean): void {
     if (successful) {
-      this.messages.add(new Success("Successful signup", "You can log in now"));
+      this.messages.add(new Success("Sikeres", "Regisztráció"));
       this.status.creator.reset();
     } else {
-      this.messages.add(new Error("Ooops!", "Something went wrong"));
+      this.messages.add(new Error("Ooops!", "Valami hiba történt"));
     }
   }
 

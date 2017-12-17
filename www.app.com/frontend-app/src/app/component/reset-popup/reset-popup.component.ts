@@ -19,14 +19,14 @@ export class ResetPopupComponent implements OnInit {
   constructor(
     private service: ResetService,
     private messages: MessageService,
-    protected status: ResetStartStatus
+    public status: ResetStartStatus
   ) { }
 
   ngOnInit() {
     this.status.creator.reset();
   }
 
-  protected openReset(): void {
+  public openReset(): void {
     this.status.toggle(true);
     this.status.creator.reset();
   }
@@ -55,13 +55,13 @@ export class ResetPopupComponent implements OnInit {
 
   private handleSuccess(): void {
     this.messages.add(
-      new Success("Email sent", "Your mail should arrive in a few seconds"));
+      new Success("Email", "Kiküldve"));
     this.closeReset();
   }
 
   private handleError(): void {
     this.messages.add(
-      new Error("Invalid credentials", "No email is sent"));
+      new Error("Nem létező", "Felhasználó"));
     this.closeReset();
   }
 

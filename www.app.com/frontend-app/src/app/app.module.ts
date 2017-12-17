@@ -59,6 +59,12 @@ import {InfoService} from "./service/info.service";
 import {HomeStatus} from "./status/home-status";
 import {CalendarStatus} from "./status/calendar-status";
 import {CalendarService} from "./service/calendar.service";
+import {DatePrinterService} from "./service/date-printer.service";
+import {FilterService} from "./service/filter.service";
+import { AboutPageComponent } from './component/about-page/about-page.component';
+import { CalendarInfoComponent } from './component/calendar-info/calendar-info.component';
+import {FaqService} from "./service/faq.service";
+import {FaqStatus} from "./status/faq-status";
 
 @NgModule({
   declarations: [
@@ -87,7 +93,9 @@ import {CalendarService} from "./service/calendar.service";
     FaqPageComponent,
     CalendarPageComponent,
     MessagePageComponent,
-    MainControllerComponent
+    MainControllerComponent,
+    AboutPageComponent,
+    CalendarInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -105,6 +113,9 @@ import {CalendarService} from "./service/calendar.service";
     MessageService,
     ConfirmService,
     CalendarService,
+    FaqService,
+    DatePrinterService,
+    FilterService,
     InfoService,
     PrivateMessageService,
     UsernameValidator,
@@ -121,6 +132,7 @@ import {CalendarService} from "./service/calendar.service";
     HomeStatus,
     LoginStatus,
     ResetStatus,
+    FaqStatus,
     ResetStartStatus,
     CalendarStatus,
     MessagesStatus,

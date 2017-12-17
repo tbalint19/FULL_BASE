@@ -8,7 +8,7 @@ import {SignupStatus} from "../../status/signup-status";
 })
 export class SignupComponent implements OnInit {
 
-  constructor(protected status: SignupStatus) { }
+  constructor(public status: SignupStatus) { }
 
   ngOnInit() {
     this.status.creator.reset();

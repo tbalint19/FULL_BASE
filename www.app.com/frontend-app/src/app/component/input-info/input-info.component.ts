@@ -13,9 +13,9 @@ export class InputInfoComponent implements OnInit {
   }
 
   @Input()
-  protected type: string;
+  public type: string;
 
   @Input()
-  protected text: string;
+  public text: string;
 
 }

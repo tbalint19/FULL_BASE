@@ -11,5 +11,6 @@ public class SecurityConstants {
     public static final String AUTH_URLS = "/api/auth/**";
     public static final String CONFIRM_URLS = "/api/confirm/**";
     public static final String RESET_URLS = "/api/reset/**";
-    public static final String MAIN_MESSAGE_URL = "/api/info/**";
+    public static final String MAIN_MESSAGE_URL = "/api/info/mainmessage/get/home";
+    public static final String CALENDAR_MESSAGE_URL = "/api/info/mainmessage/get/calendar";
 }

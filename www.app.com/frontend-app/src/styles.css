@@ -24,3 +24,22 @@
   opacity : 0.15;
   z-index: -1;
 }
+
+.hoverable-container {
+  padding: 20px;
+  transition: 1.2s;
+
+}
+
+.hoverable-container:hover {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 20px white;
+  transition: 1.2s;
+  cursor: all-scroll;
+}
+
+.flex-p {
+  display: flex;
+  justify-content: space-between;
+}

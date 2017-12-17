@@ -17,7 +17,7 @@ export class SignupService {
   constructor(
     private client: HttpClient,
     private requestFactory: RequestFactory,
-    protected dtoFactory: DtoFactory,
+    public dtoFactory: DtoFactory,
     private paramFactory: ParamFactory) { }
 
   public checkUsername(creator: SignupDtoCreator): Observable<CheckResponse> {

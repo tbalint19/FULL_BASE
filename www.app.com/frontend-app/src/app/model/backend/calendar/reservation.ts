@@ -7,8 +7,7 @@ export class Reservation {
   public event: string;
   public date: Date;
 
-  constructor(user, event, date) {
-    this.user = user;
+  constructor(event, date) {
     this.event = event;
     this.date = date;
   }

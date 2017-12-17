@@ -1,46 +1,48 @@
 <reset-navbar></reset-navbar>
 
-<div class="container">
-  <div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 block-container">
-    <div class="well">
-      <div class="user-sign">
-        <span class="glyphicon glyphicon-user"></span>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
-          <input
-            class="form-control"
-            [(ngModel)]="status.resetDtoCreator.password"
-            type="password"
-            placeholder="Új jelszó"/>
+<div id="background">
+  <div class="container">
+    <div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 block-container">
+      <div class="well">
+        <div class="user-sign">
+          <span class="glyphicon glyphicon-user"></span>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
-          <input
-            class="form-control"
-            [(ngModel)]="status.resetDtoCreator.passwordAgain"
-            type="password"
-            placeholder="Új jelszó mégegyszer"/>
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+            <input
+              class="form-control"
+              [(ngModel)]="status.resetDtoCreator.password"
+              type="password"
+              placeholder="Új jelszó"/>
+          </div>
         </div>
-      </div>
 
-      <div class="button-container">
-        <button
-          class="btn btn-success"
-          [disabled]="status.isPending() || status.isSuspended()"
-          (click)="attemptReset()">
-          Jelszó beállítása
-        </button>
-      </div>
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+            <input
+              class="form-control"
+              [(ngModel)]="status.resetDtoCreator.passwordAgain"
+              type="password"
+              placeholder="Új jelszó mégegyszer"/>
+          </div>
+        </div>
 
-      <div class="info-container">
-        <p>
-          Kérjük vegye figyelembe, hogy a jelszót ezen a felületen körülbelül 5 percig
-          állíthatja át - ez után (biztonsági okokból) újra igényelnie kell a jelszó átállítást.
-        </p>
+        <div class="button-container">
+          <button
+            class="btn btn-success"
+            [disabled]="status.isPending() || status.isSuspended()"
+            (click)="attemptReset()">
+            Jelszó beállítása
+          </button>
+        </div>
+
+        <div class="info-container">
+          <p>
+            Kérjük vegye figyelembe, hogy a jelszót ezen a felületen körülbelül 5 percig
+            állíthatja át - ez után (biztonsági okokból) újra igényelnie kell a jelszó átállítást.
+          </p>
+        </div>
       </div>
     </div>
   </div>
