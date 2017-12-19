@@ -106,8 +106,16 @@ export class CalendarPageComponent implements OnInit {
     return selected && noSlots;
   }
 
-  colorReservation(slot: Slot): boolean {
-    return slot.relatedReservation && slot.relatedReservation.event != "Szünet";
+  shouldShowName(day: Date, slot: Slot): boolean {
+    return this.isSelected(day) && slot.relatedReservation != null;
+  }
+
+  colorV(slot: Slot): boolean {
+    return slot.relatedReservation && slot.relatedReservation.event == "Oltás";
+  }
+
+  colorR(slot: Slot): boolean {
+    return slot.relatedReservation && slot.relatedReservation.event == "Általános vizsgálat";
   }
 
   colorBreak(slot: Slot): boolean {

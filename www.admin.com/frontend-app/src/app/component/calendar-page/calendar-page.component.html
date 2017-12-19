@@ -34,6 +34,8 @@
             </option>
           </select>
 
+          <input type="text" [(ngModel)]="status.editedReservation.childName">
+
           <select [(ngModel)]="status.editedReservation.event"
                   class="btn btn-default btn-block">
             <option [ngValue]="null" [hidden]="true"
@@ -48,6 +50,8 @@
 
         <div *ngIf="status.editedReservation.id">
           <p>{{ status.editedReservation.user ? status.editedReservation.user.username : null }}</p>
+          <p>{{ status.editedReservation.user ? status.editedReservation.user.email : null }}</p>
+          <p>{{ status.editedReservation.childName ? status.editedReservation.childName : null }}</p>
           <p>{{ status.editedReservation.event }}</p>
         </div>
 
@@ -118,9 +122,13 @@
           <hr>
           <div class="day-body">
             <div *ngFor="let slot of day.slots"
-                 class="quarter {{ colorReservation(slot) && 'reservation-colored'}} {{ colorBreak(slot) && 'break-colored' }}">
+                 class="quarter {{ colorV(slot) && 'v-colored'}} {{ colorR(slot) && 'r-colored'}} {{ colorBreak(slot) && 'break-colored' }}">
             <span class="quarter-time">
               {{ printer.printHours(slot.start.getHours()) }}:{{ printer.printMinutes(slot.start.getMinutes()) }}
+            </span>
+
+            <span *ngIf="shouldShowName(day, slot)">
+              {{ slot.relatedReservation.childName }}
             </span>
 
             <span *ngIf="isSelected(day.date)">

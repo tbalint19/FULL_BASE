@@ -6,6 +6,8 @@ export class ApplicationUser {
 
   public username: string;
 
+  public email: string;
+
   public channel: Channel;
 
   private constructor(){}

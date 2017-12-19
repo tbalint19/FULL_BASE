@@ -41,9 +41,7 @@ export class CalendarStatus {
   }
 
   disabledNewReservation(): boolean {
-    return this.editedReservation.event == null ||
-      (this.editedReservation.event != "Szünet" &&
-        this.editedReservation.user == null);
+    return this.editedReservation.event == null;
   }
 
   disabledNewAddition(): boolean {

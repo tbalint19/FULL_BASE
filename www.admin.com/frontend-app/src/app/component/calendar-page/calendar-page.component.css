@@ -30,8 +30,13 @@
   opacity: 0.5;
 }
 
-.reservation-colored {
+.r-colored {
   background-color: #5cb85c;
+  color: white;
+}
+
+.v-colored {
+  background-color: #d9534f;
   color: white;
 }
 

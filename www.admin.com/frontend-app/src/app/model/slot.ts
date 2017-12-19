@@ -9,6 +9,7 @@ export class Slot {
   public isVaccinateTime: boolean;
 
   constructor(start: Date, isVaccinateTime: boolean) {
+    this.relatedReservation = null;
     this.start = start;
     this.isVaccinateTime = isVaccinateTime;
   }

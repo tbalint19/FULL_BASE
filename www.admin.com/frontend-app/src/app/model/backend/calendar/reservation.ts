@@ -6,6 +6,7 @@ export class Reservation {
   public user: ApplicationUser;
   public event: string;
   public date: Date;
+  public childName: string;
 
   constructor(date: Date) {
     this.date = date;
