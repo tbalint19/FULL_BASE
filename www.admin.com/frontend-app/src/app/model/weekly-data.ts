@@ -60,7 +60,7 @@ export class WeeklyData {
   }
 
   private weekIsOdd(monday: Date): boolean {
-    return this.getWeekNumber(monday) % 2 == 0;
+    return this.getWeekNumber(monday) % 2 == 1;
   }
 
   private getWeekNumber(date: Date): number {

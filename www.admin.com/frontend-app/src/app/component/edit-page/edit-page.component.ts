@@ -67,7 +67,7 @@ export class EditPageComponent implements OnInit {
   }
 
   public infoTypes(): string[] {
-    return [InfoType.SUCCESS, InfoType.ERROR, InfoType.DEFAULT]
+    return [InfoType.SUCCESS, InfoType.ERROR, InfoType.DEFAULT, InfoType.NONE]
       .map((e) => InfoType[e]);
   }
 

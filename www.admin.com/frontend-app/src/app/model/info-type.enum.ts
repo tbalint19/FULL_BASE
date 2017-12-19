@@ -1,4 +1,4 @@
 export enum InfoType {
 
-  SUCCESS, ERROR, DEFAULT
+  SUCCESS, ERROR, DEFAULT, NONE
 }
