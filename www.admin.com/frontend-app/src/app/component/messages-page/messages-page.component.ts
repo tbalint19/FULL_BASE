@@ -101,6 +101,9 @@ export class MessagesPageComponent implements OnInit {
   }
 
   lastTime(user: ApplicationUser): string {
+    if (user.channel.messages.length < 1) {
+      return "";
+    }
     let date = user.channel.messages[user.channel.messages.length - 1].created;
     let actualDate = new Date();
     actualDate.setTime(date);
@@ -108,6 +111,9 @@ export class MessagesPageComponent implements OnInit {
   }
 
   lastIsUsers(user: ApplicationUser): boolean {
+    if (user.channel.messages.length < 1) {
+      return false;
+    }
     return user.channel.messages[user.channel.messages.length - 1].isUserMessage;
   }
 }

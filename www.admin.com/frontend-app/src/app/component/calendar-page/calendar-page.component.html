@@ -26,15 +26,16 @@
           <select [(ngModel)]="status.editedReservation.user"
                   class="btn btn-default btn-block">
             <option [ngValue]="null"
-                    [selected]="status.editedReservation.user == null">
-              Nincs felhasználó
+                    [selected]="!status.editedReservation.user">
+              Felhasználó
             </option>
             <option *ngFor="let user of status.users" [ngValue]="user">
               {{ user.username }}
             </option>
           </select>
 
-          <input type="text" [(ngModel)]="status.editedReservation.childName">
+          <input id="child-selector" type="text" class="form-control" placeholder="Gyermek neve"
+                 [(ngModel)]="status.editedReservation.childName">
 
           <select [(ngModel)]="status.editedReservation.event"
                   class="btn btn-default btn-block">
@@ -127,8 +128,10 @@
               {{ printer.printHours(slot.start.getHours()) }}:{{ printer.printMinutes(slot.start.getMinutes()) }}
             </span>
 
-            <span *ngIf="shouldShowName(day, slot)">
-              {{ slot.relatedReservation.childName }}
+            <span *ngIf="isSelected(day.date)" class="child-name">
+              <span *ngIf="shouldShowName(slot)">
+                {{ slot.relatedReservation.childName }}
+              </span>
             </span>
 
             <span *ngIf="isSelected(day.date)">

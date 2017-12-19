@@ -54,3 +54,15 @@
   padding-top: 50px;
   padding-bottom: 100px;
 }
+
+#child-selector {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.child-name {
+  font-size: 0.8em;
+  font-style: italic;
+  font-weight: bold;
+  padding-top: 7px;
+}

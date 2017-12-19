@@ -10,5 +10,7 @@ export class Reservation {
 
   constructor(date: Date) {
     this.date = date;
+    this.event = null;
+    this.user = null;
   }
 }

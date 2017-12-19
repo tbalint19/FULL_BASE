@@ -106,8 +106,8 @@ export class CalendarPageComponent implements OnInit {
     return selected && noSlots;
   }
 
-  shouldShowName(day: Date, slot: Slot): boolean {
-    return this.isSelected(day) && slot.relatedReservation != null;
+  shouldShowName(slot: Slot): boolean {
+    return slot.relatedReservation != null && slot.relatedReservation.childName != null;
   }
 
   colorV(slot: Slot): boolean {
