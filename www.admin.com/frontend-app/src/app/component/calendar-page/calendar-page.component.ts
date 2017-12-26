@@ -37,6 +37,7 @@ export class CalendarPageComponent implements OnInit {
     private messages: MessageService) { }
 
   ngOnInit() {
+    this.status.editedReservation = null;
     this.status.selectedDay.subscribe((day) => this.selectedDay = day);
     this.status.selectedMonday.subscribe((day) => this.selectedMonday = day);
     this.status.weeklyData.subscribe(

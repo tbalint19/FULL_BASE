@@ -9,7 +9,8 @@ import _ from 'lodash';
 @Injectable()
 export class HttpClient {
 
-  private urlPrefix = 'http://localhost:9000';
+  private urlPrefix = 'http://52.47.161.102/';
+  // private urlPrefix = "http://localhost:9000";
   private headers = new Headers({'Content-Type': 'application/json'});
   private requests: HttpRequest[] = [];
 
@@ -22,6 +23,10 @@ export class HttpClient {
 
   public findPending(request: HttpRequest): boolean {
     return this.requests.filter((req: HttpRequest) => _.isEqual(req, request)).length > 0;
+  }
+
+  public uploadURL(): string {
+    return this.urlPrefix + "/api/upload/file";
   }
 
   private get(request: HttpRequest): Observable<any> {

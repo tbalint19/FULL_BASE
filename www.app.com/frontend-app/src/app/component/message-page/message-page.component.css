@@ -9,3 +9,8 @@ textarea {
 .with-ws {
   white-space: pre-line;
 }
+
+.dark-well {
+  text-align: left;
+  margin-bottom: 10px;
+}

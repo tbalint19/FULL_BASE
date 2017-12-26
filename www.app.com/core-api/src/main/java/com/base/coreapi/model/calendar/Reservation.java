@@ -23,4 +23,6 @@ public class Reservation {
     private String event;
 
     private Date date;
+
+    private String childName;
 }

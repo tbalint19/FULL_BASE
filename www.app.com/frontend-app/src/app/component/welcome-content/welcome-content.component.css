@@ -5,40 +5,66 @@
   box-shadow: 0 0 7px #555;
 }
 
-.info-container {
+#info-container {
   text-align: justify;
-  font-size: 1.2em;
-  color: #555;
+  padding: 20px;
 }
 
 .hoverable-container {
   padding: 20px;
   transition: 1.2s;
-
 }
 
 .hoverable-container:hover {
-  background-color: white;
+  background-color: black;
   border-radius: 20px;
-  box-shadow: 0 0 20px white;
+  box-shadow: 0 0 20px black;
   transition: 1.2s;
   cursor: all-scroll;
 }
 
 h4, h6 {
+  padding-top: 10px;
   text-align: center;
-  color: purple;
+  color: white;
   margin-bottom: 20px;
   font-size: 1.5em;
 }
 
 .welcome-link {
-  color: purple;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .mini-container {
+  position: relative;
   text-align: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  font-size: 0.7em;
+  box-shadow: 0 0 5px black;
+  transition: 1.9s;
+}
+
+.mini-container:after {
+  border-radius: 3px;
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  opacity : 0.55;
+  z-index: -1;
+}
+
+.mini-container:hover {
+  background-color: black;
+  opacity: 0.9;
+  cursor: move;
 }
 
 .one-time {

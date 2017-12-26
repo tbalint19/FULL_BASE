@@ -9,8 +9,10 @@
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <input class="form-control" placeholder="Keresés" [(ngModel)]="searchString">
-          <div class="hoverable-container">
+          <div class="dark-well">
+            <input class="form-control" placeholder="Keresés" [(ngModel)]="searchString">
+          </div>
+          <div class="dark-well">
             <div *ngFor="let row of filteredList()" class="one-street">
               <p class="row-street">{{ displayStreet(row) }}</p>
               <p class="row-name">{{ displayName(row) }}</p>
@@ -22,7 +24,7 @@
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-          <div class="well">
+          <div class="dark-well">
             <p class="name">Fekete Nóra</p>
             <p class="phone">06-20/411-52-10</p>
             <div class="row">
@@ -53,7 +55,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-          <div class="well">
+          <div class="dark-well">
             <p class="name">Hegedűs Ágnes</p>
             <p class="phone">06-20/409-21-00</p>
             <div class="row">
@@ -84,7 +86,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-          <div class="well">
+          <div class="dark-well">
             <p class="name">Kerepeczki Ágnes</p>
             <p class="phone">06-20/411-44-55</p>
             <div class="row">
@@ -115,7 +117,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-          <div class="well">
+          <div class="dark-well">
             <p class="name">Kirbsziné Opóczki Gabriella</p>
             <p class="phone">06-20/409-05-09</p>
             <div class="row">
@@ -146,7 +148,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-          <div class="well">
+          <div class="dark-well">
             <p class="name">Majsai Péterné Györgyi</p>
             <p class="phone">06-20/411-34-31</p>
             <div class="row">

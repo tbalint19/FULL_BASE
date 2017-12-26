@@ -36,7 +36,10 @@ public class EmailService {
             logger.reportSuccess(to, subject);
             return CompletableFuture.completedFuture(true);
         } catch (Exception exception){
-            logger.reportFailure(to, subject, exception.toString());
+            System.out.println("---\nError:\n");
+            System.out.println(exception.toString());
+            System.out.println("\n---");
+            logger.reportFailure(to, subject);
             return CompletableFuture.completedFuture(false);
         }
     }

@@ -95,4 +95,8 @@ export class RequestFactory {
   createCalendarMessageRequest() {
     return new HttpRequest("/api/info/mainmessage/get/calendar", "GET", null);
   }
+
+  createCalendarRequest(params: StartParams): HttpRequest {
+    return new HttpRequest("/api/calendar/data/all", "GET", params);
+  }
 }

@@ -9,4 +9,8 @@ public class AttemptResponse {
 
     private Boolean attempted;
 
+    public AttemptResponse(Boolean attempted) {
+        this.attempted = attempted;
+    }
+
 }

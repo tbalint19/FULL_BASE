@@ -71,6 +71,11 @@
 			<version>1.5.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.106</version>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>

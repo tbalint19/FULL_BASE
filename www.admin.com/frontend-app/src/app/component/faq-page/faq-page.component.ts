@@ -6,6 +6,7 @@ import {SuccessResponse} from "../../model/response/success-response";
 import {MessageService} from "../../service/message.service";
 import {Success} from "../../model/message/success.model";
 import {Error} from "../../model/message/error.model";
+import {HttpClient} from "../../http/http.client";
 
 @Component({
   selector: 'app-faq-page',
@@ -15,6 +16,7 @@ import {Error} from "../../model/message/error.model";
 export class FaqPageComponent implements OnInit {
 
   constructor(
+    public client: HttpClient,
     private messages: MessageService,
     public status: FaqStatus,
     private service: FaqService) { }

@@ -7,6 +7,7 @@ import com.base.coreapi.model.auth.Reset;
 import com.base.coreapi.model.auth.request.ResetEmailRequest;
 import com.base.coreapi.model.common.response.AttemptResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,18 +17,22 @@ public class EmailServiceController {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final Boolean SHOULDMOCK = false;
+    @Value("${build.with.emailMock}")
+    private Boolean SHOULD_MOCK;
 
-    private static final String APP_URL = "http://localhost:9000";
-    private static final String SERVICE_URL = "http://localhost:8001/api/send";
+    @Value("${app.url}")
+    private String APP_URL;
+
+    @Value("${service.email.url}")
+    private String SERVICE_URL;
 
     private AttemptResponse post(String url, Object data){
-        if (SHOULDMOCK) {
+        if (SHOULD_MOCK) {
             AttemptResponse response = new AttemptResponse();
             response.setAttempted(true);
             return response;
         }
-        return restTemplate.postForObject(SERVICE_URL + url, data , AttemptResponse.class);
+        return restTemplate.postForObject(SERVICE_URL + "/api/send" + url, data , AttemptResponse.class);
     }
 
     public AttemptResponse sendResetEmail(Admin admin, AdminPasswordReset reset){

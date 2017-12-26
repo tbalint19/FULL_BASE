@@ -65,6 +65,7 @@ import { AboutPageComponent } from './component/about-page/about-page.component'
 import { CalendarInfoComponent } from './component/calendar-info/calendar-info.component';
 import {FaqService} from "./service/faq.service";
 import {FaqStatus} from "./status/faq-status";
+import {AboutStatus} from "./status/about-status";
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import {FaqStatus} from "./status/faq-status";
     ParamFactory,
     DtoFactory,
     AuthStatus,
+    AboutStatus,
     ConfirmStatus,
     HomeStatus,
     LoginStatus,

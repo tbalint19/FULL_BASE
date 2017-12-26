@@ -9,6 +9,7 @@ import com.base.coreapi.repository.admin.PermissionRepository;
 import com.base.coreapi.repository.info.MainMessageRepository;
 import com.base.coreapi.service.admin.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,9 +31,15 @@ public class InitialLoader {
     @Autowired
     private AuthService authService;
 
+    @Value("${build.with.initialLoad}")
+    private Boolean WITH_INITIAL_LOAD;
+
     @PostConstruct
     @Transactional
     public void InitialPermission() {
+        if (!WITH_INITIAL_LOAD) {
+            return;
+        }
         Permission permission = new Permission();
         permission.setName("default-admin");
         permissionRepository.save(permission);

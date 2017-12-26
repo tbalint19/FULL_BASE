@@ -1,13 +1,13 @@
 <menu-navbar *ngIf="authStatus.isAuthenticated()"></menu-navbar>
 <login-navbar *ngIf="!authStatus.isAuthenticated()"></login-navbar>
 
-<div id="background">
+<div id="background-big-1">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <h3>Gyakori kérdések</h3>
         <hr>
-        <div class="well">
+        <div class="dark-well">
           <button *ngFor="let faq of status.faqs"
                   class="btn btn-default btn-block" (click)="select(faq)">
             {{ faq.question }}
@@ -15,17 +15,17 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
         <div *ngIf="status.selected">
           <h3>{{ status.selected.question }}</h3>
           <hr>
-          <div *ngIf="numberOfPictures(status.selected) == 0">
+          <div *ngIf="numberOfPictures(status.selected) == 0" class="dark-well">
             <div class="one-big-text">
               {{ status.selected.text }}
             </div>
           </div>
 
-          <div *ngIf="numberOfPictures(status.selected) == 1">
+          <div *ngIf="numberOfPictures(status.selected) == 1" class="dark-well">
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="one-big-text">
@@ -34,12 +34,12 @@
               </div>
 
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <img src="ext-images/{{ getOneImage(status.selected) }}" class="img-responsive">
+                <img src="{{ client.imageUrl(getOneImage(status.selected)) }}" class="img-responsive">
               </div>
             </div>
           </div>
 
-          <div *ngIf="numberOfPictures(status.selected) == 2">
+          <div *ngIf="numberOfPictures(status.selected) == 2" class="dark-well">
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="one-big-text">
@@ -50,11 +50,11 @@
 
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <img src="ext-images/{{ status.selected.picture1name }}" class="img-responsive">
+                <img src="{{ client.imageUrl(status.selected.picture1name) }}" class="img-responsive">
               </div>
 
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <img src="ext-images/{{ status.selected.picture2name }}" class="img-responsive">
+                <img src="{{ client.imageUrl(status.selected.picture2name) }}" class="img-responsive">
               </div>
             </div>
           </div>

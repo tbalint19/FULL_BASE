@@ -53,13 +53,13 @@ export class ResetPopupComponent implements OnInit {
 
   private handleSuccess(): void {
     this.messages.add(
-      new Success("Email sent", "Your mail should arrive in a few seconds"));
+      new Success("Email", "Kiküldve"));
     // this.closeReset();
   }
 
   private handleError(): void {
     this.messages.add(
-      new Error("Invalid credentials", "No email is sent"));
+      new Error("Hiba", "Nem sikerült"));
     // this.closeReset();
   }
 

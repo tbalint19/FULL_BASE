@@ -17,10 +17,7 @@ public class UploadController {
 
     @PostMapping("/api/upload/file")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
-
-
         storageService.store(file);
-
         return "redirect:" + REDIRECT_URL;
     }
 }

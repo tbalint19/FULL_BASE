@@ -11,6 +11,7 @@ import {Restriction} from "../model/backend/calendar/restriction";
 import {Reservation} from "../model/backend/calendar/reservation";
 import {Slot} from "../model/slot";
 import {MainMessage} from "../model/backend/info/main-message";
+import {CalendarDto} from "../model/backend/calendar/calendar-dto";
 
 @Injectable()
 export class CalendarService {
@@ -54,10 +55,16 @@ export class CalendarService {
       this.requestFactory.createGetMyReservationsRequest());
   }
 
-  public createReservation(event: string, slot: Slot): Observable<SuccessResponse> {
+  public getAll(): Observable<CalendarDto> {
+    return this.client.transfer(
+      this.requestFactory.createCalendarRequest(
+        new StartParams(new Date())));
+  }
+
+  public createReservation(event: string, slot: Slot, name: string): Observable<SuccessResponse> {
     return this.client.transfer(
       this.requestFactory.createReservationRequest(
-        new Reservation(event, slot.date)));
+        new Reservation(event, slot.date, name)));
   }
 
   public deleteReservation(reservation: Reservation): Observable<SuccessResponse> {

@@ -2,10 +2,11 @@
   font-size: 0.7em;
   text-align: right;
   margin-bottom: 15px;
+  font-weight: bolder;
 }
 
 .default-info {
-  color: #555;
+  color: white;
 }
 
 .error-info {

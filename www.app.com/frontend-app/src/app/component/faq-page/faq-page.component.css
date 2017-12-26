@@ -1,6 +1,11 @@
 h3 {
   text-align: center;
-  color: purple;
+  font-weight: bolder;
+  color: white;
+}
+
+.dark-well {
+  padding: 20px;
 }
 
 .block-container {

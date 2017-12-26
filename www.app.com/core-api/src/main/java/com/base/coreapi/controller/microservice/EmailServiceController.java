@@ -6,6 +6,7 @@ import com.base.coreapi.model.auth.request.ConfirmEmailRequest;
 import com.base.coreapi.model.auth.request.ResetEmailRequest;
 import com.base.coreapi.model.common.response.AttemptResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,12 +16,20 @@ public class EmailServiceController {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String API_URL = "http://localhost:8000";
-    private static final String APP_URL = "http://localhost:8000";
-    private static final String SERVICE_URL = "http://localhost:8001/api/send";
+    @Value("${app.url}")
+    private String APP_URL;
+
+    @Value("${service.email.url}")
+    private String SERVICE_URL;
+
+    @Value("${build.with.emailMock}")
+    private Boolean SHOULD_MOCK;
 
     private AttemptResponse post(String url, Object data){
-        return restTemplate.postForObject(SERVICE_URL + url, data , AttemptResponse.class);
+        if (SHOULD_MOCK) {
+            return new AttemptResponse(true);
+        }
+        return restTemplate.postForObject(SERVICE_URL + "/api/send" + url, data , AttemptResponse.class);
     }
 
     public AttemptResponse sendConfirmationEmail(ApplicationUser user){

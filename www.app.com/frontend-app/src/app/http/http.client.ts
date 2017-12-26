@@ -9,7 +9,9 @@ import _ from 'lodash';
 @Injectable()
 export class HttpClient {
 
-  private urlPrefix = 'http://localhost:8000';
+  private urlPrefix = 'http://52.47.138.72';
+  // private urlPrefix = 'http://localhost:8000';
+  private imagePrefix = 'https://s3.eu-west-2.amazonaws.com/medical-website-pictures/'
   private headers = new Headers({'Content-Type': 'application/json'});
   private requests: HttpRequest[] = [];
 
@@ -22,6 +24,14 @@ export class HttpClient {
 
   public findPending(request: HttpRequest): boolean {
     return this.requests.filter((req: HttpRequest) => _.isEqual(req, request)).length > 0;
+  }
+
+  public findToRoute(route: string): boolean {
+    return this.requests.filter((req: HttpRequest) => req.url = route).length > 0;
+  }
+
+  public imageUrl(nameAndExtension: string): string {
+    return this.imagePrefix + nameAndExtension;
   }
 
   private get(request: HttpRequest): Observable<any> {

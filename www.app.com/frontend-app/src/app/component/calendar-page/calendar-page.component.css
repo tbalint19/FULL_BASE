@@ -42,3 +42,22 @@
   color: #5cb85c;
   font-weight: bold;
 }
+
+.dark-well {
+  margin-bottom: 10px;
+}
+
+.child-name-input {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.btn-create {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.btn-cancel {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

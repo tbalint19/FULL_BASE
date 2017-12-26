@@ -1,9 +1,9 @@
 package com.base.coreapi.storage;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +21,9 @@ public class StorageService {
 
     private static final Path ROOT_LOCATION = Paths.get("external-images");
 
+    @Autowired
+    private S3Service s3Service;
+
     public void init() {
         try {
             Files.createDirectories(ROOT_LOCATION);
@@ -33,8 +36,10 @@ public class StorageService {
     public void store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
-            Files.copy(file.getInputStream(), ROOT_LOCATION.resolve(filename),
+            Path filePath = ROOT_LOCATION.resolve(filename);
+            Files.copy(file.getInputStream(), filePath,
                     StandardCopyOption.REPLACE_EXISTING);
+            s3Service.uploadFile(filename, filePath.toString());
         } catch (Exception e) {
             System.out.println(e.toString());
         }

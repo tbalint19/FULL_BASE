@@ -61,7 +61,9 @@
 <div class="container">
   <div class="row">
     <hr>
-    <form ngNoForm method="POST" enctype="multipart/form-data" action="http://localhost:9000/api/upload/file">
+    <form ngNoForm method="POST"
+          enctype="multipart/form-data"
+          action="{{ client.uploadURL() }}">
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
         <input type="file" name="file" class="form-control"/>
       </div>

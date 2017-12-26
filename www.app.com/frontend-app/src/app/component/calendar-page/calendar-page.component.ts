@@ -15,6 +15,7 @@ import {DatePrinterService} from "../../service/date-printer.service";
 import {FilterService} from "../../service/filter.service";
 import {Slot} from "../../model/slot";
 import {MainMessage} from "../../model/backend/info/main-message";
+import {CalendarDto} from "../../model/backend/calendar/calendar-dto";
 
 
 @Component({
@@ -47,6 +48,7 @@ export class CalendarPageComponent implements OnInit {
     this.status.selectedEvent = null;
     this.status.selectedDay = null;
     this.status.selectedSlot = null;
+    this.status.childName = null;
     this.status.editorOpened = true;
   }
 
@@ -54,16 +56,19 @@ export class CalendarPageComponent implements OnInit {
     this.status.selectedEvent = null;
     this.status.selectedDay = null;
     this.status.selectedSlot = null;
+    this.status.childName = null;
     this.status.editorOpened = false;
   }
 
   createReservation(): void {
-    this.service.createReservation(this.status.selectedEvent, this.status.selectedSlot)
+    this.status.setPending(true);
+    this.service.createReservation(this.status.selectedEvent, this.status.selectedSlot, this.status.childName)
       .subscribe((response: SuccessResponse) => this.handleResponse(response));
     this.closeEditor();
   }
 
   deleteReservation(reservation: Reservation): void {
+    this.status.setPending(true);
     this.service.deleteReservation(reservation).subscribe(
       (response: SuccessResponse) => this.handleResponse(response));
   }
@@ -98,40 +103,18 @@ export class CalendarPageComponent implements OnInit {
   }
 
   private initialize(): void {
-    this.getAdditions();
-    this.getHolidays();
-    this.getRestrictions();
-    this.getReservations();
-    this.getMyReservations();
-  }
-
-  private getAdditions(): void {
-    this.service.getAdditions().subscribe(
-      (additions: Addition[]) => this.status.additions = additions
+    this.status.setPending(true);
+    this.status.ownReservations = [];
+    this.service.getAll().subscribe(
+      (dto: CalendarDto) => {
+        this.status.additions = dto.additions;
+        this.status.holidays = dto.holidays;
+        this.status.restrictions = dto.restrictions;
+        this.status.reservations = dto.reservations;
+        this.status.ownReservations = dto.ownReservations;
+        this.status.setPending(false);
+      }
     );
   }
 
-  private getHolidays(): void {
-    this.service.getHolidays().subscribe(
-      (holidays: Holiday[]) => this.status.holidays = holidays
-    );
-  }
-
-  private getRestrictions(): void {
-    this.service.getRestrictions().subscribe(
-      (restrictions: Restriction[]) => this.status.restrictions = restrictions
-    );
-  }
-
-  private getReservations(): void {
-    this.service.getReservations().subscribe(
-      (reservations: Reservation[]) => this.status.reservations = reservations
-    );
-  }
-
-  private getMyReservations(): void {
-    this.service.getMyReservations().subscribe(
-      (reservations: Reservation[]) => this.status.ownReservations = reservations
-    );
-  }
 }

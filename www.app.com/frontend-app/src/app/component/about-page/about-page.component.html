@@ -3,70 +3,101 @@
 
 <div id="background">
   <div class="container">
-    <p class="hoverable-container">
-      Dr. Baranyi Judit vagyok.
-      Csecsemő és gyermekgyógyász, továbbá aneszteziológus és intenzívterápiás szakorvosként és mentőrvosként kezdtem meg háziorvosi munkámat 2008 november 1.-től Rákosszentmihályon.
-    </p>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="dark-well">
+          <button
+            *ngFor="let site of status.sites"
+            (click)="selectSite(site)"
+            class="btn btn-default btn-block one-site-button {{ isSelected(site) && 'selected-site' }}">
+            {{ site }}
+          </button>
+        </div>
+      </div>
 
-    <p class="hoverable-container">
-      Az alapellátásban szeretném hasznosítani mindazt a tapasztalatot és kapcsolatot, amit az elmúlt 16 évben kórházi munkám során szereztem. A modern farmakológiai és diagnosztikus módszerek, lehetőségek mellett, adott esetben azok ellenére fontosnak, sőt alapvetőnek tartom az egészségre, egészséges életre nevelést, a természetes gyógymódokat, a szervezet öngyógyító lehetőségeinek segítését.
-    </p>
-    <p class="hoverable-container">
-      Az alapellátás mellett továbbra is dolgozom a Heim Pál Gyermekkórház Intenzív osztályán.
-    </p>
-    <p class="hoverable-container">
-      A Hősök terei rendelésen asszisztensnőm Farkas András Sándorné Gyöngyike.
-    </p>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="dark-well content-well">
+          <h4>{{ status.selectedSite }}</h4>
+          <hr>
+          <div *ngIf="status.selectedSite == 'Rólam'">
+            <div>
+              <img src="https://s3.eu-west-2.amazonaws.com/medical-website-pictures/doktornoprofil.jpg" class="img-responsive" id="drno" width="250px">
+              <p>Dr. Baranyi Judit vagyok.</p><p>
+              Csecsemő és gyermekgyógyász, továbbá aneszteziológus és
+              intenzívterápiás szakorvosként és mentőrvosként kezdtem
+              meg háziorvosi munkámat 2008 november 1.-től Rákosszentmihályon.</p><p>
+              Az alapellátásban szeretném hasznosítani mindazt a
+              tapasztalatot és kapcsolatot, amit az elmúlt 16 évben
+              kórházi munkám során szereztem. A modern farmakológiai
+              és diagnosztikus módszerek, lehetőségek mellett, adott
+              esetben azok ellenére fontosnak, sőt alapvetőnek tartom az
+              egészségre, egészséges életre nevelést, a természetes
+              gyógymódokat, a szervezet öngyógyító lehetőségeinek segítését.</p><p>
+              Az alapellátás mellett továbbra is dolgozom a Heim Pál
+              Gyermekkórház Intenzív osztályán.</p><p>
+              A Hősök terei rendelésen asszisztensnőm
+              Farkas András Sándorné Gyöngyike.</p>
+            </div>
+          </div>
 
-    <p class="hoverable-container">
-      A rendelőnkről:<br>
-      A betegrendelőnk a magasföldszinten jobb kéz felől található.<br>
-      A betegrendelésen minden gyermeket megnézünk, de a várakozási idő lecsökkentésére érdemes időpontot kérni.<br>
-      A tanácsadás, oltások a magasföldszinten bal oldalon, a betegektől teljesen elválasztva történik kizárólag előjegyzett, egészséges gyermekek számára.<br>
-      A fertőző betegek ellátása a betegrendelés idején soronkívül, a Fertőző Elkülönítőben történik /magasföldszinten egyenesen/. Ha fertőző gyermekkel érkezett az Elkülönítő folyosó végén lévő ajtón kopogtasson: ez a rendelőm hátsó kijárata.<br>
-      Ugyanitt lehetőség van súlyosabb betegek néhány órás megfigyelésére, esetlegesen infúziós folyadékpótlásra.
-    </p>
-    <p class="hoverable-container">
-      Laborvizsgálatok:<br>
-      A laborvizsgálatokhoz beutaló szükséges, melyet ea rendelésen kapnak.<br>
-      Laborvizsgálat <br>
-      &nbsp;&nbsp;1. helyben a Hősök terei rendelő első emeletén, csak kedd, szedra, csütörtöki napokon. Időpontot a portán kell kérni. Eredmény interneten visszajön a rendelőmbe.<br>
-      &nbsp;&nbsp;2. a Jókai úton, A Kertvárosi Eü. Szolg /KESz/ központi rendelőjében. Idópontot neten, vagy telefonon kell kérni. Eredmény interneten visszajön a rendelőmbe.<br>
-      &nbsp;&nbsp;3. az Őrs Vezér téren a Zuglói Eü. Szolgálat /ZESz/központi rendelőjében mindennap. Időpont nem kell, 7-9 óra közt lehet menni. Az eredményért vissza kell menni.<br>
-      A nehezen szúrható, nem kooperáló gyermekek vérvételében a szerdai rendelés elején, 8 órakor a betegrendelőnkben segítünk.
-    </p>
-    <p class="hoverable-container">
-      Szakvizsgálatok:<br>
-      A szakrendelőkbe általában beutaló szükséges. Ezt a betegrendelésen adjuk ki.<br>
-      Nem kell beutaló<br>
-      &nbsp;&nbsp;- szemészetre: időpontfoglalás kell! /pl. ZESz T:4694698/<br>
-      &nbsp;&nbsp;- fülészetre /pl. KESz, ZESz, Bethesda Kh., Heim Pál Kh./<br>
-      &nbsp;&nbsp;- bőrgyógyászatra: időpontfoglalás kell! /pl. KESz-Erzsébetliget neten az előjegyzési rendszeren át vagy telefonon/<br>
-      &nbsp;&nbsp;- nőgyógyászatra: időpontfoglalás kell! /pl. KESz Jókai u.-i kp.-i rendelőbe neten vagy telefonon/
-    </p>
-    <p class="hoverable-container">
-      Recepciószolgálat:<br>
-      Rendelőnkben minden munkanapon 15-19:30 közt recepció szolgálat működik a magasföldszinten. Közvetlenül a lépcsővel szemben.<br>
-      Itt átvehetőek a megírt receptek, beutalók, igazolások.<br>
-      Ezeket a papírokat a betegrendelési időben kérhetik a rendelői /4058740/ telefonszámon.
-    </p>
+          <div *ngIf="status.selectedSite == 'Rendelő'">
+            <img src="https://s3.eu-west-2.amazonaws.com/medical-website-pictures/rendelo.jpg" class="img-responsive" id="drno" width="250px">
+            <p>A betegrendelőnk a magasföldszinten jobb kéz felől található.</p>
+            <p>A betegrendelésen minden gyermeket megnézünk, de a várakozási
+              idő lecsökkentésére érdemes időpontot kérni.</p>
+            <p>A tanácsadás, oltások a magasföldszinten bal
+              oldalon, a betegektől teljesen elválasztva
+              történik kizárólag előjegyzett, egészséges gyermekek számára.</p>
+            <p>A fertőző betegek ellátása a betegrendelés
+              idején soronkívül, a Fertőző Elkülönítőben
+              történik /magasföldszinten egyenesen/. Ha fertőző
+              gyermekkel érkezett az Elkülönítő folyosó végén lévő
+              ajtón kopogtasson: ez a rendelőm hátsó kijárata.</p>
+            <p>Ugyanitt lehetőség van súlyosabb betegek
+              néhány órás megfigyelésére, esetlegesen infúziós folyadékpótlásra.</p>
+          </div>
 
-    <p class="hoverable-container">
-      Továbbiak a bemutatkozáshoz/ vagy esetleg külön ablakban:
-      Helyettesítés:
-      A Hősök terei rendelőben négy gyermekorvos rendel. Mindenki a saját szobájában rendel, helyettesítés idején is!
-      Párhuzamosan rendelek Dr Lezsák Éva gyermekorvossal. Ő látja el távollétem, szabadságom alatt a gyermekeket.
-      Az oltásokra előjegyzetteket beoltja. Minden beteget ellát. Betegrendelési előjegyzésre  azonban a helyettesítés idején nincs mód. Táppénz, igazolás, recept Tőle kérhető.
+          <div *ngIf="status.selectedSite == 'Helyettesítés'">
+            <p>A Hősök terei rendelőben négy gyermekorvos rendel. Mindenki a saját szobájában rendel, helyettesítés idején is!</p>
+            <p>Párhuzamosan rendelek Dr Lezsák Éva gyermekorvossal. Ő látja el távollétem, szabadságom alatt a gyermekeket.</p>
+            <p>Az oltásokra előjegyzetteket beoltja. Minden beteget ellát. Betegrendelési előjegyzésre  azonban a helyettesítés idején nincs mód. Táppénz, igazolás, recept Tőle kérhető.</p>
 
+            <p>Ellentétes rendelési időben dolgozik Dr. Szabó Eleonóra és Dr. Vajda Ildikó. Sürgő esetben a beteg gyermeket megnézik. Oltást nem adnak.Táppénzes papírt, igazolást, állandó gyógyszerekre recepteket nem adnak ki.</p>
 
-      Ellentétes rendelési időben dolgozik Dr. Szabó Eleonóra és Dr. Vajda Ildikó. Sürgő esetben a beteg gyermeket megnézik. Oltást nem adnak.Táppénzes papírt, igazolást, állandó gyógyszerekre recepteket nem adnak ki.
+            <p>Elérhetőség:</p>
+            <p>Dr. Lezsák Éva: 4052376</p>
+            <p>Dr. Szabó Eleonóra: 4055137</p>
+            <p>Dr. Vajda Ildikó: 4058739</p>
 
-      Elérhetőség:
-      Dr. Lezsák Éva: 4052376
-      Dr. Szabó Eleonóra: 4055137
-      Dr. Vajda Ildikó: 4058739
+            <p>Az éjszakai és a hétvégi ügyeletet a Heim Pál Kh /T: 06-1-2643314/ és a Bethesda Kh. /06-1-3649020/ látja el.</p>
+          </div>
 
-      Az éjszakai és a hétvégi ügyeletet a Heim Pál Kh /T: 06-1-2643314/ és a Bethesda Kh. /06-1-3649020/ látja el.
-    </p>
+          <div *ngIf="status.selectedSite == 'Recepció'">
+            <p>Rendelőnkben minden munkanapon 15-19:30 közt recepció szolgálat működik a magasföldszinten. Közvetlenül a lépcsővel szemben.</p>
+            <p>Itt átvehetőek a megírt receptek, beutalók, igazolások.</p>
+            <p>Ezeket a papírokat a betegrendelési időben kérhetik a rendelői /4058740/ telefonszámon.</p>
+          </div>
+
+          <div *ngIf="status.selectedSite == 'Labor'">
+            <p>A laborvizsgálatokhoz beutaló szükséges, melyet ea rendelésen kapnak.</p>
+            <p>Laborvizsgálat </p>
+            <p>&nbsp;&nbsp;1. helyben a Hősök terei rendelő első emeletén, csak kedd, szedra, csütörtöki napokon. Időpontot a portán kell kérni. Eredmény interneten visszajön a rendelőmbe.</p>
+            <p>&nbsp;&nbsp;2. a Jókai úton, A Kertvárosi Eü. Szolg /KESz/ központi rendelőjében. Idópontot neten, vagy telefonon kell kérni. Eredmény interneten visszajön a rendelőmbe.</p>
+            <p>&nbsp;&nbsp;3. az Őrs Vezér téren a Zuglói Eü. Szolgálat /ZESz/központi rendelőjében mindennap. Időpont nem kell, 7-9 óra közt lehet menni. Az eredményért vissza kell menni.</p>
+            <p>A nehezen szúrható, nem kooperáló gyermekek vérvételében a szerdai rendelés elején, 8 órakor a betegrendelőnkben segítünk.</p>
+          </div>
+
+          <div *ngIf="status.selectedSite == 'Szakrendelések'">
+            <p>A szakrendelőkbe általában beutaló szükséges. Ezt a betegrendelésen adjuk ki.</p>
+            <p>Nem kell beutaló</p>
+            <p>&nbsp;&nbsp;- szemészetre: időpontfoglalás kell! /pl. ZESz T:4694698/</p>
+            <p>&nbsp;&nbsp;- fülészetre /pl. KESz, ZESz, Bethesda Kh., Heim Pál Kh./</p>
+            <p>&nbsp;&nbsp;- bőrgyógyászatra: időpontfoglalás kell! /pl. KESz-Erzsébetliget neten az előjegyzési rendszeren át vagy telefonon/</p>
+            <p>&nbsp;&nbsp;- nőgyógyászatra: időpontfoglalás kell! /pl. KESz Jókai u.-i kp.-i rendelőbe neten vagy telefonon/</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+

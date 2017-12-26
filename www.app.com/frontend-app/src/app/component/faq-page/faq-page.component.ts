@@ -3,6 +3,7 @@ import {AuthStatus} from "../../status/auth-status";
 import {FaqService} from "../../service/faq.service";
 import {FaqStatus} from "../../status/faq-status";
 import {Faq} from "../../model/backend/faq/faq";
+import {HttpClient} from "../../http/http.client";
 
 @Component({
   selector: 'app-faq-page',
@@ -12,6 +13,7 @@ import {Faq} from "../../model/backend/faq/faq";
 export class FaqPageComponent implements OnInit {
 
   constructor(
+    public client: HttpClient,
     public authStatus: AuthStatus,
     private service: FaqService,
     public status: FaqStatus) { }

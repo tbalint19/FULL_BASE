@@ -18,11 +18,11 @@ public class LoggerService {
         sendAttemptRepository.save(attempt);
     }
 
-    public void reportFailure(String to, String subject, String comment){
+    public void reportFailure(String to, String subject){
         SendAttempt attempt = new SendAttempt(false);
         attempt.setTarget(to);
         attempt.setSubject(subject);
-        attempt.setComment(comment);
+        attempt.setComment("error");
         sendAttemptRepository.save(attempt);
     }
 }

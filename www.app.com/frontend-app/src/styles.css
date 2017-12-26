@@ -1,7 +1,3 @@
-.block-container {
-  padding: 10px;
-}
-
 .container {
   padding-top: 90px;
 }
@@ -17,12 +13,88 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url('./assets/home.jpg');
+  background-image: url('https://s3.eu-west-2.amazonaws.com/medical-website-pictures/kekhatter.jpg');
   background-size: 100% auto;
   width: 100%;
   height: 100%;
-  opacity : 0.15;
-  z-index: -1;
+  opacity : 0.55;
+  z-index: -2;
+}
+
+#background-big-1 {
+  position: relative;
+  min-height: 100vh;
+}
+
+#background-big-1:after {
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('https://s3.eu-west-2.amazonaws.com/medical-website-pictures/hatter1.jpg');
+  background-size: 100% auto;
+  width: 100%;
+  height: 100%;
+  opacity : 0.55;
+  z-index: -2;
+}
+
+#background-big-2 {
+  position: relative;
+  min-height: 100vh;
+}
+
+#background-big-2:after {
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('https://s3.eu-west-2.amazonaws.com/medical-website-pictures/hatter2.jpg');
+  background-size: 100% auto;
+  width: 100%;
+  height: 100%;
+  opacity : 0.55;
+  z-index: -2;
+}
+
+#background-big-3 {
+  position: relative;
+  min-height: 100vh;
+}
+
+#background-big-3:after {
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('https://s3.eu-west-2.amazonaws.com/medical-website-pictures/hatter3.jpg');
+  background-size: 100% auto;
+  width: 100%;
+  height: 100%;
+  opacity : 0.55;
+  z-index: -2;
+}
+
+#background-big-4 {
+  position: relative;
+  min-height: 100vh;
+}
+
+#background-big-4:after {
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('https://s3.eu-west-2.amazonaws.com/medical-website-pictures/assets/hatter4.jpg');
+  background-size: 100% auto;
+  width: 100%;
+  height: 100%;
+  opacity : 0.55;
+  z-index: -2;
 }
 
 .hoverable-container {
@@ -42,4 +114,74 @@
 .flex-p {
   display: flex;
   justify-content: space-between;
+}
+
+.dark-well {
+  position: relative;
+  text-align: center;
+  color: white;
+  border-radius: 3px;
+  box-shadow: 0 0 5px black;
+  transition: 1.9s;
+  padding: 10px;
+  cursor: move;
+}
+
+.dark-well:after {
+  border-radius: 3px;
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  opacity : 0.55;
+  z-index: -1;
+}
+
+.dark-well:hover {
+  background-color: black;
+  opacity: 0.9;
+}
+
+.full-page-loading {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: white;
+  opacity: 0.5;
+  text-align: center;
+  padding-top: 250px;
+  color: #555;
+}
+
+.loading-circle {
+  font-size: 3em;
+  animation: loading 1s ease forwards;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loading {
+  0% { transform: rotateZ(0); }
+  100% { transform: rotateZ(360deg); }
+}
+
+@media only screen and (min-width: 500px) {
+  .block-container {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .block-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }

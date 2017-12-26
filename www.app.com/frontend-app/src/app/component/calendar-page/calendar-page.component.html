@@ -1,7 +1,11 @@
 <menu-navbar></menu-navbar>
 
-<div id="background">
+<div id="background-big-4">
   <div class="container">
+    <div *ngIf="status.isPending()" class="full-page-loading">
+      <span class="glyphicon glyphicon-refresh loading-circle"></span>
+    </div>
+
     <div *ngIf="status.message" class="row block-container">
       <div class="main-message main-message-{{ status.message.type }}">
         {{ status.message.title }}:&nbsp;&nbsp;{{ status.message.text }}
@@ -15,27 +19,31 @@
         <calendar-info></calendar-info>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <div *ngFor="let reservation of status.ownReservations" class="well">
-          <p class="flex-p">
-            <span>{{ reservation.event }}</span>
-            <span>
+        <div *ngIf="!status.isPending()">
+          <div *ngIf="status.ownReservations.length > 0">
+            <div  *ngFor="let reservation of status.ownReservations" class="dark-well">
+              <p class="flex-p">
+                <span>{{ reservation.event }}</span>
+                <span>
               {{ printer.showDate(reservation.date) }}
               &nbsp;-&nbsp;
               {{ printer.showTime(reservation.date) }}
             </span>
-          </p>
-          <button class="btn btn-default btn-block" (click)="deleteReservation(reservation)">
-            Lemondás
-          </button>
+              </p>
+              <button class="btn btn-default btn-block" (click)="deleteReservation(reservation)">
+                Lemondás
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div class="well" *ngIf="!status.editorOpened">
+        <div class="dark-well" *ngIf="!status.editorOpened">
           <button class="btn btn-default btn-block" (click)="openEditor()">
             Új foglalás
           </button>
         </div>
 
-        <div *ngIf="status.editorOpened" class="well">
+        <div *ngIf="status.editorOpened" class="dark-well">
           <div class="about-reservation-container">
             <div class="about-reservation">
               <p *ngIf="status.selectedEvent">{{ status.selectedEvent }}</p>
@@ -91,11 +99,20 @@
 
           </select>
 
+          <input *ngIf="status.showChildName()"
+            type="text"
+            class="form-control child-name-input"
+            [(ngModel)]="status.childName"
+            placeholder="Gyermek neve">
+
           <button  *ngIf="status.showCreateButton()" class="button-container"
-            class="btn btn-default btn-block" (click)="createReservation()">
+            class="btn btn-default btn-block btn-create btn-create"
+            (click)="createReservation()"
+            [disabled]="status.isDisabled()">
             Foglalás
           </button>
-          <button class="btn btn-default btn-block" (click)="closeEditor()">
+          <button class="btn btn-default btn-block btn-cancel"
+                  (click)="closeEditor()">
             Mégse
           </button>
         </div>

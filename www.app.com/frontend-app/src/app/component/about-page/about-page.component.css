@@ -1,0 +1,19 @@
+.one-site-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.content-well {
+  text-align: justify;
+  font-size: 1.2em;
+}
+
+#drno {
+  float: right;
+  margin: 20px;
+}
+
+.selected-site {
+  font-weight: bold;
+}
+
