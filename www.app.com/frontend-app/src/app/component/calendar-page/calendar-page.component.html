@@ -23,7 +23,7 @@
           <div *ngIf="status.ownReservations.length > 0">
             <div  *ngFor="let reservation of status.ownReservations" class="dark-well">
               <p class="flex-p">
-                <span>{{ reservation.event }}</span>
+                <span>{{ reservation.event }} - {{ reservation.childName }}</span>
                 <span>
               {{ printer.showDate(reservation.date) }}
               &nbsp;-&nbsp;

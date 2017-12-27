@@ -15,8 +15,10 @@ public class Faq {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
+    @Column(columnDefinition = "text")
     private String question;
 
+    @Column(columnDefinition = "text")
     private String text;
 
     private String picture1name;

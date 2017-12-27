@@ -70,3 +70,15 @@ h3 {
   margin-bottom: 20px;
   cursor: move;
 }
+
+.main-info {
+  color: white;
+  font-weight: bold;
+  text-align: justify;
+}
+
+.main-info-end {
+  font-weight: bold;
+  font-style: italic;
+  color: white;
+}

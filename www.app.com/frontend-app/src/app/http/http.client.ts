@@ -9,8 +9,8 @@ import _ from 'lodash';
 @Injectable()
 export class HttpClient {
 
-  private urlPrefix = 'http://52.47.138.72';
-  // private urlPrefix = 'http://localhost:8000';
+  // private urlPrefix = 'http://52.47.138.72';
+  private urlPrefix = 'http://localhost:8000';
   private imagePrefix = 'https://s3.eu-west-2.amazonaws.com/medical-website-pictures/'
   private headers = new Headers({'Content-Type': 'application/json'});
   private requests: HttpRequest[] = [];
