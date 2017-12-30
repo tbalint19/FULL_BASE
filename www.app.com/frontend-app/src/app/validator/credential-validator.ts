@@ -13,6 +13,6 @@ export class CredentialValidator {
 
   public validFormat(credential: string): boolean {
     let pattern = credential.includes("@") ? this.emailPattern : this.usernamePattern;
-    return credential.match(pattern) != null;
+    return credential && (9 < credential.length && credential.length < 26);
   }
 }

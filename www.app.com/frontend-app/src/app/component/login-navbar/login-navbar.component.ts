@@ -38,7 +38,7 @@ export class LoginNavbarComponent implements OnInit {
 
   public suspend(): void {
     this.status.setSuspended(true);
-    this.messages.add(new Error("Error", "Invalid login data"));
+    this.messages.add(new Error("Hiba", "Sikertelen bejelentkezés"));
     setTimeout(()=>{
       this.status.setSuspended(false);
     }, 5000);

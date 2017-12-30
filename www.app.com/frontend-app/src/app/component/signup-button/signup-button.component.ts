@@ -36,7 +36,7 @@ export class SignupButtonComponent implements OnInit {
 
   private suspend(): void {
     this.status.setSuspended(true);
-    this.messages.add(new Error("Error", "Invalid signup data"));
+    this.messages.add(new Error("Hiba", "Sikertelen regisztráció"));
     setTimeout(()=>{
       this.status.setSuspended(false);
     }, 5000);

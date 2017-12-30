@@ -6,3 +6,9 @@
 #margin-fix {
   margin-bottom: 0;
 }
+
+@media only screen and (max-width: 500px) {
+  .mobile-fix-input {
+    margin-top: 5px;
+  }
+}
