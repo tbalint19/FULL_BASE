@@ -2,26 +2,28 @@
 
 <div id="background-big-2">
   <div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="dark-well">
+        <textarea rows="15"
+                  class="form-control"
+                  placeholder="Írja le az üzenetét"
+                  [(ngModel)]="status.creator.message">
+        </textarea>
+          <button class="btn btn-block btn-default mobile-button-fix" (click)="send()">
+            <span class="glyphicon glyphicon-envelope"></span>
+            Küldés
+          </button>
+      </div>
+    </div>
+
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
       <div *ngFor="let message of orderedMessages()"  class="row">
-        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9  {{ message.isUserMessage && 'col-md-offset-3 col-lg-offset-3' }}">
-          <div class="dark-well {{ message.isUserMessage && 'align-right' }}">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9  {{ !message.isUserMessage && 'col-md-offset-3 col-lg-offset-3' }}">
+          <div class="dark-well {{ !message.isUserMessage && 'align-right' }}">
             <p class="with-ws">{{ message.text }}</p>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-      <textarea rows="15"
-        class="form-control"
-        placeholder="Írja le az üzenetét"
-        [(ngModel)]="status.creator.message">
-      </textarea>
-      <button class="btn btn-block btn-default" (click)="send()">
-        <span class="glyphicon glyphicon-envelope"></span>
-        Küldés
-      </button>
     </div>
   </div>
 </div>

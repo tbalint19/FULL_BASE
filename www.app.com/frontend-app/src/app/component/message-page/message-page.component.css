@@ -2,10 +2,6 @@ textarea {
   margin-bottom: 10px;
 }
 
-.align-right {
-  text-align: right;
-}
-
 .with-ws {
   white-space: pre-line;
 }
@@ -13,4 +9,12 @@ textarea {
 .dark-well {
   text-align: left;
   margin-bottom: 10px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.mobile-button-fix {
+  margin-bottom: 20px;
 }
