@@ -65,6 +65,7 @@ export class CalendarPageComponent implements OnInit {
     this.status.selectedSlot = null;
     this.status.childName = null;
     this.status.editorOpened = false;
+    this.initialize();
   }
 
   createReservation(): void {
