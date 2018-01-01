@@ -14,8 +14,10 @@ public class MainMessage {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(columnDefinition = "text")
     private String title;
 
+    @Column(columnDefinition = "text")
     private String text;
 
     @Enumerated(value = EnumType.STRING)

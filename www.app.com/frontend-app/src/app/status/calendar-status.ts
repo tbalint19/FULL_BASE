@@ -7,6 +7,8 @@ import {Slot} from "../model/slot";
 import {MainMessage} from "../model/backend/info/main-message";
 import {HttpClient} from "../http/http.client";
 import {RequestFactory} from "../factory/request-factory";
+import {Month} from "../model/month";
+import {Day} from "../model/day";
 
 
 @Injectable()
@@ -15,21 +17,19 @@ export class CalendarStatus {
   public message: MainMessage;
 
   public events: string[];
-  public additions: Addition[];
-  public holidays: Holiday[];
-  public restrictions: Restriction[];
-  public reservations: Reservation[];
 
   public ownReservations: Reservation[];
 
   public selectedEvent: string;
-  public selectedDay: Date;
+  public selectedDay: Day;
   public selectedSlot: Slot;
   public childName: string;
 
   public editorOpened: boolean;
 
   private pending: boolean;
+
+  public month: Month;
 
   constructor(
     private requestObserver: HttpClient,

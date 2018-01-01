@@ -40,6 +40,12 @@ public class ReservationController {
     @Transactional
     @PostMapping("/create")
     public SuccessResponse create(@RequestBody Reservation reservation, Principal principal){
+        List<Reservation> reservationsForSameSpot = repository.findByDateBetween(
+            new Date(reservation.getDate().getTime()), new Date(reservation.getDate().getTime())
+        );
+        if (0 < reservationsForSameSpot.size()) {
+            return new SuccessResponse(false);
+        }
         ApplicationUser user = userService.getUserByCredential(principal.getName());
         reservation.setUser(user);
         repository.save(reservation);

@@ -48,7 +48,7 @@
             <div class="about-reservation">
               <p *ngIf="status.selectedEvent">{{ status.selectedEvent }}</p>
               <p *ngIf="status.selectedDay" class="flex-p">
-                <span>{{ printer.showDate(status.selectedDay) }}</span>
+                <span>{{ printer.showDate(status.selectedDay.date) }}</span>
                 <span *ngIf="status.selectedSlot">{{ printer.showTime(status.selectedSlot.date) }}</span>
               </p>
             </div>
@@ -78,8 +78,32 @@
               Válasszon napot
             </option>
 
-            <option *ngFor="let day of getDays()" [ngValue]="day">
-              {{ printer.showDate(day) }}
+            <option *ngFor="let day of getWeeksDays(0)" [ngValue]="day">
+              {{ printer.showDate(day.date) }}
+            </option>
+
+            <option [ngValue]="null" [disabled] ="true">
+              &nbsp;---&nbsp;Jövő hét&nbsp;---&nbsp;
+            </option>
+
+            <option *ngFor="let day of getWeeksDays(1)" [ngValue]="day">
+              {{ printer.showDate(day.date) }}
+            </option>
+
+            <option [ngValue]="null" [disabled] ="true">
+              &nbsp;---&nbsp;Két hét múlvat&nbsp;---&nbsp;
+            </option>
+
+            <option *ngFor="let day of getWeeksDays(2)" [ngValue]="day">
+              {{ printer.showDate(day.date) }}
+            </option>
+
+            <option [ngValue]="null" [disabled] ="true">
+              &nbsp;---&nbsp;Három hét múlvat&nbsp;---&nbsp;
+            </option>
+
+            <option *ngFor="let day of getWeeksDays(3)" [ngValue]="day">
+              {{ printer.showDate(day.date) }}
             </option>
 
           </select>
@@ -93,7 +117,7 @@
               Válasszon időpontot
             </option>
 
-            <option *ngFor="let slot of getSlots()" [ngValue]="slot">
+            <option *ngFor="let slot of getSlotsForDay()" [ngValue]="slot">
               {{ printer.showTime(slot.date) }}
             </option>
 

@@ -37,6 +37,13 @@
   animation: roll-down 0.4s ease forwards;
 }
 
+@media only screen and (max-width: 750px) {
+  .reset-modal-container {
+    left: 5%;
+    width: 90%;
+  }
+}
+
 @keyframes roll-down {
   0% { transform: translateY(350px); opacity: 0.5; }
   100% { transform: translateY(0); opacity: 1; }

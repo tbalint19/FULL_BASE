@@ -34,6 +34,7 @@ public class UserService {
 
     public ApplicationUser getUserByCredential(String credential){
         ApplicationUser userInDb;
+
         if (credential.contains("@")){
             userInDb = userRepository.findByEmailIgnoreCase(
                     checkService.cleanseEmail(credential));

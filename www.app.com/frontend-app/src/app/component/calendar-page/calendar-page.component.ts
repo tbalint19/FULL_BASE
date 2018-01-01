@@ -16,6 +16,9 @@ import {FilterService} from "../../service/filter.service";
 import {Slot} from "../../model/slot";
 import {MainMessage} from "../../model/backend/info/main-message";
 import {CalendarDto} from "../../model/backend/calendar/calendar-dto";
+import {CalendarBuilder} from "../../service/calendar-builder";
+import {Week} from "../../model/week";
+import {Day} from "../../model/day";
 
 
 @Component({
@@ -25,13 +28,17 @@ import {CalendarDto} from "../../model/backend/calendar/calendar-dto";
 })
 export class CalendarPageComponent implements OnInit {
 
+  public builder: CalendarBuilder;
+
   constructor(
     public filterer: FilterService,
     public printer: DatePrinterService,
     private messages: MessageService,
     public authStatus: AuthStatus,
     public status: CalendarStatus,
-    private service: CalendarService) { }
+    private service: CalendarService) {
+    this.builder = new CalendarBuilder();
+  }
 
   ngOnInit() {
     this.getMessage();
@@ -74,23 +81,19 @@ export class CalendarPageComponent implements OnInit {
   }
 
   getEvents(): string[] {
-    return this.filterer.getEvents()
+    return this.filterer.getEvents();
   }
 
-  getDays(): Date[] {
-    return this.filterer.getDays(
-      this.status.selectedEvent,
-      this.status.additions,
-      this.status.holidays,
-      this.status.restrictions,
-      this.status.reservations)
+  getDaysOfWeeksForEvent(): Week[] {
+    return this.filterer.getDaysOfWeeksForEvent(this.status.selectedEvent, this.status.month);
   }
 
-  getSlots(): Slot[] {
-    return this.filterer.getSlots(
-      this.status.selectedEvent, this.status.selectedDay,
-      this.status.reservations, this.status.additions
-    );
+  getWeeksDays(weekNumber: number): Day[] {
+    return this.getDaysOfWeeksForEvent()[weekNumber].days;
+  }
+
+  getSlotsForDay(): Slot[] {
+    return this.filterer.getSlotsForDay(this.status.selectedEvent, this.status.selectedDay);
   }
 
   private handleResponse(response: SuccessResponse): void {
@@ -104,14 +107,13 @@ export class CalendarPageComponent implements OnInit {
 
   private initialize(): void {
     this.status.setPending(true);
+    this.status.month = this.builder.buildCalendar(new Date());
     this.status.ownReservations = [];
     this.service.getAll().subscribe(
       (dto: CalendarDto) => {
-        this.status.additions = dto.additions;
-        this.status.holidays = dto.holidays;
-        this.status.restrictions = dto.restrictions;
-        this.status.reservations = dto.reservations;
         this.status.ownReservations = dto.ownReservations;
+        this.builder.fillCalendar(
+          this.status.month, dto.additions, dto.holidays, dto.restrictions, dto.reservations);
         this.status.setPending(false);
       }
     );

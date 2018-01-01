@@ -40,8 +40,8 @@ public class DTOController {
     @GetMapping("/all")
     public CalendarDTO getAll(@RequestParam Long start, Principal principal){
         ApplicationUser user = userService.getUserByCredential(principal.getName());
-        Date now = new Date(start);
-        Date threeWeeksLater = new Date(start + 1814400000);
+        Date now = new Date();
+        Date threeWeeksLater = new Date(now.getTime() + 2629746000L);
 
         CalendarDTO dto = new CalendarDTO();
         dto.setAdditions(additionRepository.findByDateBetween(now, threeWeeksLater));

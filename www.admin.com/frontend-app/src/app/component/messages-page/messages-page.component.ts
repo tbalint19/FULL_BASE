@@ -107,7 +107,7 @@ export class MessagesPageComponent implements OnInit {
     let date = user.channel.messages[user.channel.messages.length - 1].created;
     let actualDate = new Date();
     actualDate.setTime(date);
-    return "" + actualDate.getMonth() + "." + actualDate.getDate() + " (" + actualDate.getHours() + ":" + actualDate.getMinutes() + ")";
+    return "" + (actualDate.getMonth() + 1) + "." + actualDate.getDate() + " (" + actualDate.getHours() + ":" + actualDate.getMinutes() + ")";
   }
 
   lastIsUsers(user: ApplicationUser): boolean {

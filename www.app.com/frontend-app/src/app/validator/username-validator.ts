@@ -10,6 +10,12 @@ export class UsernameValidator {
   }
 
   public validFormat(username: string): boolean {
-    return username && (9 < username.length && username.length < 26);
+    if (!username) {
+      return false;
+    }
+    if (username.includes("@") || username.includes(".")) {
+      return false;
+    }
+    return 9 < username.length && username.length < 26;
   }
 }

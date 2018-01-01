@@ -2,13 +2,13 @@
   padding-top: 90px;
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 780px) {
   .container {
     padding-top: 90px;
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 780px) {
   .container {
     padding-top: 210px;
   }
@@ -167,7 +167,7 @@
   right: 0;
   bottom: 0;
   z-index: 100;
-  background-color: white;
+  background-color: darkslategrey;
   opacity: 0.5;
   text-align: center;
   padding-top: 250px;
@@ -175,7 +175,7 @@
 }
 
 .loading-circle {
-  font-size: 3em;
+  font-size: 5em;
   animation: loading 1s ease forwards;
   animation-iteration-count: infinite;
 }

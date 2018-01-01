@@ -21,7 +21,7 @@ export class DoctorsPageComponent implements OnInit {
   }
 
   filteredList(): string[] {
-    return this.data.filter(row => row.includes(this.searchString));
+    return this.data.filter(row => row.includes(this.searchString)).slice(0, 10);
   }
 
   displayStreet(data: string): string {
