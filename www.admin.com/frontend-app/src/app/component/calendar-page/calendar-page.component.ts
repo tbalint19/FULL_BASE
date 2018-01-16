@@ -337,7 +337,7 @@ export class CalendarPageComponent implements OnInit {
       this.messages.add(new Success("Sikeres", "Módosítás"));
       this.fillWeeklyData(this.weeklyData);
     } else {
-      this.messages.add(new Error("Ooops", "Próbálja újra"));
+      this.messages.add(new Error("Sikertelen", "Kísérlet"));
     }
   }
 

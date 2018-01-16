@@ -1,0 +1,24 @@
+.credits {
+  margin-top: 30px;
+  padding-bottom: 3px;
+}
+
+.credits hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.credit {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7em;
+}
+
+.credits-footer {
+  text-align: center;
+  font-size: 0.7em;
+  margin-bottom: 3px;
+  padding-bottom: 3px;
+}

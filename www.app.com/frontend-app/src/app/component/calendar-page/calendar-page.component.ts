@@ -99,11 +99,11 @@ export class CalendarPageComponent implements OnInit {
 
   private handleResponse(response: SuccessResponse): void {
     if (response && response.successful) {
-      this.messages.add(new Success("Sikeres", "Módosítás"));
-      this.initialize();
+      this.messages.add(new Success("Sikeres", "Foglalás"));
     } else {
-      this.messages.add(new Error("Sikertelen", "Módosítás"));
+      this.messages.add(new Error("Sikertelen", "Közben lefoglalták - próbáljon egy másik időpontot."));
     }
+    this.initialize();
   }
 
   private initialize(): void {
@@ -118,6 +118,10 @@ export class CalendarPageComponent implements OnInit {
         this.status.setPending(false);
       }
     );
+  }
+
+  getPlaceholder(): string {
+    return this.status.selectedEvent == "Oltás" ? "Gyerek neve és a kért oltás" : "Gyerek neve";
   }
 
 }

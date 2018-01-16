@@ -21,7 +21,7 @@ export class CalendarBuilder {
       new DaySchema("Hétfő", 16, 4, 0, 0),
       new DaySchema("Kedd", 16, 2, 14, 2),
       new DaySchema("Szerda", 10, 2, 8, 2),
-      new DaySchema("Csütörtök", 14, 4, 16, 2),
+      new DaySchema("Csütörtök", 14, 4, 14, 2),
       new DaySchema("Péntek(1)", 8, 4, 0, 0),
       new DaySchema("Péntek(2)", 16, 4, 0, 0),
       new DaySchema("Szabad", 0, 0, 0, 0)
@@ -87,7 +87,7 @@ export class CalendarBuilder {
       });
       relatedDay.restriction = restriction;
       relatedDay.slots.forEach(
-        (slot: Slot) => slot.reservableFor.filter(
+        (slot: Slot) => slot.reservableFor = slot.reservableFor.filter(
           (event: string) => event != "Oltás"));
     });
 

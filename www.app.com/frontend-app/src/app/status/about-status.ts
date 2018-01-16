@@ -8,7 +8,7 @@ export class AboutStatus {
   public selectedSite: string;
 
   constructor() {
-    this.sites = ["Rólam", "Rendelő", "Helyettesítés", "Recepció", "Labor", "Szakrendelések"]
+    this.sites = ["Rólam", "Rendelő", "Helyettesítés", "Recepció", "Labor", "Szakrendelések - beutalók"]
   }
 
   public reset(): void {

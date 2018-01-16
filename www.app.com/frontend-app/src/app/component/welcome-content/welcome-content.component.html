@@ -8,9 +8,9 @@
           Köszönöm, hogy felkereste az oldalamat, és hogy ezen keresztül intézi gyermeke ügyét.
           Regisztráció után <span class="important">foglalhat időpontot</span>, illetve
           <span class="important">privát üzenetváltásra</span> is lehetősége nyílik.
-          Ennek hiányában is tájékozódhat a rendelőmben lévő
+          Ennek hiányában is tájékozódhat a rendelőben dolgozó
           <span class="welcome-link" (click)="redirect('doctors')">védőnőkről</span>, valamint
-          elolvashatja a <span class="welcome-link" (click)="redirect('faq')">gyakran elhangzó kérdéseket</span> is.
+          olvashat a <span class="welcome-link" (click)="redirect('faq')">gyakran felmerülő problémákról</span> is.
         </p>
       </div>
     </div>
@@ -30,7 +30,7 @@
         <h6>Oltás, tanácsadás</h6>
         <p class="one-time"><span>Kedd</span><span>14:00 - 16:00</span></p>
         <p class="one-time"><span>Szerda</span><span>8:00 - 10:00</span></p>
-        <p class="one-time"><span>Csütörtök (csak ha betelt)</span><span>14:00 - 16:00</span></p>
+        <p class="one-time"><span>Csütörtök (ha kedd, szerda betelt)</span><span>14:00 - 16:00</span></p>
       </div>
     </div>
 
@@ -44,7 +44,7 @@
         <div class="buttons">
           <button class="btn btn-default btn-block" (click)="redirect('about')">Tudnivalók</button>
           <button class="btn btn-default btn-block" (click)="redirect('doctors')">Védőnők</button>
-          <button class="btn btn-default btn-block" (click)="redirect('faq')">Gyakori kérdések</button>
+          <button class="btn btn-default btn-block" (click)="redirect('faq')"><span class="normal-whitespace">Gyakran felmerülő problémák, megoldások</span></button>
         </div>
       </div>
     </div>

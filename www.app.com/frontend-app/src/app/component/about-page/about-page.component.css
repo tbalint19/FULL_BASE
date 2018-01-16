@@ -17,3 +17,27 @@
   font-weight: bold;
 }
 
+.no-need-before {
+  margin-bottom: 40px;
+}
+
+.no-need {
+  text-decoration: underline;
+  font-weight: bold;
+  color: yellow;
+}
+
+.help {
+  margin-top: 70px;
+  font-size: 0.7em;
+}
+
+@media screen and (max-width: 4000px) and (min-width: 700px) {
+  .replace-info {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 50px;
+    padding-right: 200px;
+  }
+}
+

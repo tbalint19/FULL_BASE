@@ -10,7 +10,7 @@
         <div class="dark-well">
           <button *ngFor="let faq of status.faqs"
                   class="btn btn-default btn-block" (click)="select(faq)">
-            {{ faq.question }}
+            <span class="normal-whitespace">{{ faq.question }}</span>
           </button>
         </div>
       </div>

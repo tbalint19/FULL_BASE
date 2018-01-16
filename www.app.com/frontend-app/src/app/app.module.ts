@@ -66,6 +66,7 @@ import { CalendarInfoComponent } from './component/calendar-info/calendar-info.c
 import {FaqService} from "./service/faq.service";
 import {FaqStatus} from "./status/faq-status";
 import {AboutStatus} from "./status/about-status";
+import { CreditsComponent } from './component/credits/credits.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import {AboutStatus} from "./status/about-status";
     MessagePageComponent,
     MainControllerComponent,
     AboutPageComponent,
-    CalendarInfoComponent
+    CalendarInfoComponent,
+    CreditsComponent
   ],
   imports: [
     BrowserModule,

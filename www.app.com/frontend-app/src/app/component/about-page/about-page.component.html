@@ -1,7 +1,7 @@
 <menu-navbar *ngIf="authStatus.isAuthenticated()"></menu-navbar>
 <login-navbar *ngIf="!authStatus.isAuthenticated()"></login-navbar>
 
-<div id="background">
+<div id="background-big-2">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -29,7 +29,7 @@
               és intenzívterápiás szakvizsgám
               van, továbbá 16 évig részállásban mentőrvosként is dolgoztam. </p><p>
               Az alapellátásban szeretném hasznosítani mindazt a
-              tapasztalatot és kapcsolatot, amit a korábbiakban
+              tapasztalatot és szakmai kapcsolatot, amit a korábbiakban
               kórházi munkám során szereztem. A modern farmakológiai
               és diagnosztikus módszerek, lehetőségek mellett, adott
               esetben azok ellenére fontosnak, sőt alapvetőnek tartom az
@@ -37,7 +37,7 @@
               gyógymódokat, a szervezet öngyógyító lehetőségeinek segítését.</p><p>
               Az alapellátás mellett továbbra is dolgozom a Heim Pál
               Gyermekkórház Intenzív osztályán.</p><p>
-              A Hősök terei rendelésen asszisztensnőm
+              A Hősök terén, a rendelőmben asszisztensnőm
               Farkas András Sándorné Gyöngyike.</p>
             </div>
           </div>
@@ -49,11 +49,11 @@
               idő lecsökkentésére érdemes időpontot kérni.</p>
             <p>A tanácsadás, oltások a magasföldszinten bal
               oldalon, a betegektől teljesen elválasztva
-              történik kizárólag előjegyzett, egészséges gyermekek számára.</p>
+              történik, kizárólag előjegyzett, egészséges gyermekek számára.</p>
             <p>A fertőző betegek ellátása a betegrendelés
-              idején soronkívül, a Fertőző Elkülönítőben
+              idején soron kívül, a Fertőző Elkülönítőben
               történik /magasföldszinten egyenesen/. Ha fertőző
-              gyermekkel érkezett az Elkülönítő folyosó végén lévő
+              gyermekkel érkezett, az Elkülönítő folyosó végén lévő
               ajtón kopogtasson: ez a rendelőm hátsó kijárata.</p>
             <p>Ugyanitt lehetőség van súlyosabb betegek
               néhány órás megfigyelésére, esetlegesen infúziós folyadékpótlásra.</p>
@@ -68,42 +68,54 @@
           </div>
 
           <div *ngIf="status.selectedSite == 'Helyettesítés'">
-            <p>A Hősök terei rendelőben négy gyermekorvos rendel. Mindenki a saját szobájában rendel, helyettesítés idején is!</p>
+            <p>A Hősök terén lévő rendelőben négy gyermekorvos dolgozik, mindenki
+              a saját szobájában rendel, helyettesítés idején is!</p>
             <p>Párhuzamosan rendelek Dr Lezsák Éva gyermekorvossal. Ő látja el távollétem, szabadságom alatt a gyermekeket.</p>
-            <p>Az oltásokra előjegyzetteket beoltja. Minden beteget ellát. Betegrendelési előjegyzésre  azonban a helyettesítés idején nincs mód. Táppénz, igazolás, recept Tőle kérhető.</p>
+            <p>Az oltásokra előjegyzetteket beoltja. Minden beteget ellát. Betegrendelési előjegyzésre  azonban a helyettesítés idején nincs mód. Táppénz, igazolás, recept tőle kérhető.</p>
 
-            <p>Ellentétes rendelési időben dolgozik Dr. Szabó Eleonóra és Dr. Vajda Ildikó. Sürgő esetben a beteg gyermeket megnézik. Oltást nem adnak.Táppénzes papírt, igazolást, állandó gyógyszerekre recepteket nem adnak ki.</p>
+            <p>Ellentétes rendelési időben dolgozik Dr. Szabó Eleonóra és Dr. Vajda Ildikó. Sürgős esetben a beteg gyermeket megnézik. Oltást nem adnak. Táppénzes papírt, igazolást, állandó gyógyszerekre recepteket nem adnak ki.</p>
 
             <p>Elérhetőség:</p>
-            <p>Dr. Lezsák Éva: 4052376</p>
-            <p>Dr. Szabó Eleonóra: 4055137</p>
-            <p>Dr. Vajda Ildikó: 4058739</p>
+            <p class="replace-info">
+              <span>Dr. Lezsák Éva:</span><span>06-1 / 405-23-76</span>
+            </p>
+            <p class="replace-info">
+              <span>Dr. Szabó Eleonóra:</span><span> 06-1 / 405-51-37</span>
+            </p>
+            <p class="replace-info">
+              <span>Dr. Vajda Ildikó:</span><span>06-1 / 405-87-39</span>
+            </p>
 
-            <p>Az éjszakai és a hétvégi ügyeletet a Heim Pál Kh /T: 06-1-2643314/ és a Bethesda Kh. /06-1-3649020/ látja el.</p>
+            <p>Az éjszakai és a hétvégi ügyeletet a Heim Pál Kórház /T: 06-1-2643314/ és a Bethesda Kórház. /06-1-3649020/ látja el.</p>
           </div>
 
           <div *ngIf="status.selectedSite == 'Recepció'">
-            <p>Rendelőnkben minden munkanapon 15-19:30 közt recepció szolgálat működik a magasföldszinten. Közvetlenül a lépcsővel szemben.</p>
+            <p>Rendelőnkben minden munkanapon 15:00-19:30 közt recepció szolgálat működik a magasföldszinten, közvetlenül a lépcsővel szemben.</p>
             <p>Itt átvehetőek a megírt receptek, beutalók, igazolások.</p>
-            <p>Ezeket a papírokat a betegrendelési időben kérhetik a rendelői /4058740/ telefonszámon.</p>
+            <p>Ezeket a papírokat a betegrendelési időben kérhetik a rendelői (06-1 / 405-87-40) telefonszámon.</p>
           </div>
 
           <div *ngIf="status.selectedSite == 'Labor'">
             <p>A laborvizsgálatokhoz beutaló szükséges, melyet a rendelésen kapnak.</p>
-            <p>Laborvizsgálat </p>
-            <p>&nbsp;&nbsp;1. helyben a Hősök terei rendelő első emeletén, csak kedd, szerda, csütörtöki napokon. Időpontot a portán kell kérni. Eredmény interneten visszajön a rendelőmbe.</p>
-            <p>&nbsp;&nbsp;2. a Jókai úton, A Kertvárosi Eü. Szolg /KESz/ központi rendelőjében. Időpontot neten, vagy telefonon kell kérni. Eredmény interneten visszajön a rendelőmbe.</p>
-            <p>&nbsp;&nbsp;3. az Őrs Vezér téren a Zuglói Eü. Szolgálat /ZESz/központi rendelőjében mindennap. Időpont nem kell, 7-9 óra közt lehet menni. Az eredményért vissza kell menni.</p>
-            <p>A nehezen szúrható, nem kooperáló gyermekek vérvételében a szerdai rendelés elején, 8 órakor a betegrendelőnkben segítünk.</p>
+            <p>Laborvizsgálat történhet</p>
+            <p>&nbsp;&nbsp;- helyben a Hősök terén lévő rendelő első emeletén, csak kedd, szerda, csütörtöki napokon. Időpontot a portán kell kérni. Az eredmény interneten visszakerül a rendelőmbe.</p>
+            <p>&nbsp;&nbsp;- a Jókai úton, A Kertvárosi Eü. Szolg /KESZ/ központi rendelőjében. Időpontot neten, vagy telefonon kell kérni. Az eredmény szintén visszakerül a rendelőmbe.</p>
+            <p>&nbsp;&nbsp;- az Őrs Vezér téren a Zuglói Eü. Szolgálat /ZESZ/ központi rendelőjében minden nap. Időpontot nem kell kérnie, 7-9 óra közt lehet menni. Az eredményért vissza kell menni.</p>
+            <p>A nehezen szúrható, nem kooperáló gyermekek vérvételét a szerdai rendelés elején, 8 órakor a betegrendelőnkben megoldjuk.</p>
           </div>
 
-          <div *ngIf="status.selectedSite == 'Szakrendelések'">
-            <p>A szakrendelőkbe általában beutaló szükséges. Ezt a betegrendelésen adjuk ki.</p>
-            <p>Nem kell beutaló</p>
-            <p>&nbsp;&nbsp;- szemészetre: időpontfoglalás kell! /pl. ZESz T:4694698/</p>
-            <p>&nbsp;&nbsp;- fülészetre /pl. KESz, ZESz, Bethesda Kh., Heim Pál Kh./</p>
-            <p>&nbsp;&nbsp;- bőrgyógyászatra: időpontfoglalás kell! /pl. KESz-Erzsébetliget neten az előjegyzési rendszeren át vagy telefonon/</p>
-            <p>&nbsp;&nbsp;- nőgyógyászatra: időpontfoglalás kell! /pl. KESz Jókai u.-i kp.-i rendelőbe neten vagy telefonon/</p>
+          <div *ngIf="status.selectedSite == 'Szakrendelések - beutalók'">
+            <p class="no-need-before">A szakrendelőkbe általában beutaló szükséges. Ezt a betegrendelésen adjuk ki.</p>
+            <h4 class="no-need">Az alábbi szakrendeléskre nem kell beutaló:</h4>
+            <p>&nbsp;&nbsp;<span class="no-need">- szemészet</span>: időpontfoglalás kell! /pl. ZESZ* T:06-1 / 469-46-98/</p>
+            <p>&nbsp;&nbsp;<span class="no-need">- fülészet</span>: (pl. KESZ**, ZESZ, Bethesda Kh., Heim Pál Kh.)</p>
+            <p>&nbsp;&nbsp;<span class="no-need">- bőrgyógyászat</span>: időpontfoglalás kell! (pl. KESZ - neten vagy telefonon)</p>
+            <p>&nbsp;&nbsp;<span class="no-need">- nőgyógyászat</span>: időpontfoglalás kell! (pl. KESZ - neten vagy telefonon)</p>
+
+            <div class="help">
+              <p>*ZESZ: Zuglói Egészségügyi Szolgálat</p>
+              <p>**KESZ: Kertvárosi Egészségügyi Szolgálat</p>
+            </div>
           </div>
         </div>
       </div>

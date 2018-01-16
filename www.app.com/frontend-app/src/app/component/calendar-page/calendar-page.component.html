@@ -127,7 +127,7 @@
             type="text"
             class="form-control child-name-input"
             [(ngModel)]="status.childName"
-            placeholder="Gyermek neve">
+            placeholder="{{ getPlaceholder() }}">
 
           <button  *ngIf="status.showCreateButton()" class="button-container"
             class="btn btn-default btn-block btn-create btn-create"

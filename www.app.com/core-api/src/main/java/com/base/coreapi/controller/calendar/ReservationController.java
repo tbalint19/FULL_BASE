@@ -41,7 +41,8 @@ public class ReservationController {
     @PostMapping("/create")
     public SuccessResponse create(@RequestBody Reservation reservation, Principal principal){
         List<Reservation> reservationsForSameSpot = repository.findByDateBetween(
-            new Date(reservation.getDate().getTime()), new Date(reservation.getDate().getTime())
+            new Date(reservation.getDate().getTime() - 300000),
+                new Date(reservation.getDate().getTime() + 300000)
         );
         if (0 < reservationsForSameSpot.size()) {
             return new SuccessResponse(false);

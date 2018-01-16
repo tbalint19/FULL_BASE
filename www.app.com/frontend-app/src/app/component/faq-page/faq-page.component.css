@@ -13,6 +13,10 @@ h3 {
 }
 
 .one-big-text {
-  white-space: pre-wrap;
+  white-space: pre-line;
   text-align: justify;
+}
+
+.normal-whitespace {
+  white-space: normal;
 }

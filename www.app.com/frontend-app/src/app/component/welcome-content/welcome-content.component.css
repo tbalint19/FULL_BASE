@@ -79,3 +79,7 @@ h4, h6 {
 .important {
   color: gold;
 }
+
+.normal-whitespace {
+  white-space: normal;
+}
