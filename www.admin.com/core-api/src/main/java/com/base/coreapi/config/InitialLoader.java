@@ -46,7 +46,7 @@ public class InitialLoader {
 
         Admin admin = new Admin();
         admin.setName("admin");
-        admin.setEmail("toth910719balint@gmail.com");
+        admin.setEmail("baranyi1968@gmail.com");
         admin.setPassword(authService.hash("0123456789"));
         admin.setActive(true);
         adminRepository.save(admin);
