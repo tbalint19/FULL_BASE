@@ -66,9 +66,11 @@ export class CalendarBuilder {
         return day.date.getDate() == new Date(addition.date).getDate() &&
           day.date.getMonth() == new Date(addition.date).getMonth();
       });
-      relatedDay.addition = addition;
-      let schema = this.getSchema(relatedDay.addition.schemaName);
-      relatedDay.slots = this.buildDayFromSchema(relatedDay.date, schema);
+      if (relatedDay) {
+        relatedDay.addition = addition;
+        let schema = this.getSchema(relatedDay.addition.schemaName);
+        relatedDay.slots = this.buildDayFromSchema(relatedDay.date, schema);
+      }
     });
 
     holidays.forEach((holiday: Holiday) => {
@@ -76,8 +78,10 @@ export class CalendarBuilder {
         return day.date.getDate() == new Date(holiday.date).getDate() &&
           day.date.getMonth() == new Date(holiday.date).getMonth();
       });
-      relatedDay.holiday = holiday;
-      relatedDay.slots = [];
+      if (relatedDay) {
+        relatedDay.holiday = holiday;
+        relatedDay.slots = [];
+      }
     });
 
     restrictions.forEach((restriction: Restriction) => {
@@ -85,22 +89,27 @@ export class CalendarBuilder {
         return day.date.getDate() == new Date(restriction.date).getDate() &&
           day.date.getMonth() == new Date(restriction.date).getMonth();
       });
-      relatedDay.restriction = restriction;
-      relatedDay.slots.forEach(
-        (slot: Slot) => slot.reservableFor = slot.reservableFor.filter(
-          (event: string) => event != "Oltás"));
+      if (relatedDay) {
+        relatedDay.restriction = restriction;
+        relatedDay.slots.forEach(
+          (slot: Slot) => slot.reservableFor = slot.reservableFor.filter(
+            (event: string) => event != "Oltás"));
+      }
     });
 
     reservations.forEach((reservation: Reservation) => {
-      let relatedSlot = month.getDays().find((day: Day) => {
+      let relatedDay = month.getDays().find((day: Day) => {
         return day.date.getDate() == new Date(reservation.date).getDate() &&
           day.date.getMonth() == new Date(reservation.date).getMonth();
-      }).slots.find((slot: Slot) => {
-        return slot.date.getHours() == new Date(reservation.date).getHours() &&
-          slot.date.getMinutes() == new Date(reservation.date).getMinutes();
       });
-      relatedSlot.reservation = reservation;
-      relatedSlot.reservableFor = [];
+      if (relatedDay) {
+        let relatedSlot = relatedDay.slots.find((slot: Slot) => {
+          return slot.date.getHours() == new Date(reservation.date).getHours() &&
+            slot.date.getMinutes() == new Date(reservation.date).getMinutes();
+        });
+        relatedSlot.reservation = reservation;
+        relatedSlot.reservableFor = [];
+      }
     });
   }
 

@@ -113,9 +113,14 @@ export class CalendarPageComponent implements OnInit {
     this.service.getAll().subscribe(
       (dto: CalendarDto) => {
         this.status.ownReservations = dto.ownReservations;
-        this.builder.fillCalendar(
-          this.status.month, dto.additions, dto.holidays, dto.restrictions, dto.reservations);
-        this.status.setPending(false);
+        try {
+          this.builder.fillCalendar(
+            this.status.month, dto.additions, dto.holidays, dto.restrictions, dto.reservations);
+          this.status.setPending(false);
+        } catch (e) {
+          this.messages.add(new Error(
+            "Átmenetileg nem üzemel.", "Kérjük foglaljon telefonon, vagy nézzen vissza később."))
+        }
       }
     );
   }

@@ -67,14 +67,18 @@ export class CalendarPageComponent implements OnInit {
   showRemoveAddition(day: DayInfo): boolean {
     let hasAddition = day.addition != null;
     let selected = this.isSelected(day.date);
-    return selected && hasAddition;
+    let hasNoReservation = day.slots.filter(
+      slot => slot.relatedReservation != null).length == 0;
+    return selected && hasAddition && hasNoReservation;
   }
 
   showAddHoliday(day: DayInfo): boolean {
     let noHoliday = day.holiday == null;
     let weekDay = 0 < day.date.getDay() && day.date.getDay() < 6;
     let selected = this.isSelected(day.date);
-    return selected && weekDay && noHoliday;
+    let hasNoReservation = day.slots.filter(
+      slot => slot.relatedReservation != null).length == 0;
+    return selected && weekDay && noHoliday && hasNoReservation;
   }
 
   showRemoveHoliday(day: DayInfo): boolean {

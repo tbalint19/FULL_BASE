@@ -95,8 +95,8 @@ export class MessagesPageComponent implements OnInit {
   }
 
   sortByDate(one: ApplicationUser, other: ApplicationUser): number {
-    let oneLast = one.channel.messages[one.channel.messages.length - 1].created;
-    let otherLast = other.channel.messages[other.channel.messages.length - 1].created;
+    let oneLast = one.channel.messages.length > 0 ? one.channel.messages[one.channel.messages.length - 1].created : 0;
+    let otherLast = other.channel.messages.length > 0 ?other.channel.messages[other.channel.messages.length - 1].created : 0;
     return oneLast < otherLast ? 1 : -1;
   }
 

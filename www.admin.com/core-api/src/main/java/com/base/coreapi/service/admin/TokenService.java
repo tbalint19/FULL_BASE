@@ -18,7 +18,7 @@ public class TokenService {
         String token = Jwts.builder()
                 .setAudience(username)
                 .setSubject("default-admin")
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .setExpiration(new Date(EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
         return TOKEN_PREFIX + token;
